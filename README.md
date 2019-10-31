@@ -6,7 +6,7 @@ Our program will be able to function as a basic shell that will be able to take 
 
 # Diagram
 ![OMT Diagram](/images/OMT_Diagram_Prototype.JPG)
-Format: ![Alt Text](url)
+
 
 # Classes
 
