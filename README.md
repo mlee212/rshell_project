@@ -9,7 +9,38 @@ Our program will be able to function as a basic shell that will be able to take 
 
 
 # Classes
+*Input: This is our base class, which will help build up the composite class and Leaf children. 
+*Inputs: This is our composite class which inherits from Input, which holds references to a collection of Input *, to StratExe *,  to StratCon *.
+*Executable / Argument / Connector: These are our Leaf child which inherit from Input. They will be used in the collection of Input in the composite class to run differently, varying if they are an Executable, Argument, or a Connector.
+*StratExe / StratCon: This is our strategy pattern, which will help us run different executables and connectors depending on Inputs.
+*ls / echo / mkdir / Semicolon / Ampersand / Parallel: These will run individual functions that perform their executable/connector action.
+
 
 # Prototypes
+*Parser
+  *We used getline (cin, str) to get the inputs from the user. Once we have the inputs from the user, we separate each command into either an executable, argument, or connector and add it to the vector<Input *>.
+*Function Testing
+  *With the fork() function, we can use our executables to run with our connectors so that the connectors function properly by having the fork() function run in a child and be able to move onto the next state, depending on the connector value.  
+  *With the waitpid() function, we can stop “zombie” child being made by terminating any leftover child processes made by the fork() function. 
+  *With the execvp() function, we will be able to run our executables with their arguments. 
+*Connector Logic
+  *For the semicolon, regardless if the first command works or not, it will move to the second command.
+  *For the ampersands, if the first command works, it will move onto the second command. If the first command does not work, it will not move onto the second command.
+  *For the parallel signs, if the first command works, it will not move onto the second command. If the first command does not work, it will move onto the second command.
+
 
 # Dev Testing Roadmap
+*InputData Class
+  *Testing
+*InputFunction Class
+  *Testing
+*Strategies
+  *StratExe Class
+    *ls / echo / mkdir Class
+   *Testing
+  *StratCon Class
+    *Semicolon / Ampersand / Parallel Class
+  *Testing
+*Testing overall
+*Turn in
+
