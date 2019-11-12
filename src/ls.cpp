@@ -1,6 +1,0 @@
-
-
-void run(){
-	execvp("ls")
-
-}
