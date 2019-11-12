@@ -1,17 +1,21 @@
-#ifndef __PARSER_HPP__
-#define __PARSER_HPP__
+#ifndef __INPUT_DATA_HPP__
+#define __INPUT_DATA_HPP__
 
+#include "inputs.hpp"
 #include <iostream>
 #include <vector>
 #include <string>
+#include <boost/tokenizer.hpp>
 
+using namespace std;
+using namespace boost;
 
-class InputData {
-	private:
-		std::vector<string> inputs;
-		std::vector<string> args;
+class InputData : public Input {
+	protected:
+		vector<Input *> inputs;
+		vector<Input *> args;
 	public:
-		InputData();
-};
+		InputData() : Input() { };
+		virtual void run() = 0;
 
 #endif
