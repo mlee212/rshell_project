@@ -8,7 +8,7 @@ using namespace std;
 
 class Input{
 	public:
-		Input(string x) { input = x };	
+		Input(string x);	
 		virtual void run() = 0;
 	protected:
 		string input;
