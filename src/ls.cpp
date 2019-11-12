@@ -1,0 +1,6 @@
+
+
+void run(){
+	execvp("ls")
+
+}

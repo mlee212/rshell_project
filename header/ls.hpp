@@ -5,6 +5,7 @@
 
 class ls : public StratExe{
 	public:
+		ls() : StratExe();
 		void run(vector<Argument *>);
 
 

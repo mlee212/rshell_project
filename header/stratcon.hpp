@@ -5,6 +5,7 @@
 
 class StratCon {
 	public:
+		StratCon(Inputs *);
 		virtual void run() = 0;
 	protected:
 		Inputs * inp;

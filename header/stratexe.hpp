@@ -5,6 +5,7 @@
 
 class StratExe {
 	public:
+		StratExe(Inputs *);
 		virtual void run(vector<Argument *>) = 0;
 	protected:
 		Inputs * inp;

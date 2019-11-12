@@ -7,7 +7,8 @@
 using namespace std;
 
 class Input{
-	public:	
+	public:
+		Input(string x) { input = x };	
 		virtual void run() = 0;
 	protected:
 		string input;
