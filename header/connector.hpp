@@ -5,7 +5,7 @@
 
 class Connector : public Input{
 	public:
-		Connector(string )
+		Connector(string);
 		void run();
 }
 

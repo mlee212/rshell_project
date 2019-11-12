@@ -2,6 +2,8 @@
 #define __INPUTS_HPP__
 
 #include "input.hpp"
+#include "stratexe.hpp"
+#include "stratcon.hpp"
 
 class Inputs : public Input{
 	public:
