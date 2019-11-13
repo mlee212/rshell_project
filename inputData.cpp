@@ -14,6 +14,12 @@ InputData::InputData() {
 			str.insert(i," ");
 			i++;
 		}
+		if (str.at(i) == '#' && i != 0) {
+			str.insert(i, " ");
+			i++;
+			str.insert(i + 1, " ");
+			i++;
+		}
 			
 	}
 	
@@ -24,33 +30,66 @@ InputData::InputData() {
 	string quoteStr;
 	quote = false;
 	bool quoteSec = false;
-	bool singular = true;
-	
+	bool quit = false;
+	bool quitCheck = false;
+	string quitStr;
+
 	//indexE++;
-	//cout << str << endl;
+	cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
+	
 		if(temp.at(0) == '\"'){
 			for(int i = 0; i < temp.size(); i++) {
 				indexE++;
 				exeLength++;
+			//	if(temp.at(i) == '#') {
+			//		quit = true;
+			//		break;
+			//	}
 				//if(temp.at(i) == '\"') {
 				//	quote = !quote;
 				//}
 			
-			}
+			} /*
+			if(quit) {
+				for(int i = 0; i < temp.size(); i++) {
+					if(temp.at(i) == '#') {
+						quitCheck = true;
+					}
+					if(!quitCheck) {
+						quitStr += temp.at(i);
+					}
+				}
+				temp = quitStr;
+			}*/
 			indexE += 1;
 			exeLength += 1;
-		}
+		} 
 		else {
 			for(int i = 0; i < temp.size(); i++) {
 				indexE++;
 				exeLength++;
+			//	if(temp.at(i) == '#') {
+			//		quit = true;
+			//		break;
+			//	}
 				//if(temp.at(i) == '\"') {
 				//	quote = !quote;
 				//}
 			
 			}
+			/* if(quit) {
+				for(int i = 0; i < temp.size(); i++) {
+					if(temp.at(i) == '#') {
+						quitCheck = true;
+					}
+					if(!quitCheck) {
+						quitStr += temp.at(i);
+					}
+				}
+				temp = quitStr;
+			}*/
 			if((temp == "&&" || temp == "||") /* && !quote */) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
 				inputs.push_back(/* new Executable */(str.substr(indexS, exeLength)));
@@ -63,7 +102,6 @@ InputData::InputData() {
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
-				singular = false;
 			}
 			else if(temp == ";" /* && !quote */) {
 				inputs.push_back(/* new Executable */(str.substr(indexS, exeLength)));
@@ -71,7 +109,13 @@ InputData::InputData() {
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
-				singular = false;
+			}
+			else if(temp == "#" /* && !quote */) {
+				inputs.push_back(/* new Executable */(str.substr(indexS, exeLength)));
+				exeLength = 0;
+				indexS = indexE + 3;
+				indexE = indexS;
+				quitCheck = true;
 			}
 			//if(singular) {
 			//	inputs.push_back(str);
@@ -96,7 +140,14 @@ InputData::InputData() {
 		}
 	}
 	
-	inputs.push_back(str.substr(indexS, indexE + 1));
+	if (quitCheck) {
+		//cout << "quitStr: "<< quitStr.size() << endl;
+		//inputs.push_back(str.substr(indexS, quitStr.size()));
+
+	}
+	else {
+		inputs.push_back(str.substr(indexS, indexE + 1));
+	}
 	//cout << "Exe + args: " << str.substr(indexS, indexE) << endl;
 	// -------------- TEST -----------------------
 	//cout << "hello" << endl;
