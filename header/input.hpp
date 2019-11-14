@@ -1,22 +1,15 @@
-#ifndef __INPUT_HPP__
-#define __INPUT_HPP__
+#ifndef __INPUTS_HPP__
+#define __INPUTS_HPP__
 
 #include <iostream>
-#include <bits/stdc++.h>
 #include <string>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
 
-using namespace std;
-
-class Input{
-	public:
-		Input(string x);	
-		virtual void run() = 0;
+class Input {
 	protected:
 		string input;
-
-};
+	public:
+		Input(string);
+		virtual void run() = 0;
+}
 
 #endif

@@ -18,7 +18,7 @@ ADD_EXECUTABLE(main
 )
 
 ADD_EXECUTABLE(manT
-	main.cpp
+	main2.cpp
 	input_data.cpp
 	#unit_test.cpp
 )
