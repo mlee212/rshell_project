@@ -8,6 +8,8 @@ SET(CMAKE_CXX_STANDARD 11)
 ADD_EXECUTABLE(test
 	~/assignment-scootscoot/unit_tests/unit_test.cpp
 	~/assignment-scootscoot/src/executable.cpp
+	~/assignment-scootscoot/src/input_data.cpp
+	~/assignment-scootscoot/src/connector.cpp
 	~/assignment-scootscoot/src/input.cpp
 )
 

@@ -160,6 +160,7 @@ void InputData::takeInput() {
 	for(int i = 0; i < inputs.size(); i++) {
 		cout << inputs.at(i)->input << endl;
 	}
+	cout << "size: " << inputs.size() << endl;
 	cout << "hello" << endl;
 	//cout << "inputs size: " << inputs.size() << endl;
 	//cout << inputs.at(0) << endl << inputs.at(1) << endl;
@@ -172,26 +173,37 @@ int InputData::run() {
 	int stat;
 	pid_t pid[inputs.size()];
 	for (int i = 0; i < inputs.size(); i++)	{
-		if ((pid[i] = fork()) == 0){
-			if (inputs.at(i)->run() == -1){
-				exit(2);
-			}
-			exit(1);
-		}
-		else {
-			waitpid(pid[i], &stat, 0);
-			cout << "w: " << WEXITSTATUS(stat) << endl;
-			if (i != inputs.size() - 1){
-				if (inputs.at(i + 1)->input == "&&" || inputs.at(i + 1)->input == "&& "){
-					if (WEXITSTATUS(stat) != 0){
-						cout << "&& worked" << endl;
-						i += 2;
-					}
+		if (i % 2 == 0){
+			if ((pid[i] = fork()) == 0){
+				cout << "This is child: " << getpid() << endl;
+				if (inputs.at(i)->run() == -1){
+					exit(2);
 				}
-				if (inputs.at(i + 1)->input == "||" || inputs.at(i +1)->input == "|| "){
-					if (WEXITSTATUS(stat) == 0){
-						cout << "|| worked" << endl;
-						i += 2;
+				exit(1);
+			}
+			else {
+				cout << "This is parent: " << i << endl;
+				pid_t test = waitpid(pid[i], &stat, 0);
+				if (i != inputs.size() - 1){
+					if (WIFEXITED(stat)){
+						cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
+						if (inputs.at(i + 1)->input == "&&" || inputs.at(i + 1)->input == "&& "){
+							if (WEXITSTATUS(stat) == 2){
+								cout << "Skip &&" << endl;
+								i += 2;
+							}
+							cout << "Went next &&" << endl;
+						}
+						else if (inputs.at(i + 1)->input == "||" || inputs.at(i + 1)->input == "|| "){
+							if (WEXITSTATUS(stat) == 0){
+								cout << "Skip ||" << endl;
+								i += 2;
+							}
+							cout << "Went next ||" << endl;
+						}
+						else {
+							cout << "Went next 3" << endl;
+						}
 					}
 				}
 			}

@@ -32,10 +32,10 @@ int Executable::run(){
 				arguments[cIndex] = new char[i - index + 1];
 				strcpy(arguments[cIndex++], input.substr(index, i - index).c_str());
 				int temp = 0;
-				while(arguments[cIndex - 1][temp] == '\0') {
+				//while(arguments[cIndex - 1][temp] == '\0') {
 
-					cout << arguments[cIndex - 1][temp];
-				}
+				//	cout << arguments[cIndex - 1][temp];
+				//}
 				cout << endl;
 				index = i + 1;
 			}

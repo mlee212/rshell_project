@@ -6,7 +6,7 @@
 *.lo
 *.o
 *.obj
-
+*.swp
 # Precompiled Headers
 *.gch
 *.pch
@@ -34,10 +34,11 @@
 rshell
 test2
 main
+manT
+test
 
 # CMake Temp Files
 CMakeCache.txt
 CMakeFiles
 Makefile
-test
-manT
+
