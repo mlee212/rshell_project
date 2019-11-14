@@ -96,7 +96,7 @@ void InputData::takeInput() {
 			}*/
 			if((temp == "&&" || temp == "||") /* && !quote */) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
-				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
+				inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
 				
 				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
 				//cout << indexE << endl;
@@ -180,14 +180,17 @@ int InputData::run() {
 		}
 		else {
 			waitpid(pid[i], &stat, 0);
+			cout << "w: " << WEXITSTATUS(stat) << endl;
 			if (i != inputs.size() - 1){
 				if (inputs.at(i + 1)->input == "&&" || inputs.at(i + 1)->input == "&& "){
-					if (WEXITSTATUS(stat) == 2){
+					if (WEXITSTATUS(stat) != 0){
+						cout << "&& worked" << endl;
 						i += 2;
 					}
 				}
-				else if (inputs.at(i + 1)->input == "||" || inputs.at(i +1)->input == "|| "){
-					if (WEXITSTATUS(stat) == 1){
+				if (inputs.at(i + 1)->input == "||" || inputs.at(i +1)->input == "|| "){
+					if (WEXITSTATUS(stat) == 0){
+						cout << "|| worked" << endl;
 						i += 2;
 					}
 				}
