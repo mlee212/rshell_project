@@ -10,11 +10,11 @@
 using namespace std;
 
 class InputData /* : public Input */ {
-	protected:
+	public:
 		vector<string> inputs;
 		string tempStr;
 	public:
-		InputData();
+		InputData(string);
 		void takeInput();
 		//virtual void run() = 0;
 };
