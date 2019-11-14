@@ -5,8 +5,9 @@
 #include "gtest/gtest.h"
 
 TEST(ExecutableTest, TestLS){
-	Input * x = new Executable("ls");
+	//Input * x = new Executable("ls");
 	//EXPECT_EQ(ls, x->run());
+	
 }
 
 
