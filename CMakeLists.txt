@@ -18,14 +18,14 @@ ADD_EXECUTABLE(main
 )
 
 ADD_EXECUTABLE(manT
-	main2.cpp
-	input_data.cpp
+	~/assignment-scootscoot/unit_tests/main2.cpp
+	~/assignment-scootscoot/src/input_data.cpp
 	#unit_test.cpp
 )
 
 ADD_EXECUTABLE(test2
-	unit_test.cpp
-	input_data.cpp
+	~/assignment-scootscoot/unit_tests/unit_test.cpp
+	~/assignment-scootscoot/src/input_data.cpp
 	#vector_container.cpp
 	#selection_sort.cpp
 	#list_container.cpp

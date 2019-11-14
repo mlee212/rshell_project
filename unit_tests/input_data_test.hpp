@@ -1,8 +1,8 @@
 #ifndef __INPUT_DATA_TEST_HPP__
 #define __INPUT_DATA_TEST_HPP__
 
-#include <gtest/gtest.h>
-#include "input_data.hpp"
+#include "../header/input_data.hpp"
+#include "gtest/gtest.h"
 
 TEST(Parser, SimpleEcho) {
 	string str = "echo ello";

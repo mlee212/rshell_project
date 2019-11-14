@@ -6,7 +6,7 @@
 class Executable : public Input {
 	public:
 		Executable(string x) : Input(x) { };
-		void run();
+		int run();
 
 };
 

@@ -4,7 +4,7 @@
 //	input = x;
 //}
 
-void Executable::run(){
+int Executable::run(){
 	int space = 0;
 	bool quote = false;
 	// if there is a space then that means there is an argument in this input);
@@ -61,5 +61,5 @@ void Executable::run(){
 		}
 		cout << endl;
 	}
-	execvp(command, arguments);
+	return execvp(command, arguments);
 }

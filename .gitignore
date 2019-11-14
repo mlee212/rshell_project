@@ -38,6 +38,6 @@ main
 # CMake Temp Files
 CMakeCache.txt
 CMakeFiles
-
+Makefile
 test
 manT

@@ -3,13 +3,21 @@
 
 #include <iostream>
 #include <string>
+#include <stdio.h>
+#include <string.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+
+using namespace std;
 
 class Input {
 	protected:
 		string input;
 	public:
 		Input(string);
-		virtual void run() = 0;
-}
+		virtual int run() = 0;
+};
 
 #endif
