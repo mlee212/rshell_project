@@ -37,3 +37,6 @@ test
 # CMake Temp Files
 CMakeCache.txt
 CMakeFiles
+
+test
+manT

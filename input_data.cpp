@@ -1,9 +1,9 @@
-#include "inputData.hpp"
+#include "input_data.hpp"
 
-InputData::InputData() {
-	string str;
-	cout << "$";
-	getline(cin, str);
+InputData::InputData(string str) {
+//	string str;
+//	cout << "$";
+//	getline(cin, str);
 	bool quote = false;
 
 	for(int i = 0; i < str.size(); i++) {
@@ -156,6 +156,8 @@ InputData::InputData() {
 	for(int i = 0; i < inputs.size(); i++) {
 		cout << inputs.at(i) << endl;
 	}
+	//cout << "inputs size: " << inputs.size() << endl;
+	//cout << inputs.at(0) << endl << inputs.at(1) << endl;
 	//cout << "hello 2" << endl;
 	
 }
