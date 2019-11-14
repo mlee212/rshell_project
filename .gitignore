@@ -32,7 +32,7 @@
 *.out
 *.app
 rshell
-test
+test2
 main
 
 # CMake Temp Files

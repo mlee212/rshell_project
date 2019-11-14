@@ -17,20 +17,20 @@ ADD_EXECUTABLE(main
 	~/assignment-scootscoot/src/input.cpp
 )
 
-ADD_EXECUTABLE(manT
-	~/assignment-scootscoot/unit_tests/main2.cpp
-	~/assignment-scootscoot/src/input_data.cpp
+#ADD_EXECUTABLE(manT
+#	~/assignment-scootscoot/unit_tests/main2.cpp
+#	~/assignment-scootscoot/src/input_data.cpp
 	#unit_test.cpp
-)
+#)
 
-ADD_EXECUTABLE(test2
-	~/assignment-scootscoot/unit_tests/unit_test.cpp
-	~/assignment-scootscoot/src/input_data.cpp
+#ADD_EXECUTABLE(test2
+#	~/assignment-scootscoot/unit_tests/unit_test.cpp
+#	~/assignment-scootscoot/src/input_data.cpp
 	#vector_container.cpp
 	#selection_sort.cpp
 	#list_container.cpp
 	#bubble_sort.cpp
-)
+#)
 
 TARGET_LINK_LIBRARIES(test gtest)
 TARGET_COMPILE_DEFINITIONS(test PRIVATE gtest_disable_pthreads=ON)

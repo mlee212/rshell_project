@@ -5,8 +5,8 @@
 #include "gtest/gtest.h"
 
 TEST(ExecutableTest, TestLS){
-	//Input * x = new Executable("ls");
-	//EXPECT_EQ(ls, x->run());
+	Input * x = new Executable("ls");
+	EXPECT_EQ(15, 10+5);
 	
 }
 

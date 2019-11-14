@@ -18,6 +18,6 @@ class InputData : public Input {
 	public:
 		InputData(string);
 		void takeInput();
-		void run();
+		int run();
 };
 #endif
