@@ -13,10 +13,10 @@ using namespace std;
 
 class InputData : public Input {
 	public:
-		vector<string> inputs;
-		string tempStr;
+		vector<Input *> inputs;
+		string str;
 	public:
-		InputData(string);
+		InputData(string x) : Input(x) {str = x;};
 		void takeInput();
 		int run();
 };

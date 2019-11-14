@@ -5,8 +5,8 @@
 
 class Connector : public Input{
 	public:
-		Connector(string);
-		void run();
-}
+		Connector(string x) : Input(x) { };
+		int run();
+};
 
 #endif

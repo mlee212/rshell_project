@@ -17,11 +17,14 @@ ADD_EXECUTABLE(main
 	~/assignment-scootscoot/src/input.cpp
 )
 
-#ADD_EXECUTABLE(manT
-#	~/assignment-scootscoot/unit_tests/main2.cpp
-#	~/assignment-scootscoot/src/input_data.cpp
+ADD_EXECUTABLE(manT
+	~/assignment-scootscoot/unit_tests/main2.cpp
+	~/assignment-scootscoot/src/input_data.cpp
+	~/assignment-scootscoot/src/input.cpp
+	~/assignment-scootscoot/src/executable.cpp
+	~/assignment-scootscoot/src/connector.cpp
 	#unit_test.cpp
-#)
+)
 
 #ADD_EXECUTABLE(test2
 #	~/assignment-scootscoot/unit_tests/unit_test.cpp

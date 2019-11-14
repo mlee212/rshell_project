@@ -13,9 +13,8 @@
 using namespace std;
 
 class Input {
-	protected:
-		string input;
 	public:
+		string input;
 		Input(string);
 		virtual int run() = 0;
 };

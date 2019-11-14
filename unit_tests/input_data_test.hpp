@@ -2,6 +2,7 @@
 #define __INPUT_DATA_TEST_HPP__
 
 #include "../header/input_data.hpp"
+#include "../header/input.hpp"
 #include "gtest/gtest.h"
 
 TEST(Parser, SimpleEcho) {

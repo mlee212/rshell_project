@@ -1,11 +1,15 @@
 #include "../header/input_data.hpp"
+#include "../header/executable.hpp"
+#include "../header/connector.hpp"
+#include "../header/input.hpp"
 
-InputData::InputData(string str) {
+
+void InputData::takeInput() {
 //	string str;
 //	cout << "$";
 //	getline(cin, str);
 	bool quote = false;
-
+	cout << str << endl;
 	for(int i = 0; i < str.size(); i++) {
 		//if(str.at(i) == '\"'){
 		//	quote = !quote;
@@ -96,7 +100,7 @@ InputData::InputData(string str) {
 				
 				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
 				//cout << indexE << endl;
-				inputs.push_back(str.substr(indexE, temp.size()));
+				inputs.push_back(new Connector(str.substr(indexE, temp.size())));
 				//indexS = indexE + temp.size() + 1;
 				//indexE = indexS
 				exeLength = 0;
@@ -105,7 +109,7 @@ InputData::InputData(string str) {
 			}
 			else if(temp == ";" /* && !quote */) {
 				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
-				inputs.push_back(str.substr(indexE + 1, temp.size() + 1));
+				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() + 1)));
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
@@ -146,7 +150,7 @@ InputData::InputData(string str) {
 
 	}
 	else {
-		inputs.push_back(str.substr(indexS, indexE + 1));
+		inputs.push_back(new Executable(str.substr(indexS, indexE + 1)));
 	}
 	//cout << "Exe + args: " << str.substr(indexS, indexE) << endl;
 	// -------------- TEST -----------------------
@@ -154,8 +158,9 @@ InputData::InputData(string str) {
 	cout << indexE << endl;
 	cout << str.size() - 1<< endl;	
 	for(int i = 0; i < inputs.size(); i++) {
-		cout << inputs.at(i) << endl;
+		cout << inputs.at(i)->input << endl;
 	}
+	cout << "hello" << endl;
 	//cout << "inputs size: " << inputs.size() << endl;
 	//cout << inputs.at(0) << endl << inputs.at(1) << endl;
 	//cout << "hello 2" << endl;
@@ -166,42 +171,28 @@ int InputData::run() {
 	bool next = true;
 	int stat;
 	pid_t pid[inputs.size()];
-	for (int i = 0; i < inputs.size(); i++){
-		next = true;
-		if (inputs.at(i) == "&&" || inputs.at(i) == "||" || inputs.at(i) == ";"){
-			 if ((pid[i] = fork()) == 0){
-				if (input.at(i)->input == "&&") {
-					if (input.at(i - 1)->run() == -1) {
-						cout << "Run failed &&" << endl;
-						exit(1);
+	for (int i = 0; i < inputs.size(); i++)	{
+		if ((pid[i] = fork()) == 0){
+			if (inputs.at(i)->run() == -1){
+				exit(2);
+			}
+			exit(1);
+		}
+		else {
+			waitpid(pid[i], &stat, 0);
+			if (i != inputs.size() - 1){
+				if (inputs.at(i + 1)->input == "&&" || inputs.at(i + 1)->input == "&& "){
+					if (WEXITSTATUS(stat) == 2){
+						i += 2;
 					}
 				}
-				else if (input.at(i)->input == "||") {
-					if (input.at(i - 1)->run() != -1) {
-						cout << "Run failed ||" << endl
-						exit(2);
+				else if (inputs.at(i + 1)->input == "||" || inputs.at(i +1)->input == "|| "){
+					if (WEXITSTATUS(stat) == 1){
+						i += 2;
 					}
 				}
-			}
-			else{
-				pid_t test = waitpid(pid, &stat, 0);
-				if(WEXITSTATUS(stat) == 2){
-					next = false
-				}
-				else if (WEXITSTATUS(stat) == 1){
-					next = false;
-				}
-			}
-			if (!next){
-				i++;
-			}
-			else {
-				input.at(i - 1)->run();
 			}
 		}
-	}
-	if (inputs.size() == 1){
-		input.at(0)->run();
 	}
 	return 0;
 }

@@ -27,8 +27,8 @@ int Executable::run(){
 				quote = !quote;
 			}
 			if (input.at(i) == ' ' && !quote){
-				cout << "cIndex: " << cIndex << endl;
-				cout << "input: " << input.substr(index, i - index) << endl;
+				//`cout << "cIndex: " << cIndex << endl;
+				//cout << "input: " << input.substr(index, i - index) << endl;
 				arguments[cIndex] = new char[i - index + 1];
 				strcpy(arguments[cIndex++], input.substr(index, i - index).c_str());
 				int temp = 0;
@@ -41,8 +41,8 @@ int Executable::run(){
 			}
 		}
 		command = arguments[0];
-		cout << "cIndex: " << cIndex << endl;
-        cout << "input: " << input.substr(index, input.size() - 1) << endl;
+		//cout << "cIndex: " << cIndex << endl;
+        //cout << "input: " << input.substr(index, input.size() - 1) << endl;
 		arguments[cIndex] = new char[input.size() + 1 - index];
 		strcpy(arguments[cIndex], input.substr(index, input.size() - 1).c_str());
 		arguments[space + 1] = '\0';
@@ -54,12 +54,12 @@ int Executable::run(){
 		arguments[1] = NULL;
 	}
 	
-	for (int i = 0; i < space + 1; i++){
-		index = 0;
-		while (arguments[i][index] != '\0'){
-			cout << arguments[i][index++];
-		}
-		cout << endl;
-	}
+	//for (int i = 0; i < space + 1; i++){
+	//	index = 0;
+		//while (arguments[i][index] != '\0'){
+		//	cout << arguments[i][index++];
+		//}
+		//cout << endl;
+	//}
 	return execvp(command, arguments);
 }
