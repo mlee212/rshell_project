@@ -31,12 +31,16 @@ Our program will be able to function as a basic shell that will be able to take 
   * The Prototype's design helped us realize that our initial design was too complex and unnecessarily complicated and guided us to implement something much more simple and streamlined.
 
 # Dev Testing Roadmap
+* Input Class
+  * Created base class
 * InputData Class
   * Worked on Parser
   * Unit Testing with Gtest
 * Executable Class
   * Worked on making functional executable objects
   * Unit Testing with Gtest
+* Connector Class
+  * Created Connector Object to distinguish Executables and Connectors
 * Rshell
   * Created rshell executable
   * Created integration tests
