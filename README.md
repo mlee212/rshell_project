@@ -14,6 +14,17 @@ Our program will be able to function as a basic shell that will be able to take 
 * Executable: This class will inherit from the Input base class and will construct an Executable object that holds the string to be executed. The run function in this class will execute the command held within the string and return a negative number if the process failed.
 * Connector: This class will inherit from the Input base class and will construct a Connector object that holds the string of the connector that will be used to determine whether or not the next Executable object should be executed. The run function will determine its identity as a Connector.
 
+# Prototypes
+* Parser: We used getline (cin, str) to get the inputs from the user. Once we have the inputs from the user, we separate each command into either an executable, argument, or connector and add it to the vector<Input *>.
+* Function Testing
+  * With the fork() function, we can use our executables to run with our connectors so that the connectors function properly by having the fork() function run in a child and be able to move onto the next state, depending on the connector value.
+  * With the waitpid() function, we can stop “zombie” child being made by terminating any leftover child processes made by the fork() function.
+  * With the execvp() function, we will be able to run our executables with their arguments.
+* Connector Logic
+  * For the semicolon, regardless if the first command works or not, it will move to the second command.
+  * For the ampersands, if the first command works, it will move onto the second command. If the first command does not work, it will not move onto the second command.
+  * For the parallel signs, if the first command works, it will not move onto the second command. If the first command does not work, it will move onto the second command.
+
 # Dev Testing Roadmap
 * InputData Class
   * Worked on Parser
