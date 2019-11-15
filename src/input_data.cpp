@@ -11,9 +11,9 @@ void InputData::takeInput() {
 	bool quote = false;
 	cout << str << endl;
 	for(int i = 0; i < str.size(); i++) {
-		//if(str.at(i) == '\"'){
-		//	quote = !quote;
-		//}
+		if(str.at(i) == '\"'){
+			quote = !quote;
+		}
 		if (str.at(i) == ';' && !quote) {
 			str.insert(i," ");
 			i++;
@@ -44,57 +44,57 @@ void InputData::takeInput() {
 	while(ss >> temp) {
 	
 		if(temp.at(0) == '\"'){
-			for(int i = 0; i < temp.size(); i++) {
-				indexE++;
-				exeLength++;
+			//for(int i = 0; i < temp.size(); i++) {
+			//	indexE++;
+			//	exeLength++;
 			//	if(temp.at(i) == '#') {
 			//		quit = true;
 			//		break;
 			//	}
-				//if(temp.at(i) == '\"') {
-				//	quote = !quote;
-				//}
+			//	if(temp.at(i) == '\"') {
+			//		quote = !quote;
+			//	}
 			
-			} /*
-			if(quit) {
-				for(int i = 0; i < temp.size(); i++) {
-					if(temp.at(i) == '#') {
-						quitCheck = true;
-					}
-					if(!quitCheck) {
-						quitStr += temp.at(i);
-					}
-				}
-				temp = quitStr;
-			}*/
-			indexE += 1;
-			exeLength += 1;
+			//} 
+			//if(quit) {
+			//	for(int i = 0; i < temp.size(); i++) {
+			//		if(temp.at(i) == '#') {
+			//			quitCheck = true;
+			//		}
+			//		if(!quitCheck) {
+			//			quitStr += temp.at(i);
+			//		}
+			//	}
+			//	temp = quitStr;
+			//}
+			//indexE += 1;
+			//exeLength += 1;
 		} 
 		else {
 			for(int i = 0; i < temp.size(); i++) {
 				indexE++;
 				exeLength++;
-			//	if(temp.at(i) == '#') {
-			//		quit = true;
-			//		break;
-			//	}
-				//if(temp.at(i) == '\"') {
-				//	quote = !quote;
-				//}
+				if(temp.at(i) == '#') {
+					quit = true;
+					break;
+				}
+				if(temp.at(i) == '\"') {
+					quote = !quote;
+				}
 			
 			}
-			/* if(quit) {
-				for(int i = 0; i < temp.size(); i++) {
-					if(temp.at(i) == '#') {
-						quitCheck = true;
-					}
-					if(!quitCheck) {
-						quitStr += temp.at(i);
-					}
-				}
-				temp = quitStr;
-			}*/
-			if((temp == "&&" || temp == "||") /* && !quote */) {
+			// if(quit) {
+			//	for(int i = 0; i < temp.size(); i++) {
+			//		if(temp.at(i) == '#') {
+			//			quitCheck = true;
+			//		}
+			//		if(!quitCheck) {
+			//			quitStr += temp.at(i);
+			//		}
+			//	}
+			//	temp = quitStr;
+			//}
+			if((temp == "&&" || temp == "||")  && !quote ) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
 				inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
 				
@@ -107,14 +107,14 @@ void InputData::takeInput() {
 				indexS = indexE + 3;
 				indexE = indexS;
 			}
-			else if(temp == ";" /* && !quote */) {
+			else if(temp == ";"  && !quote ) {
 				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() + 1)));
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
 			}
-			else if(temp == "#" /* && !quote */) {
+			else if(temp == "#"  && !quote ) {
 				inputs.push_back(new Executable (str.substr(indexS, exeLength)));
 				exeLength = 0;
 				indexS = indexE + 3;
@@ -124,33 +124,35 @@ void InputData::takeInput() {
 			//if(singular) {
 			//	inputs.push_back(str);
 			//}
-//			if(quote && quoteSec) {
-//				quote = false;
-//				quoteSec = false;
-//				quoteStr += str.substr(indexS + 1, exeLength);
-//				inputs.push_back(quoteStr);
-//				exeLength = 0;
-//				indexS = indexE + 2;
-//				indexE = indexS;
-//			}
-//			else if (quote) {
-//				if (quote && !quoteSec) {
-//					quoteStr = str.substr(indexS, exeLength);
-//					cout << "first part: " << str.substr(indexS, exeLength);
-//					indexS = indexE;
-//				}
-//				quoteSec = true;
-//			}
+			//if(quote && quoteSec) {
+			//	quote = false;
+			//	quoteSec = false;
+			//	quoteStr += str.substr(indexS + 1, exeLength);
+			//	inputs.push_back(new Executable(quoteStr));
+			//	exeLength = 0;
+			//	indexS = indexE + 2;
+			//	indexE = indexS;
+			//}
+			//else if (quote) {
+			//	if (quote && !quoteSec) {
+			//		quoteStr = str.substr(indexS, exeLength);
+			//		cout << "first part: " << str.substr(indexS, exeLength);
+			//		indexS = indexE;
+			//	}
+			//	quoteSec = true;
+			//}
 		}
 	}
 	
 	if (quitCheck) {
 		//cout << "quitStr: "<< quitStr.size() << endl;
-		//inputs.push_back(str.substr(indexS, quitStr.size()));
+		//inputs.push_back(new Executable(str.substr(indexS, quitStr.size() + 3)));
 
 	}
 	else {
-		inputs.push_back(new Executable(str.substr(indexS, indexE + 1)));
+		cout << "what is this: " << str.substr(indexS, indexE + 2) << endl;
+		
+		inputs.push_back(new Executable(str.substr(indexS, indexE + 2)));
 	}
 	//cout << "Exe + args: " << str.substr(indexS, indexE) << endl;
 	// -------------- TEST -----------------------
@@ -173,10 +175,12 @@ int InputData::run() {
 	int stat;
 	pid_t pid[inputs.size()];
 	for (int i = 0; i < inputs.size(); i++)	{
-		if (i % 2 == 0){
+		cout << i << endl;
+		next = true;
+		if (i % 2 == 1){
 			if ((pid[i] = fork()) == 0){
 				cout << "This is child: " << getpid() << endl;
-				if (inputs.at(i)->run() == -1){
+				if (inputs.at(i - 1)->run() == -1){
 					exit(2);
 				}
 				exit(1);
@@ -187,16 +191,18 @@ int InputData::run() {
 				if (i != inputs.size() - 1){
 					if (WIFEXITED(stat)){
 						cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
-						if (inputs.at(i + 1)->input == "&&" || inputs.at(i + 1)->input == "&& "){
+						if (inputs.at(i)->input == "&&" || inputs.at(i)->input == "&& "){
 							if (WEXITSTATUS(stat) == 2){
 								cout << "Skip &&" << endl;
+								next = false;
 								i += 2;
 							}
 							cout << "Went next &&" << endl;
 						}
-						else if (inputs.at(i + 1)->input == "||" || inputs.at(i + 1)->input == "|| "){
+						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
 							if (WEXITSTATUS(stat) == 0){
 								cout << "Skip ||" << endl;
+								next = false;
 								i += 2;
 							}
 							cout << "Went next ||" << endl;
@@ -208,6 +214,9 @@ int InputData::run() {
 				}
 			}
 		}
+	}
+	if (inputs.size() % 2 == 1 && next){
+		inputs.at(inputs.size() - 1)->run();
 	}
 	return 0;
 }
