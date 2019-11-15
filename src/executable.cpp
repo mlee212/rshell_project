@@ -12,7 +12,7 @@ int Executable::run(){
 		if (input.at(i) == '\"'){
 			quote = !quote;
 		}
-		if (input.at(i) == ' '){
+		if (input.at(i) == ' ' && !quote){
 			space++;
 		}
 	}

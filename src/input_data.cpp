@@ -8,17 +8,32 @@ void InputData::takeInput() {
 //	string str;
 //	cout << "$";
 //	getline(cin, str);
+	
 	bool quote = false;
-	cout << str << endl;
+	cout << "og str:" << str << endl;
 	for(int i = 0; i < str.size(); i++) {
-		if(str.at(i) == '\"'){
+	//	if(str.at(i) == '\"' && !quote){
+	//		quote = true;
+	//		str.insert(i, " ");
+	//		i++;
+	//		str.insert(i + 1, " ");
+	//		i++;
+	//	}
+	//	if(str.at(i) == '\"' && quote) {
+	//		quote = false;
+	//		str.insert(i, " ");
+	//		i++;
+	//		str.insert(i + 1, " ");
+	//		i++;
+	//	}
+		if(str.at(i) == '\"') {
 			quote = !quote;
 		}
 		if (str.at(i) == ';' && !quote) {
 			str.insert(i," ");
 			i++;
 		}
-		if (str.at(i) == '#' && i != 0) {
+		if (str.at(i) == '#' && i != 0 && !quote) {
 			str.insert(i, " ");
 			i++;
 			str.insert(i + 1, " ");
@@ -26,36 +41,51 @@ void InputData::takeInput() {
 		}
 			
 	}
+	string quoteStr = str;
+	
+	cout << "first mod str:" << str << endl;
 	
 	int indexS = 0;
 	int indexE = 0;
 	int exeLength = 0;
 	string temp;
-	string quoteStr;
 	quote = false;
 	bool quoteSec = false;
 	bool quit = false;
 	bool quitCheck = false;
 	string quitStr;
 
+
+
+
 	//indexE++;
 	cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
-	
-		if(temp.at(0) == '\"'){
-			//for(int i = 0; i < temp.size(); i++) {
-			//	indexE++;
-			//	exeLength++;
+
+		for(int i = 0; i < temp.size(); i++) {
+			if (temp.at(i) == '\"') {
+				quote = !quote;
+			}
+		}
+		if(quote){
+		//	quote = true;
+		//	quoteSec = false;
+			for(int i = 0; i < temp.size(); i++) {
+				indexE++;
+				exeLength++;
 			//	if(temp.at(i) == '#') {
 			//		quit = true;
 			//		break;
 			//	}
-			//	if(temp.at(i) == '\"') {
-			//		quote = !quote;
-			//	}
+		//		if(temp.at(i) == '\"') {
+		//			quote = !quote;
+		//		}
 			
-			//} 
+			}
+		//	if(temp.at(temp.size() - 1) = '\"') {
+		//		quoteSec = true;
+		//	} 
 			//if(quit) {
 			//	for(int i = 0; i < temp.size(); i++) {
 			//		if(temp.at(i) == '#') {
@@ -67,8 +97,8 @@ void InputData::takeInput() {
 			//	}
 			//	temp = quitStr;
 			//}
-			//indexE += 1;
-			//exeLength += 1;
+			indexE += 1;
+			exeLength += 1;
 		} 
 		else {
 			for(int i = 0; i < temp.size(); i++) {
@@ -78,9 +108,9 @@ void InputData::takeInput() {
 					quit = true;
 					break;
 				}
-				if(temp.at(i) == '\"') {
-					quote = !quote;
-				}
+			//	if(temp.at(i) == '\"') {
+			//		quote = !quote;
+			//	}
 			
 			}
 			// if(quit) {
@@ -109,7 +139,7 @@ void InputData::takeInput() {
 			}
 			else if(temp == ";"  && !quote ) {
 				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
-				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() + 1)));
+				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() /* + 1 */)));
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;

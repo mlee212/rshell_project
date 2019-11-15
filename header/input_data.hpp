@@ -15,7 +15,7 @@ class InputData : public Input {
 	public:
 		vector<Input *> inputs;
 		string str;
-	public:
+//	public:
 		InputData(string x) : Input(x) {str = x;};
 		void takeInput();
 		int run();
