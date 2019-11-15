@@ -28,6 +28,14 @@ ADD_EXECUTABLE(manT
 	#unit_test.cpp
 )
 
+ADD_EXECUTABLE(rshell
+	~/assignment-scootscoot/unit_tests/rshell.cpp
+	~/assignment-scootscoot/src/input_data.cpp
+	~/assignment-scootscoot/src/input.cpp
+	~/assignment-scootscoot/src/executable.cpp
+	~/assignment-scootscoot/src/connector.cpp
+)
+
 #ADD_EXECUTABLE(test2
 #	~/assignment-scootscoot/unit_tests/unit_test.cpp
 #	~/assignment-scootscoot/src/input_data.cpp

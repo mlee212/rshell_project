@@ -176,7 +176,6 @@ int InputData::run() {
 	pid_t pid[inputs.size()];
 	for (int i = 0; i < inputs.size(); i++)	{
 		cout << i << endl;
-		next = true;
 		if (i % 2 == 1){
 			if ((pid[i] = fork()) == 0){
 				cout << "This is child: " << getpid() << endl;
@@ -197,7 +196,10 @@ int InputData::run() {
 								next = false;
 								i += 2;
 							}
-							cout << "Went next &&" << endl;
+							else {
+								next = true;
+								cout << "Went next &&" << endl;
+							}
 						}
 						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
 							if (WEXITSTATUS(stat) == 0){
@@ -205,9 +207,13 @@ int InputData::run() {
 								next = false;
 								i += 2;
 							}
-							cout << "Went next ||" << endl;
+							else {
+								next = true;
+								cout << "Went next ||" << endl;
+							}
 						}
 						else {
+							next = true;
 							cout << "Went next 3" << endl;
 						}
 					}
@@ -216,6 +222,7 @@ int InputData::run() {
 		}
 	}
 	if (inputs.size() % 2 == 1 && next){
+		cout << "next true" << endl;
 		inputs.at(inputs.size() - 1)->run();
 	}
 	return 0;
