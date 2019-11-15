@@ -24,6 +24,11 @@ Our program will be able to function as a basic shell that will be able to take 
   * For the semicolon, regardless if the first command works or not, it will move to the second command.
   * For the ampersands, if the first command works, it will move onto the second command. If the first command does not work, it will not move onto the second command.
   * For the parallel signs, if the first command works, it will not move onto the second command. If the first command does not work, it will move onto the second command.
+* Post-Prototype
+  * The Protoype's initial parser helped us realize that we could create a "partial parser" where the vector of inputs would contain strings of executables and arguments combined and connectors separately.
+  * The function testing of fork(), waitpid(), and execvp() helped us run our inputs without ending the entire program.
+  * The connector logic helped us understand how all of the inputs would run together.
+  * The Prototype's design helped us realize that our initial design was too complex and unnecessarily complicated and guided us to implement something much more simple and streamlined.
 
 # Dev Testing Roadmap
 * InputData Class
