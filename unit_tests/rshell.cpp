@@ -2,6 +2,7 @@
 
 int main(int argc, char ** argv){
 	string x;
+	//cout << "argc: " << argc << endl;
 	for (int i = 1; i < argc; i++){
 		if (i != argc - 1){
 			x = x + argv[i] + ' ';
@@ -9,9 +10,9 @@ int main(int argc, char ** argv){
 		else {
 			x = x + argv[i];
 		}
-		cout << "argv[ " << i << "]: " << argv[i] << endl;
+		//cout << "argv[ " << i << "]: " << argv[i] << endl;
 	}
-	cout << "x: " << endl;
+	//cout << "x: " << x << endl;
 	InputData test(x);
 	test.takeInput();
 	test.run();

@@ -36,7 +36,7 @@ int Executable::run(){
 
 				//	cout << arguments[cIndex - 1][temp];
 				//}
-				cout << endl;
+				//cout << endl;
 				index = i + 1;
 			}
 		}

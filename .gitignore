@@ -42,3 +42,4 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 
+integration_tests/test

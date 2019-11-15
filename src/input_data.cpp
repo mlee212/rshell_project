@@ -10,7 +10,7 @@ void InputData::takeInput() {
 //	getline(cin, str);
 	
 	bool quote = false;
-	cout << "og str:" << str << endl;
+	//cout << "og str:" << str << endl;
 	for(int i = 0; i < str.size(); i++) {
 	//	if(str.at(i) == '\"' && !quote){
 	//		quote = true;
@@ -43,7 +43,7 @@ void InputData::takeInput() {
 	}
 	string quoteStr = str;
 	
-	cout << "first mod str:" << str << endl;
+	//cout << "first mod str:" << str << endl;
 	
 	int indexS = 0;
 	int indexE = 0;
@@ -59,7 +59,7 @@ void InputData::takeInput() {
 
 
 	//indexE++;
-	cout << str << endl;
+	//cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
 
@@ -180,20 +180,20 @@ void InputData::takeInput() {
 
 	}
 	else {
-		cout << "what is this: " << str.substr(indexS, indexE + 2) << endl;
+		//cout << "what is this: " << str.substr(indexS, indexE + 2) << endl;
 		
 		inputs.push_back(new Executable(str.substr(indexS, indexE + 2)));
 	}
 	//cout << "Exe + args: " << str.substr(indexS, indexE) << endl;
 	// -------------- TEST -----------------------
 	//cout << "hello" << endl;
-	cout << indexE << endl;
-	cout << str.size() - 1<< endl;	
-	for(int i = 0; i < inputs.size(); i++) {
-		cout << inputs.at(i)->input << endl;
-	}
-	cout << "size: " << inputs.size() << endl;
-	cout << "hello" << endl;
+	//cout << indexE << endl;
+	//cout << str.size() - 1<< endl;	
+	//for(int i = 0; i < inputs.size(); i++) {
+	//	cout << inputs.at(i)->input << endl;
+	//}
+	//cout << "size: " << inputs.size() << endl;
+	//cout << "hello" << endl;
 	//cout << "inputs size: " << inputs.size() << endl;
 	//cout << inputs.at(0) << endl << inputs.at(1) << endl;
 	//cout << "hello 2" << endl;
@@ -205,46 +205,46 @@ int InputData::run() {
 	int stat;
 	pid_t pid[inputs.size()];
 	for (int i = 0; i < inputs.size(); i++)	{
-		cout << i << endl;
+		//cout << i << endl;
 		if (i % 2 == 1){
 			if ((pid[i] = fork()) == 0){
-				cout << "This is child: " << getpid() << endl;
+				//cout << "This is child: " << getpid() << endl;
 				if (inputs.at(i - 1)->run() == -1){
 					exit(2);
 				}
 				exit(1);
 			}
 			else {
-				cout << "This is parent: " << i << endl;
+				//cout << "This is parent: " << i << endl;
 				pid_t test = waitpid(pid[i], &stat, 0);
 				if (i != inputs.size() - 1){
 					if (WIFEXITED(stat)){
-						cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
+						//cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
 						if (inputs.at(i)->input == "&&" || inputs.at(i)->input == "&& "){
 							if (WEXITSTATUS(stat) == 2){
-								cout << "Skip &&" << endl;
+								//cout << "Skip &&" << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-								cout << "Went next &&" << endl;
+								//cout << "Went next &&" << endl;
 							}
 						}
 						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
 							if (WEXITSTATUS(stat) == 0){
-								cout << "Skip ||" << endl;
+								//cout << "Skip ||" << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-								cout << "Went next ||" << endl;
+								//cout << "Went next ||" << endl;
 							}
 						}
 						else {
 							next = true;
-							cout << "Went next 3" << endl;
+							//cout << "Went next 3" << endl;
 						}
 					}
 				}
@@ -252,7 +252,7 @@ int InputData::run() {
 		}
 	}
 	if (inputs.size() % 2 == 1 && next){
-		cout << "next true" << endl;
+		//cout << "next true" << endl;
 		inputs.at(inputs.size() - 1)->run();
 	}
 	return 0;
