@@ -56,7 +56,7 @@ void InputData::takeInput() {
 	int exeLength = 0;
 	string temp;
 	quote = false;
-	bool paren = false;
+	int paren = 0;
 	bool quoteSec = false;
 	bool quit = false;
 	bool quitCheck = false;
@@ -69,15 +69,16 @@ void InputData::takeInput() {
 	stringstream ss(str);
 	while(ss >> temp) {
 		
-		if(temp.at(0) == '(') {
-			paren = true;
-		}
-		if(temp.at(temp.size() - 1) == ')') {
-			paren = false;
-		}
+		
 		for(int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
 				quote = !quote;
+			}
+			if(temp.at(0) == '(' && !quote) {
+				paren++;
+			}
+			if(temp.at(temp.size() - 1) == ')' && !quote) {
+				paren--;
 			}
 		}
 		if(quote){
@@ -112,7 +113,7 @@ void InputData::takeInput() {
 			indexE += 1;
 			exeLength += 1;
 		}
-		else if(paren){
+		else if(paren > 0){
 		//	quote = true;
 		//	quoteSec = false;
 			if(start) {
