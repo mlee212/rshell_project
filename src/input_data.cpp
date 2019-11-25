@@ -186,7 +186,9 @@ void InputData::takeInput() {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
 				
 				if(str.at(indexS) == '(') {
+					cout << "SOMETHING SHOULD BE HAPPENING HERE &&" << endl;
 					inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
+					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
 				}
 				else {
 					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
@@ -203,7 +205,9 @@ void InputData::takeInput() {
 			else if(temp == "||" && !quote) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
 				if(str.at(indexS) == '(') {
+					cout << "SOMETHING SHOULD BE HAPPENING HERE ||" << endl;
 					inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
+					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
 				}
 				else {
 					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
@@ -221,7 +225,9 @@ void InputData::takeInput() {
 			}
 			else if(temp == ";"  && !quote ) {
 				if(str.at(indexS) == '(') {
+					cout << "SOMETHING SHOULD BE HAPPENING HERE ;" << endl;
 					inputs.push_back(new Parenthesis(str.substr(indexS, exeLength)));
+					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
 				}
 				else {
 					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
@@ -234,6 +240,7 @@ void InputData::takeInput() {
 			else if(temp == "#"  && !quote ) {
 				if(str.at(indexS) == '(') {
 					inputs.push_back(new Parenthesis (str.substr(indexS, exeLength)));
+					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
 				}
 				else {
 					inputs.push_back(new Executable (str.substr(indexS, exeLength)));
