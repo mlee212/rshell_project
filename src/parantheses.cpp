@@ -1,13 +1,11 @@
 #include "../header/parantheses.hpp"
 
-Parantheses::Parantheses(Input * l, Input * r) {
+Parantheses::Parantheses(Input * l) {
     left = l;
-    right = r;
 }
 
 int Parantheses::run(){
-    if (left->run() == -1){
-        right->run();
+    if (l->run() != -1){
         return 1;
     }
     return -1;
