@@ -14,11 +14,12 @@ ADD_EXECUTABLE(test
 	~/assignment-scootscoot/src/parenthesis.cpp
 )
 
-#ADD_EXECUTABLE(main
-#	~/assignment-scootscoot/unit_tests/main.cpp
-#	~/assignment-scootscoot/src/executable.cpp
-#	~/assignment-scootscoot/src/input.cpp
-#)
+ADD_EXECUTABLE(main
+	~/assignment-scootscoot/unit_tests/main.cpp
+	~/assignment-scootscoot/src/executable.cpp
+	~/assignment-scootscoot/src/input.cpp
+	~/assignment-scootscoot/src/test.cpp
+)
 
 ADD_EXECUTABLE(manT
 	~/assignment-scootscoot/unit_tests/main2.cpp
