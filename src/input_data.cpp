@@ -319,29 +319,29 @@ int InputData::run() {
 						//cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
 						if (inputs.at(i)->input == "&&" || inputs.at(i)->input == "&& "){
 							if (WEXITSTATUS(stat) == 2){
-								//cout << "Skip &&" << endl;
+								cout << "Skip &&" << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-								//cout << "Went next &&" << endl;
+								cout << "Went next &&" << endl;
 							}
 						}
 						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
 							if (WEXITSTATUS(stat) == 0){
-								//cout << "Skip ||" << endl;
+								cout << "Skip ||" << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-								//cout << "Went next ||" << endl;
+								cout << "Went next ||" << endl;
 							}
 						}
 						else {
 							next = true;
-							//cout << "Went next 3" << endl;
+							cout << "Went next 3" << endl;
 						}
 					}
 				}
@@ -349,12 +349,12 @@ int InputData::run() {
 		}
 	}
 	if (inputs.size() % 2 == 1 && next){
-		//cout << "next true" << endl;
+		cout << "next true" << endl;
 		inputs.at(inputs.size() - 1)->run();
 	}
-	//else if (inputs.size() == 1){
-	//	inputs.at(0)->run();
-	//}
+	if (inputs.size() == 1){
+		inputs.at(0)->run();
+	}
 	return 0;
 }
 

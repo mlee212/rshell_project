@@ -4,6 +4,7 @@ Parenthesis::Parenthesis(string str) : Input(str) { }
 
 int Parenthesis::run() {
 	string strToParse = input;
+	cout << "input: " << input << endl;
 	while (strToParse.at(0) == '(' && strToParse.at(input.length() - 1) == ')') {
 		strToParse = strToParse.substr(1, input.size() - 2);
 	}	
