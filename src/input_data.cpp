@@ -283,7 +283,7 @@ void InputData::takeInput() {
 	//cout << str.size() - 1<< endl;	
 	for(int i = 0; i < inputs.size(); i++) {
 		cout << inputs.at(i)->input << endl;
-		while(inputs.at(i)->input.at(0) == '(' && inputs.at(i)->input.at(inputs.at(i)->input.length() - 1) == ')') {
+		while(inputs.at(i)->input.at(1) == '(' && inputs.at(i)->input.at(inputs.at(i)->input.length() - 2) == ')') {
 			inputs.at(i)->input = inputs.at(i)->input.substr(1, inputs.at(i)->input.length() - 2);
 		}
 		cout << "After: " << inputs.at(i)->input << endl;
