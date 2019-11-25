@@ -2,6 +2,11 @@
 #include "../header/executable.hpp"
 #include "../header/connector.hpp"
 #include "../header/input.hpp"
+#include "../header/parenthesis.hpp"
+//#include "../header/ampersand.hpp"
+//#include "../header/parallel.hpp"
+//#include "../header/semicolon.hpp"
+
 
 
 void InputData::takeInput() {
@@ -172,10 +177,15 @@ void InputData::takeInput() {
 			//	}
 			//	temp = quitStr;
 			//}
-			if((temp == "&&" || temp == "||")  && !quote ) {
+			if((temp == "&&")  && !quote) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
-				inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
 				
+				if(str.at(indexS) == '(') {
+					inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
+				}
+				else {
+					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
+				}
 				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
 				//cout << indexE << endl;
 				inputs.push_back(new Connector(str.substr(indexE, temp.size())));
@@ -185,15 +195,44 @@ void InputData::takeInput() {
 				indexS = indexE + 3;
 				indexE = indexS;
 			}
+			else if(temp == "||" && !quote) {
+				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
+				if(str.at(indexS) == '(') {
+					inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
+				}
+				else {
+					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
+				}
+				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
+				//cout << indexE << endl;
+				inputs.push_back(new Connector(str.substr(indexE, temp.size())));
+				//indexS = indexE + temp.size() + 1;
+				//indexE = indexS
+				exeLength = 0;
+				indexS = indexE + 3;
+				indexE = indexS;
+				
+				
+			}
 			else if(temp == ";"  && !quote ) {
-				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
+				if(str.at(indexS) == '(') {
+					inputs.push_back(new Parenthesis(str.substr(indexS, exeLength)));
+				}
+				else {
+					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
+				}
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() /* + 1 */)));
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
 			}
 			else if(temp == "#"  && !quote ) {
-				inputs.push_back(new Executable (str.substr(indexS, exeLength)));
+				if(str.at(indexS) == '(') {
+					inputs.push_back(new Parenthesis (str.substr(indexS, exeLength)));
+				}
+				else {
+					inputs.push_back(new Executable (str.substr(indexS, exeLength)));
+				}
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;

@@ -4,9 +4,10 @@
 
 class Parallel : public Input {
     public:
-        Parallel(Input *);
-        int run();
-        Input * left;
+        Parallel(Input *, Input *);
+		int run();
+		Input * left;
+		Input * right;
 };
 
 #endif

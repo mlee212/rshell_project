@@ -11,6 +11,7 @@ ADD_EXECUTABLE(test
 	~/assignment-scootscoot/src/input_data.cpp
 	~/assignment-scootscoot/src/connector.cpp
 	~/assignment-scootscoot/src/input.cpp
+	~/assignment-scootscoot/src/parenthesis.cpp
 )
 
 #ADD_EXECUTABLE(main
@@ -25,6 +26,7 @@ ADD_EXECUTABLE(manT
 	~/assignment-scootscoot/src/input.cpp
 	~/assignment-scootscoot/src/executable.cpp
 	~/assignment-scootscoot/src/connector.cpp
+	~/assignment-scootscoot/src/parenthesis.cpp
 #unit_test.cpp
 )
 
@@ -34,6 +36,10 @@ ADD_EXECUTABLE(rshell
 	~/assignment-scootscoot/src/input.cpp
 	~/assignment-scootscoot/src/executable.cpp
 	~/assignment-scootscoot/src/connector.cpp
+	~/assignment-scootscoot/src/parenthesis.cpp
+#	~/assignment-scootscoot/src/parallel.cpp
+#	~/assignment-scootscoot/src/ampersand.cpp
+#	~/assignment-scootscoot/src/semicolon.cpp
 )
 
 #ADD_EXECUTABLE(test2
