@@ -44,25 +44,32 @@ void InputData::takeInput() {
 	string quoteStr = str;
 	
 	//cout << "first mod str:" << str << endl;
+
 	
 	int indexS = 0;
 	int indexE = 0;
 	int exeLength = 0;
 	string temp;
 	quote = false;
+	bool paren = false;
 	bool quoteSec = false;
 	bool quit = false;
 	bool quitCheck = false;
+	bool start = true;
 	string quitStr;
-
-
 
 
 	//indexE++;
 	//cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
-
+		
+		if(temp.at(0) == '(') {
+			paren = true;
+		}
+		if(temp.at(temp.size() - 1) == ')') {
+			paren = false;
+		}
 		for(int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
 				quote = !quote;
@@ -99,6 +106,47 @@ void InputData::takeInput() {
 			//}
 			indexE += 1;
 			exeLength += 1;
+		}
+		else if(paren){
+		//	quote = true;
+		//	quoteSec = false;
+			if(start) {
+				for(int i = 0; i < temp.size(); i++) {
+					indexE++;
+					exeLength++;
+				}
+			}
+			else {
+				for(int i = 0; i < temp.size(); i++) {
+					indexE++;
+					exeLength++;
+				//	if(temp.at(i) == '#') {
+				//		quit = true;
+				//		break;
+				//	}
+			//		if(temp.at(i) == '\"') {
+			//			quote = !quote;
+			//		}
+				
+				}
+			//	if(temp.at(temp.size() - 1) = '\"') {
+			//		quoteSec = true;
+			//	} 
+				//if(quit) {
+				//	for(int i = 0; i < temp.size(); i++) {
+				//		if(temp.at(i) == '#') {
+				//			quitCheck = true;
+				//		}
+				//		if(!quitCheck) {
+				//			quitStr += temp.at(i);
+				//		}
+				//	}
+				//	temp = quitStr;
+				//}
+				indexE += 1;
+				exeLength += 1;
+			}
+			start = false;
 		} 
 		else {
 			for(int i = 0; i < temp.size(); i++) {
@@ -189,13 +237,13 @@ void InputData::takeInput() {
 	//cout << "hello" << endl;
 	//cout << indexE << endl;
 	//cout << str.size() - 1<< endl;	
-	//for(int i = 0; i < inputs.size(); i++) {
-	//	cout << inputs.at(i)->input << endl;
-	//}
-	//cout << "size: " << inputs.size() << endl;
+	for(int i = 0; i < inputs.size(); i++) {
+		cout << inputs.at(i)->input << endl;
+	}
+	cout << "size: " << inputs.size() << endl;
 	//cout << "hello" << endl;
-	//cout << "inputs size: " << inputs.size() << endl;
-	//cout << inputs.at(0) << endl << inputs.at(1) << endl;
+	cout << "inputs size: " << inputs.size() << endl;
+	cout << inputs.at(0) << endl << inputs.at(1) << endl;
 	//cout << "hello 2" << endl;
 	
 }
