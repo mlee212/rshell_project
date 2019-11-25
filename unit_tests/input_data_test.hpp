@@ -117,4 +117,37 @@ TEST(Parser, TwoQuotes) {
 	EXPECT_EQ(test.inputs.at(1)->input, ";");
 	EXPECT_EQ(test.inputs.at(2)->input, "echo \"ooga booga\"");
 }
+
+TEST(Parser, Parentheses) {
+	string str = "(echo A && echo B)";
+	InputData test(str);
+	test.takeInput();
+	ASSERT_EQ(test.inputs.size(), 1);
+	EXPECT_EQ(test.inputs.at(0)->input, "(echo A && echo B)");
+}
+
+TEST(Parser, DoubleParentheses) {
+	string str = "((echo A && echo B) && echo C)";
+	InputData test(str);
+	test.takeInput();
+	ASSERT_EQ(test.inputs.size(), 1);
+	EXPECT_EQ(test.inputs.at(0)->input, "((echo A && echo B) && echo C)");
+}
+
+TEST(Parser, Test_Command) {
+	string str = "test -e header";
+	InputData test(str);
+	test.takeInput();
+	ASSERT_EQ(test.inputs.size(), 1);
+	EXPECT_EQ(test.inputs.at(0)->input, "test -e header");
+}
+
+
+TEST(Parser, SquareBracket) {
+	string str = "[ -e header ]";
+	InputData test(str);
+	test.takeInput();
+	ASSERT_EQ(test.inputs.size(), 1);
+	EXPECT_EQ(test.inputs.at(0)->input, "-e header");
+}
 #endif
