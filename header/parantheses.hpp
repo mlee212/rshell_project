@@ -4,10 +4,9 @@
 
 class Parantheses : public Input {
     public:
-        Parantheses(Input *, Input *);
+        Parantheses(Input *);
         int run();
         Input * left;
-        Input * right;
 };
 
 #endif
