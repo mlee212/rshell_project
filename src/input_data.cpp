@@ -282,7 +282,7 @@ void InputData::takeInput() {
 	cout << "size: " << inputs.size() << endl;
 	//cout << "hello" << endl;
 	cout << "inputs size: " << inputs.size() << endl;
-	cout << inputs.at(0) << endl << inputs.at(1) << endl;
+//	cout << inputs.at(0) << endl << inputs.at(1) << endl;
 	//cout << "hello 2" << endl;
 	
 }
@@ -342,6 +342,9 @@ int InputData::run() {
 		//cout << "next true" << endl;
 		inputs.at(inputs.size() - 1)->run();
 	}
+	//else if (inputs.size() == 1){
+	//	inputs.at(0)->run();
+	//}
 	return 0;
 }
 

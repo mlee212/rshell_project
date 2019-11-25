@@ -1,7 +1,8 @@
 #include <iostream>
 #include "../header/input.hpp"
 #include "../header/executable.hpp"
-#include "../header/test.hpp"
+#include "../header/test_command.hpp"
+#include "../header/square.hpp"
 
 using namespace std;
 
@@ -15,31 +16,38 @@ int main(){
 	//Input * z = new Executable("echo \"hello world\"");
 	//z->run();
 	
-	Input * l = new Test("test -e header");
-	
-	Input * m = new Test("test -e rshell");
+	Input * l = new TestCommand("test -e header");
+	l->run();	
+
+	Input * m = new TestCommand("test -e rshell");
 	m->run();
 	
-	Input * n = new Test("test -e 5shell");
+	Input * n = new TestCommand("test -e 5shell");
 	n->run();
 
-	Input * o = new Test("test -f rshell");
+	Input * o = new TestCommand("test -f rshell");
 	o->run();
 
-	Input * p = new Test("test -d rshell");
+	Input * p = new TestCommand("test -d rshell");
 	p->run();
 
-	Input * q = new Test("test -d header");
+	Input * q = new TestCommand("test -d header");
 	q->run();
 
-	Input * r = new Test("test header");
+	Input * r = new TestCommand("test header");
 	r->run();
 
-	Input * s = new Test("test rshell");
+	Input * s = new TestCommand("test rshell");
 	s->run();
 
-	Input * t = new Test("test 5shell");
+	Input * t = new TestCommand("test 5shell");
 	t->run();
+
+	Input * u = new Square("header");
+	u->run();
+
+	Input * w = new Square("u_test.cpp");
+	w->run();
 
 
 }

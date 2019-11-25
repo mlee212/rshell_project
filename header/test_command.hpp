@@ -3,9 +3,9 @@
 
 #include "input.hpp"
 
-class Test : public Input {
+class TestCommand : public Input {
 	public:
-		Test(string x) : Input(x) { };
+		TestCommand(string x) : Input(x) { };
 		int run();
 };
 

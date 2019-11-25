@@ -1,6 +1,6 @@
-#include "../header/test.hpp"
+#include "../header/test_command.hpp"
 
-int Test::run() {
+int TestCommand::run() {
 	stringstream ss(input);
 	vector<string> values;
 	string temp;

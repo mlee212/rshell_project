@@ -7,20 +7,21 @@
 TEST(ExecutableTest, TestLS){
 	Input * x = new Executable("ls");
 	
-	EXPECT_EQ(x->run(), 0);
+	EXPECT_EQ(x->input, "ls");
 	
 }
 
 TEST(ExecutableTest, TestEcho) {
 	Input * x = new Executable("echo");
 	
-	EXPECT_EQ(x->run(), 0);
+	EXPECT_EQ(x->input, "echo");
 }
 
 TEST(ExecutableTest, Error) {
 	Input * x = new Executable("unicorn");
 
-	EXPECT_EQ(x->run(), -1);
+	EXPECT_EQ(x->input, "unicorn");
 }
+
 
 #endif

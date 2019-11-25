@@ -1,5 +1,7 @@
 #include "input_data_test.hpp"
 #include "executable_test.hpp"
+#include "test_command_test.hpp"
+#include "square_test.hpp"
 
 #include "gtest/gtest.h"
 
