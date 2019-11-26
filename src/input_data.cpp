@@ -6,6 +6,8 @@
 //#include "../header/ampersand.hpp"
 //#include "../header/parallel.hpp"
 //#include "../header/semicolon.hpp"
+#include "../header/square.hpp"
+#include "../header/test_command.hpp"
 
 
 
@@ -61,14 +63,16 @@ void InputData::takeInput() {
 	string temp;
 	quote = false;
 	int paren = 0;
+	int square = 0;
 	bool parenE = false;
 	bool quoteSec = false;
 	bool quit = false;
 	bool quitCheck = false;
 	bool start = true;
 	string quitStr;
-
-
+	bool startsq = true;
+	bool sqExist = false;
+	
 	//indexE++;
 	//cout << str << endl;
 	stringstream ss(str);
@@ -86,8 +90,34 @@ void InputData::takeInput() {
 				parenE = true;
 				paren--;
 			}
+			if(temp == "[" && !quote) {
+				square++;
+			}
+			if(temp == "]" && !quote) {
+				square--;
+			}
 		}
-		if(quote){
+		if(square > 0) {
+			cout << "Square Length: " << square << endl;
+			if(start) {
+				for(int i = 0; i < temp.size(); i++) {
+					indexE++;
+					exeLength++;
+				}
+				indexE++;
+				exeLength++;
+			}
+			else {
+				for(int i = 0; i < temp.size(); i++) {
+					indexE++;
+					exeLength++;
+				}
+				indexE += 2;
+				exeLength += 2;
+			}
+			startsq == false;
+		}
+		else if(quote){
 		//	quote = true;
 		//	quoteSec = false;
 			for(int i = 0; i < temp.size(); i++) {
@@ -310,7 +340,7 @@ void InputData::takeInput() {
 	//	}
 	//	else{
 	//		cout << "Not Paren" << endl;
-			inputs.push_back(new Executable(str.substr(indexS, indexE + 1/*+ 2*/)));
+			inputs.push_back(new Executable(str.substr(indexS, indexE + 2)));
 	//	}
 	}
 	//cout << "Exe + args: " << str.substr(indexS, indexE) << endl;
@@ -327,8 +357,18 @@ void InputData::takeInput() {
 //			inputs.at(i)->input = inputs.at(i)->input.substr(1, inputs.at(i)->input.length() - 2);
 //		}
 		if(inputs.at(i)->input.at(0) == '(' /*&& inputs.at(i)->input.at(input.length() - 1) == ')'*/) {
-			cout << "We made it in bois" << endl;
+			cout << "Paren Conversion" << endl;
 			inputs.at(i) = new Parenthesis(inputs.at(i)->input);
+		}
+		else if(inputs.at(i)->input.at(0) == '[') {
+			cout << "Square Conversion" << endl;
+			inputs.at(i) = new Square(inputs.at(i)->input.substr(2, input.length() - 4));
+		}
+		else if(inputs.at(i)->input.length() > 4) {
+			if(inputs.at(i)->input.substr(0, 4) == "test") {
+				cout << "Test Conversion" << endl;
+				inputs.at(i) = new TestCommand(inputs.at(i)->input); 
+			}
 		}
 		cout << "And we outta there" << endl;
 		cout << "After: " << inputs.at(i)->input << endl;
