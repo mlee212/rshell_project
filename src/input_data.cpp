@@ -14,9 +14,9 @@ void InputData::takeInput() {
 //	cout << "$";
 //	getline(cin, str);
 	
-	while (str.at(0) == '(' && str.at(str.length() - 1) == ')') {
-		str = str.substr(1, str.length() - 2);
-	}
+//	while (str.at(0) == '(' && str.at(str.length() - 1) == ')') {
+//		str = str.substr(1, str.length() - 2);
+//	}
 	
 	bool quote = false;
 	//cout << "og str:" << str << endl;
@@ -61,6 +61,7 @@ void InputData::takeInput() {
 	string temp;
 	quote = false;
 	int paren = 0;
+	bool parenE = false;
 	bool quoteSec = false;
 	bool quit = false;
 	bool quitCheck = false;
@@ -72,15 +73,17 @@ void InputData::takeInput() {
 	//cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
-		
+		cout << "Working with: " << temp << endl;
 		for(int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
 				quote = !quote;
 			}
 			if(temp.at(i) == '(' && !quote) {
+				parenE = true;
 				paren++;
 			}
 			if(temp.at(i) == ')' && !quote) {
+				parenE = true;
 				paren--;
 			}
 		}
@@ -184,15 +187,15 @@ void InputData::takeInput() {
 			//}
 			if((temp == "&&")  && !quote) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
-				
-				if(str.at(indexS) == '(') {
-					cout << "SOMETHING SHOULD BE HAPPENING HERE &&" << endl;
-					inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
-					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-				}
-				else {
+				cout << "Char at indexS: " << str.at(indexS) << endl;
+	//			if(str.at(indexS) == '(') {
+	//				cout << "SOMETHING SHOULD BE HAPPENING HERE &&" << endl;
+	//				inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
+	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
+	//			}
+	//			else {
 					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
-				}
+	//			}
 				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
 				//cout << indexE << endl;
 				inputs.push_back(new Connector(str.substr(indexE, temp.size())));
@@ -204,14 +207,14 @@ void InputData::takeInput() {
 			}
 			else if(temp == "||" && !quote) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
-				if(str.at(indexS) == '(') {
-					cout << "SOMETHING SHOULD BE HAPPENING HERE ||" << endl;
-					inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
-					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-				}
-				else {
+	//			if(str.at(indexS) == '(') {
+	//				cout << "SOMETHING SHOULD BE HAPPENING HERE ||" << endl;
+	//				inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
+	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
+	//			}
+	//			else {
 					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
-				}
+	//			}
 				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
 				//cout << indexE << endl;
 				inputs.push_back(new Connector(str.substr(indexE, temp.size())));
@@ -224,27 +227,27 @@ void InputData::takeInput() {
 				
 			}
 			else if(temp == ";"  && !quote ) {
-				if(str.at(indexS) == '(') {
-					cout << "SOMETHING SHOULD BE HAPPENING HERE ;" << endl;
-					inputs.push_back(new Parenthesis(str.substr(indexS, exeLength)));
-					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-				}
-				else {
+	//			if(str.at(indexS) == '(') {
+	//				cout << "SOMETHING SHOULD BE HAPPENING HERE ;" << endl;
+	//				inputs.push_back(new Parenthesis(str.substr(indexS, exeLength)));
+	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
+	//			}
+	//			else {
 					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
-				}
+	//			}
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() /* + 1 */)));
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
 			}
 			else if(temp == "#"  && !quote ) {
-				if(str.at(indexS) == '(') {
-					inputs.push_back(new Parenthesis (str.substr(indexS, exeLength)));
-					cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-				}
-				else {
+	//			if(str.at(indexS) == '(') {
+	//				inputs.push_back(new Parenthesis (str.substr(indexS, exeLength)));
+	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
+	//			}
+	//			else {
 					inputs.push_back(new Executable (str.substr(indexS, exeLength)));
-				}
+	//			}
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
@@ -273,6 +276,27 @@ void InputData::takeInput() {
 		}
 	}
 	
+	bool closedP = false;
+	paren = 0;
+	cout << indexE << endl;
+	cout << str.length() << endl;
+	
+//	for(int i = indexS; i <= indexE; i++) {
+//		cout << str.at(i);
+//		if(str.at(i) == '(') { 
+//			paren++;
+//		}
+//		if(str.at(i) == ')') {
+//			paren--;
+//		}
+//	}
+	
+	cout << endl;
+	
+//	if(paren == 0) {
+//		closedP = true;
+//	}
+	
 	if (quitCheck) {
 		//cout << "quitStr: "<< quitStr.size() << endl;
 		//inputs.push_back(new Executable(str.substr(indexS, quitStr.size() + 3)));
@@ -280,19 +304,33 @@ void InputData::takeInput() {
 	}
 	else {
 		//cout << "what is this: " << str.substr(indexS, indexE + 2) << endl;
-		
-		inputs.push_back(new Executable(str.substr(indexS, indexE + 2)));
+	//	if(closedP && parenE) {
+	//		cout << "Is Paren" << endl;
+	//		inputs.push_back(new Parenthesis(str.substr(indexS, indexE + 2)));
+	//	}
+	//	else{
+	//		cout << "Not Paren" << endl;
+			inputs.push_back(new Executable(str.substr(indexS, indexE + 1/*+ 2*/)));
+	//	}
 	}
 	//cout << "Exe + args: " << str.substr(indexS, indexE) << endl;
 	// -------------- TEST -----------------------
 	//cout << "hello" << endl;
 	//cout << indexE << endl;
 	//cout << str.size() - 1<< endl;	
+	
+	cout << endl << "FINAL DISPLAY" << endl;
+	
 	for(int i = 0; i < inputs.size(); i++) {
-		cout << inputs.at(i)->input << endl;
-		while(inputs.at(i)->input.at(1) == '(' && inputs.at(i)->input.at(inputs.at(i)->input.length() - 2) == ')') {
-			inputs.at(i)->input = inputs.at(i)->input.substr(1, inputs.at(i)->input.length() - 2);
+		cout << endl << "vector: " << inputs.at(i)->input << endl;
+//		while(inputs.at(i)->input.at(1) == '(' && inputs.at(i)->input.at(inputs.at(i)->input.length() - 2) == ')') {
+//			inputs.at(i)->input = inputs.at(i)->input.substr(1, inputs.at(i)->input.length() - 2);
+//		}
+		if(inputs.at(i)->input.at(0) == '(' /*&& inputs.at(i)->input.at(input.length() - 1) == ')'*/) {
+			cout << "We made it in bois" << endl;
+			inputs.at(i) = new Parenthesis(inputs.at(i)->input);
 		}
+		cout << "And we outta there" << endl;
 		cout << "After: " << inputs.at(i)->input << endl;
 		
 	}
