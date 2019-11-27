@@ -6,9 +6,9 @@ int Square::run() {
 	string temp;
 	while (ss >> temp){
 		values.push_back(temp);
-		cout << "temp: " << temp << endl;
+//		cout << "temp: " << temp << endl;
 	}
-	cout << "size: " << values.size() << endl;
+//	cout << "size: " << values.size() << endl;
 	bool exists = false;
 	struct stat statistic;
 	//cout << "stat: " << stat(values.at(2).c_str(), &statistic) << endl;
