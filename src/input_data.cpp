@@ -72,12 +72,19 @@ void InputData::takeInput() {
 	string quitStr;
 	bool startsq = true;
 	bool sqExist = false;
+	bool inTest = false;
 	
 	//indexE++;
 	//cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
 		cout << "Working with: " << temp << endl;
+		
+		if(!quote && !paren && !square && !inTest && temp == "test") {
+			indexE++;
+			exeLength++;
+			inTest = true;
+		} 
 		for(int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
 				quote = !quote;
@@ -234,6 +241,7 @@ void InputData::takeInput() {
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
+				inTest = false;
 			}
 			else if(temp == "||" && !quote) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
@@ -253,7 +261,7 @@ void InputData::takeInput() {
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
-				
+				inTest = false;
 				
 			}
 			else if(temp == ";"  && !quote ) {
@@ -269,6 +277,7 @@ void InputData::takeInput() {
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
+				inTest = false;
 			}
 			else if(temp == "#"  && !quote ) {
 	//			if(str.at(indexS) == '(') {
@@ -282,6 +291,7 @@ void InputData::takeInput() {
 				indexS = indexE + 3;
 				indexE = indexS;
 				quitCheck = true;
+				inTest = false;
 			}
 			//if(singular) {
 			//	inputs.push_back(str);
