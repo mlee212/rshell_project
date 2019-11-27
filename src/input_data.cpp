@@ -483,7 +483,7 @@ int InputData::run() {
 							}
 						}
 						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
-							if (WEXITSTATUS(stat) == 0){
+							if (WEXITSTATUS(stat) != 2){
 								cout << "Skip ||" << endl;
 								next = false;
 								i += 2;
