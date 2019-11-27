@@ -119,7 +119,7 @@ void InputData::takeInput() {
 				}
 				cout << "tempIndSq: " << tempIndSq << endl;
 				cout << "numParamSq: " << numParamSq << endl;
-				for(int i = 0; i < temp.size(); i++) {
+	//			for(int i = 0; i < temp.size(); i++) {
 					if(numParamSq == 2) {
 						cout << "Are we there yet?" << endl;
 						indexE += 2;
@@ -128,7 +128,7 @@ void InputData::takeInput() {
 					else {
 						indexE += 3;
 						exeLength += 3;
-					}
+	//				}
 				
 				}
 			}
@@ -291,6 +291,7 @@ void InputData::takeInput() {
 				indexS = indexE + 3;
 				indexE = indexS;
 				inTest = false;
+				numParamSq = 0;
 			}
 			else if(temp == "||" && !quote) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
@@ -316,6 +317,7 @@ void InputData::takeInput() {
 				indexS = indexE + 3;
 				indexE = indexS;
 				inTest = false;
+				numParamSq = 0;
 				
 			}
 			else if(temp == ";"  && !quote ) {
@@ -332,6 +334,7 @@ void InputData::takeInput() {
 				indexS = indexE + 3;
 				indexE = indexS;
 				inTest = false;
+				numParamSq = 0;
 			}
 			else if(temp == "#"  && !quote ) {
 	//			if(str.at(indexS) == '(') {
@@ -346,6 +349,7 @@ void InputData::takeInput() {
 				indexE = indexS;
 				quitCheck = true;
 				inTest = false;
+				numParamSq = 0;
 			}
 			//if(singular) {
 			//	inputs.push_back(str);
