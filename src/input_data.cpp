@@ -107,26 +107,28 @@ void InputData::takeInput() {
 			if(startsq) {
 				cout  << "QWERTYUIO" << endl;
 				for(int i = 0; i < temp.size(); i++) {
-					indexE++;
-					exeLength++;
+					indexE += 3;
+					exeLength += 3;
 				}
-				indexE++;
-				exeLength++;
+//				indexE++;
+//				exeLength++;
 			}
 			else {
-			cout << " ITES AWEFAWEFAWEF" << endl;
+				cout << " ITES AWEFAWEFAWEF" << endl;
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
 					exeLength++;
+	//				indexE += 1;
 				}
 //				indexE += 1;
 //				exeLength += 1;
+				
+				if(temp == "]" && !quote) {
+					square--;
+				}
 			}
-			if(temp == "]" && !quote) {
-				square--;
-			}
-
 			startsq = false;
+			
 		}
 		else if(quote){
 		//	quote = true;
