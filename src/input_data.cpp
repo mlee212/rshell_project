@@ -73,6 +73,8 @@ void InputData::takeInput() {
 	bool startsq = false;
 	bool sqExist = false;
 	bool inTest = false;
+	int numParamSq = 0;
+	int tempIndSq = 0;
 	
 	//indexE++;
 	//cout << str << endl;
@@ -106,13 +108,30 @@ void InputData::takeInput() {
 			cout << "Square Length: " << square << endl;
 			if(startsq) {
 				cout  << "QWERTYUIO" << endl;
-				for(int i = 0; i < temp.size(); i++) {
-					indexE += 3;
-					exeLength += 3;
+				tempIndSq = indexE;
+				while(str.at(tempIndSq) != ']') {
+					if(str.at(tempIndSq) == ' ') {
+						numParamSq++;
+					}
+					tempIndSq++;
 				}
+				cout << "tempIndSq: " << tempIndSq << endl;
+				cout << "numParamSq: " << numParamSq << endl;
+				for(int i = 0; i < temp.size(); i++) {
+					if(numParamSq == 2) {
+						cout << "Are we there yet?" << endl;
+						indexE += 2;
+						exeLength += 2;
+					}
+					else {
+						indexE += 3;
+						exeLength += 3;
+					}
+				
+				}
+			}
 //				indexE++;
 //				exeLength++;
-			}
 			else {
 				cout << " ITES AWEFAWEFAWEF" << endl;
 				for(int i = 0; i < temp.size(); i++) {
@@ -120,6 +139,11 @@ void InputData::takeInput() {
 					exeLength++;
 	//				indexE += 1;
 				}
+	//			if( == 2) {
+	//				cout << "IS THIS WORKING??" << endl;
+	//				indexE--;
+	//				exeLength--;
+	//			}
 //				indexE += 1;
 //				exeLength += 1;
 				
@@ -241,7 +265,12 @@ void InputData::takeInput() {
 	//			}
 				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
 				//cout << indexE << endl;
-				inputs.push_back(new Connector(str.substr(indexE, temp.size())));
+				if(str.substr(indexS, --exeLength) == "ls") {
+					inputs.push_back(new Connector(str.substr(--indexE, temp.size())));
+				}
+				else {
+					inputs.push_back(new Connector(str.substr(indexE, temp.size())));
+				}
 				//indexS = indexE + temp.size() + 1;
 				//indexE = indexS
 				exeLength = 0;
@@ -261,7 +290,12 @@ void InputData::takeInput() {
 	//			}
 				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
 				//cout << indexE << endl;
-				inputs.push_back(new Connector(str.substr(indexE, temp.size())));
+				if(str.substr(indexS, --exeLength) == "ls") {
+					inputs.push_back(new Connector(str.substr(--indexE, temp.size())));
+				}
+				else {
+					inputs.push_back(new Connector(str.substr(indexE, temp.size())));
+				}
 				//indexS = indexE + temp.size() + 1;
 				//indexE = indexS
 				exeLength = 0;
@@ -368,7 +402,7 @@ void InputData::takeInput() {
 	cout << endl << "FINAL DISPLAY" << endl;
 	
 	for(int i = 0; i < inputs.size(); i++) {
-		cout << endl << "vector: " << inputs.at(i)->input << endl;
+		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
 	//	while(inputs.at(i)->input.at(1) == '(' && inputs.at(i)->input.at(inputs.at(i)->input.length() - 2) == ')') {
 	//		inputs.at(i)->input = inputs.at(i)->input.substr(1, inputs.at(i)->input.length() - 2);
 	//	}
