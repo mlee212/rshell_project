@@ -13,6 +13,9 @@ Our program will be able to function as a basic shell that will be able to take 
 * InputData: This is our composite class which inherits from Input. The InputData class will take in an input, parse it into a vector of Input pointers.
 * Executable: This class will inherit from the Input base class and will construct an Executable object that holds the string to be executed. The run function in this class will execute the command held within the string and return a negative number if the process failed.
 * Connector: This class will inherit from the Input base class and will construct a Connector object that holds the string of the connector that will be used to determine whether or not the next Executable object should be executed. The run function will determine its identity as a Connector.
+* Square: This class will inherit from the Input base class and will construct a Square object with a string. The run function of this class will be specialize to deal with cases of square bracket commands.
+* TestCommand: This class will inherit from the Input base class and will construct a TestCommand object with a string. The run function of this class will be specialized to deal with the case of test commands.
+* Parenthesis: This class will inherit from the Input base class and will construct a Parenthesis object with a string. This class' run function will further parse the string, "peeling" the parenthesis off, and will then parse the contents of the remainder of the string. This is possible due to the Parenthesis' specialized run function.
 
 # Prototypes
 * Parser: We used getline (cin, str) to get the inputs from the user. Once we have the inputs from the user, we separate each command into either an executable, argument, or connector and add it to the vector<Input *>.
@@ -44,6 +47,18 @@ Our program will be able to function as a basic shell that will be able to take 
 * Rshell
   * Created rshell executable
   * Created integration tests
+* Parenthesis Class
+  * Created class
+  * Fixed Parser to work with Parenthesis
+  * Made tests to test the parser
+* Square
+  * Created class
+  * Fixed Parser to work with Square Brackets
+  * Made tests to test the parser
+* TestCommand
+  * Created class
+  * Fixed Parser to work with test formats (i.e. "test -d <fileName>", "test <fileName>")
+  * Made tests to test the parser
 * Testing overall
 * Turn in
 
