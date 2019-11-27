@@ -75,6 +75,7 @@ void InputData::takeInput() {
 	bool inTest = false;
 	int numParamSq = 0;
 	int tempIndSq = 0;
+	bool testStart = false;
 	
 	//indexE++;
 	//cout << str << endl;
@@ -86,6 +87,7 @@ void InputData::takeInput() {
 			indexE++;
 			exeLength++;
 			inTest = true;
+			testStart = true;
 		} 
 		for(int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
@@ -241,6 +243,18 @@ void InputData::takeInput() {
 			//	}
 			
 			}
+			if(inTest && testStart) {
+				cout << "TESTING AEFHAEOIFH" << endl;
+				indexE -= 3;
+				exeLength -= 3;
+				testStart = false;
+			}
+			else if(inTest) {
+				indexE++;
+				exeLength++;
+			}
+				
+				
 			// if(quit) {
 			//	for(int i = 0; i < temp.size(); i++) {
 			//		if(temp.at(i) == '#') {
