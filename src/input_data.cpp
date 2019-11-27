@@ -12,13 +12,13 @@
 
 
 void InputData::takeInput() {
-//	string str;
-//	cout << "$";
-//	getline(cin, str);
+	//string str;
+	//cout << "$";
+	//getline(cin, str);
 	
-//	while (str.at(0) == '(' && str.at(str.length() - 1) == ')') {
-//		str = str.substr(1, str.length() - 2);
-//	}
+	//while (str.at(0) == '(' && str.at(str.length() - 1) == ')') {
+	//	str = str.substr(1, str.length() - 2);
+	//}
 	
 	bool quote = false;
 	//cout << "og str:" << str << endl;
@@ -132,8 +132,8 @@ void InputData::takeInput() {
 				
 				}
 			}
-//				indexE++;
-//				exeLength++;
+	//			indexE++;
+	//			exeLength++;
 			else {
 				cout << " ITES AWEFAWEFAWEF" << endl;
 				for(int i = 0; i < temp.size(); i++) {
@@ -141,13 +141,13 @@ void InputData::takeInput() {
 					exeLength++;
 	//				indexE += 1;
 				}
-	//			if( == 2) {
-	//				cout << "IS THIS WORKING??" << endl;
-	//				indexE--;
-	//				exeLength--;
-	//			}
-//				indexE += 1;
-//				exeLength += 1;
+		//		if(numParamSq == 2) {
+		//			cout << "IS THIS WORKING??" << endl;
+		//			indexE--;
+		//			exeLength--;
+		//		}
+	//			indexE += 1;
+	//			exeLength += 1;
 				
 				if(temp == "]" && !quote) {
 					square--;
