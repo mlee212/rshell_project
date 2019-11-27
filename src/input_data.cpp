@@ -447,7 +447,7 @@ int InputData::run() {
 //		cout << "next true" << endl;
 		inputs.at(inputs.size() - 1)->run();
 	}
-	if (inputs.size() == 1){
+	else if (inputs.size() == 1){
 		inputs.at(0)->run();
 	}
 	return 0;
