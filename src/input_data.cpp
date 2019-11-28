@@ -81,7 +81,7 @@ void InputData::takeInput() {
 	//cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
-		cout << "Working with: " << temp << endl;
+//		cout << "Working with: " << temp << endl;
 		
 		if(!quote && !paren && !square && !inTest && temp == "test") {
 			indexE++;
@@ -107,9 +107,9 @@ void InputData::takeInput() {
 			}
 		}
 		if(square > 0) {
-			cout << "Square Length: " << square << endl;
+//			cout << "Square Length: " << square << endl;
 			if(startsq) {
-				cout  << "QWERTYUIO" << endl;
+//				cout  << "QWERTYUIO" << endl;
 				tempIndSq = indexE;
 				while(str.at(tempIndSq) != ']') {
 					if(str.at(tempIndSq) == ' ') {
@@ -117,11 +117,11 @@ void InputData::takeInput() {
 					}
 					tempIndSq++;
 				}
-				cout << "tempIndSq: " << tempIndSq << endl;
-				cout << "numParamSq: " << numParamSq << endl;
+//				cout << "tempIndSq: " << tempIndSq << endl;
+//				cout << "numParamSq: " << numParamSq << endl;
 	//			for(int i = 0; i < temp.size(); i++) {
 					if(numParamSq == 2) {
-						cout << "Are we there yet?" << endl;
+//						cout << "Are we there yet?" << endl;
 						indexE += 2;
 						exeLength += 2;
 					}
@@ -135,7 +135,7 @@ void InputData::takeInput() {
 	//			indexE++;
 	//			exeLength++;
 			else {
-				cout << " ITES AWEFAWEFAWEF" << endl;
+//				cout << " ITES AWEFAWEFAWEF" << endl;
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
 					exeLength++;
@@ -191,7 +191,7 @@ void InputData::takeInput() {
 		else if(paren > 0){
 		//	quote = true;
 		//	quoteSec = false;
-			cout << "Paren length: " << paren << endl;
+//			cout << "Paren length: " << paren << endl;
 			if(start) {
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
@@ -244,7 +244,7 @@ void InputData::takeInput() {
 			
 			}
 			if(inTest && testStart) {
-				cout << "TESTING AEFHAEOIFH" << endl;
+//				cout << "TESTING AEFHAEOIFH" << endl;
 				indexE -= 3;
 				exeLength -= 3;
 				testStart = false;
@@ -268,7 +268,7 @@ void InputData::takeInput() {
 			//}
 			if((temp == "&&")  && !quote) {
 				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
-				cout << "Char at indexS: " << str.at(indexS) << endl;
+//				cout << "Char at indexS: " << str.at(indexS) << endl;
 	//			if(str.at(indexS) == '(') {
 	//				cout << "SOMETHING SHOULD BE HAPPENING HERE &&" << endl;
 	//				inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
@@ -376,8 +376,8 @@ void InputData::takeInput() {
 	
 	bool closedP = false;
 	paren = 0;
-	cout << indexE << endl;
-	cout << str.length() << endl;
+//	cout << indexE << endl;
+//	cout << str.length() << endl;
 	
 	//for(int i = indexS; i <= indexE; i++) {
 	//	cout << str.at(i);
@@ -389,7 +389,7 @@ void InputData::takeInput() {
 	//	}
 	//}
 	
-	cout << endl;
+//	cout << endl;
 	
 	//if(paren == 0) {
 	//	closedP = true;
@@ -417,35 +417,35 @@ void InputData::takeInput() {
 	//cout << indexE << endl;
 	//cout << str.size() - 1<< endl;	
 	
-	cout << endl << "FINAL DISPLAY" << endl;
+//	cout << endl << "FINAL DISPLAY" << endl;
 	
 	for(int i = 0; i < inputs.size(); i++) {
-		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
+//		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
 	//	while(inputs.at(i)->input.at(1) == '(' && inputs.at(i)->input.at(inputs.at(i)->input.length() - 2) == ')') {
 	//		inputs.at(i)->input = inputs.at(i)->input.substr(1, inputs.at(i)->input.length() - 2);
 	//	}
 		if(inputs.at(i)->input.at(0) == '(' /*&& inputs.at(i)->input.at(input.length() - 1) == ')'*/) {
-			cout << "Paren Conversion" << endl;
+//			cout << "Paren Conversion" << endl;
 			inputs.at(i) = new Parenthesis(inputs.at(i)->input);
 		}
 		else if(inputs.at(i)->input.at(0) == '[') {
-			cout << "Square Conversion" << endl;
-			cout << "input length: " << inputs.at(i)->input.length() - 1;
+//			cout << "Square Conversion" << endl;
+//			cout << "input length: " << inputs.at(i)->input.length() - 1;
 			inputs.at(i) = new Square(inputs.at(i)->input.substr(2, inputs.at(i)->input.length() - 4  ));
 		}
 		else if(inputs.at(i)->input.length() > 4) {
 			if(inputs.at(i)->input.substr(0, 4) == "test") {
-				cout << "Test Conversion" << endl;
+//				cout << "Test Conversion" << endl;
 				inputs.at(i) = new TestCommand(inputs.at(i)->input); 
 			}
 		}
-		cout << "And we outta there" << endl;
-		cout << "After: " << inputs.at(i)->input << endl;
+//		cout << "And we outta there" << endl;
+//		cout << "After: " << inputs.at(i)->input << endl;
 		
 	}
-	cout << "size: " << inputs.size() << endl;
+//	cout << "size: " << inputs.size() << endl;
 	//cout << "hello" << endl;
-	cout << "inputs size: " << inputs.size() << endl;
+//	cout << "inputs size: " << inputs.size() << endl;
 	//cout << inputs.at(0) << endl << inputs.at(1) << endl;
 	//cout << "hello 2" << endl;
 	
@@ -473,29 +473,29 @@ int InputData::run() {
 						//cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
 						if (inputs.at(i)->input == "&&" || inputs.at(i)->input == "&& "){
 							if (WEXITSTATUS(stat) == 2){
-								cout << "Skip &&" << endl;
+//								cout << "Skip &&" << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-								cout << "Went next &&" << endl;
+//								cout << "Went next &&" << endl;
 							}
 						}
 						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
 							if (WEXITSTATUS(stat) != 2){
-								cout << "Skip ||" << endl;
+//								cout << "Skip || " << WEXITSTATUS(stat) << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-								cout << "Went next ||" << endl;
+//								cout << "Went next ||" << endl;
 							}
 						}
 						else {
 							next = true;
-							cout << "Went next 3" << endl;
+//							cout << "Went next 3" << endl;
 						}
 					}
 				}
@@ -503,7 +503,7 @@ int InputData::run() {
 		}
 	}
 	if (inputs.size() % 2 == 1 && next){
-		cout << "next true" << endl;
+//		cout << "next true" << endl;
 		inputs.at(inputs.size() - 1)->run();
 	}
 	else if (inputs.size() == 1){

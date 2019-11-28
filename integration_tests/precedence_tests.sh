@@ -1,6 +1,6 @@
 #!/bin/sh
 
-inputs=("(echo A && echo B)"  "(echo A || echo B)" "(echo A; echo B)" "(echo A && echo B) || echo C)" "(ech A && echo B) || echo C" "ech A || echo B) && echo C" "(echo A || echo B) && echo C" "(echo A && echo B) || (echo C && echo D)" "((echo A && echo B) || echo C) || echo D")
+inputs=("(echo A && echo B)"  "(echo A || echo B)" "(echo A; echo B)" "(echo A && echo B) || echo C" "(echo A && echo B) || echo C" "(echo A || echo B) && echo C" "(echo A || echo B) && echo C" "(echo A && echo B) || (echo C && echo D)" "((echo A && echo B) || echo C) || echo D")
 
 
 for i in "${inputs[@]}"
