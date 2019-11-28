@@ -16,25 +16,25 @@ ADD_EXECUTABLE(test
 	~/assignment-scootscoot/src/square.cpp
 )
 
-ADD_EXECUTABLE(main
-	~/assignment-scootscoot/unit_tests/main.cpp
-	~/assignment-scootscoot/src/executable.cpp
-	~/assignment-scootscoot/src/input.cpp
-	~/assignment-scootscoot/src/test_command.cpp
-	~/assignment-scootscoot/src/square.cpp
-)
+#ADD_EXECUTABLE(main
+#	~/assignment-scootscoot/unit_tests/main.cpp
+#	~/assignment-scootscoot/src/executable.cpp
+#	~/assignment-scootscoot/src/input.cpp
+#	~/assignment-scootscoot/src/test_command.cpp
+#	~/assignment-scootscoot/src/square.cpp
+#)
 
-ADD_EXECUTABLE(manT
-	~/assignment-scootscoot/unit_tests/main2.cpp
-	~/assignment-scootscoot/src/input_data.cpp
-	~/assignment-scootscoot/src/input.cpp
-	~/assignment-scootscoot/src/executable.cpp
-	~/assignment-scootscoot/src/connector.cpp
-	~/assignment-scootscoot/src/parenthesis.cpp
-	~/assignment-scootscoot/src/test_command.cpp
-	~/assignment-scootscoot/src/square.cpp
+#ADD_EXECUTABLE(manT
+#	~/assignment-scootscoot/unit_tests/main2.cpp
+#	~/assignment-scootscoot/src/input_data.cpp
+#	~/assignment-scootscoot/src/input.cpp
+#	~/assignment-scootscoot/src/executable.cpp
+#	~/assignment-scootscoot/src/connector.cpp
+#	~/assignment-scootscoot/src/parenthesis.cpp
+#	~/assignment-scootscoot/src/test_command.cpp
+#	~/assignment-scootscoot/src/square.cpp
 #unit_test.cpp
-)
+#)
 
 ADD_EXECUTABLE(rshell
 	~/assignment-scootscoot/unit_tests/rshell.cpp
