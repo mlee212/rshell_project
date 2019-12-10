@@ -64,7 +64,7 @@ void InputData::takeInput() {
 	// run string through a stringstream where each piece of text is separated by space.
 	
 	stringstream ss(str);
-	while(ss >> temp) {
+	while(ss >> temp && !quitCheck) {
 		if(!quote) {
 			numArgs++;
 		}
