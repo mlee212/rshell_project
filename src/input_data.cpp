@@ -12,50 +12,32 @@
 
 
 void InputData::takeInput() {
-	//string str;
-	//cout << "$";
-	//getline(cin, str);
 	
-	//while (str.at(0) == '(' && str.at(str.length() - 1) == ')') {
-	//	str = str.substr(1, str.length() - 2);
-	//}
 	
 	bool quote = false;
-	//cout << "og str:" << str << endl;
+	int numSpaceAdds = 0;
+	// modifies the inputted string to isolate semicolons and comments
+
 	for(int i = 0; i < str.size(); i++) {
-	//	if(str.at(i) == '\"' && !quote){
-	//		quote = true;
-	//		str.insert(i, " ");
-	//		i++;
-	//		str.insert(i + 1, " ");
-	//		i++;
-	//	}
-	//	if(str.at(i) == '\"' && quote) {
-	//		quote = false;
-	//		str.insert(i, " ");
-	//		i++;
-	//		str.insert(i + 1, " ");
-	//		i++;
-	//	}
+	//	quote boolean switch to ignore text inside the quotes
 		if(str.at(i) == '\"') {
 			quote = !quote;
 		}
 		if (str.at(i) == ';' && !quote) {
 			str.insert(i," ");
 			i++;
+			numSpaceAdds++;
 		}
 		if (str.at(i) == '#' && i != 0 && !quote) {
 			str.insert(i, " ");
 			i++;
 			str.insert(i + 1, " ");
 			i++;
+			numSpaceAdds += 2;
 		}
 			
 	}
 	string quoteStr = str;
-	
-	//cout << "first mod str:" << str << endl;
-
 	
 	int indexS = 0;
 	int indexE = 0;
@@ -76,19 +58,22 @@ void InputData::takeInput() {
 	int numParamSq = 0;
 	int tempIndSq = 0;
 	bool testStart = false;
+	int numArgs = 0;
+	bool firstArgRun = true;
+
+	// run string through a stringstream where each piece of text is separated by space.
 	
-	//indexE++;
-	//cout << str << endl;
 	stringstream ss(str);
 	while(ss >> temp) {
-//		cout << "Working with: " << temp << endl;
-		
+		numArgs++;
+		// determines whether the executable is of test command	
 		if(!quote && !paren && !square && !inTest && temp == "test") {
 			indexE++;
 			exeLength++;
 			inTest = true;
 			testStart = true;
-		} 
+		}
+		// determines whether there is a quote, parenthesis, or square brackets within current string
 		for(int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
 				quote = !quote;
@@ -107,9 +92,9 @@ void InputData::takeInput() {
 			}
 		}
 		if(square > 0) {
-//			cout << "Square Length: " << square << endl;
+			cout << "Square Length: " << square << endl;
 			if(startsq) {
-//				cout  << "QWERTYUIO" << endl;
+				cout  << "First Square Bracket Read in" << endl;
 				tempIndSq = indexE;
 				while(str.at(tempIndSq) != ']') {
 					if(str.at(tempIndSq) == ' ') {
@@ -117,38 +102,27 @@ void InputData::takeInput() {
 					}
 					tempIndSq++;
 				}
-//				cout << "tempIndSq: " << tempIndSq << endl;
-//				cout << "numParamSq: " << numParamSq << endl;
-	//			for(int i = 0; i < temp.size(); i++) {
+				cout << "tempIndSq: " << tempIndSq << endl;
+				cout << "numParamSq: " << numParamSq << endl;
+
 					if(numParamSq == 2) {
-//						cout << "Are we there yet?" << endl;
+	//				Covers case of 1 space
+						cout << "Are we there yet?" << endl;
 						indexE += 2;
 						exeLength += 2;
 					}
 					else {
+	//				Cover case of 2 spaces
 						indexE += 3;
 						exeLength += 3;
-	//				}
-				
-				}
+					}
 			}
-	//			indexE++;
-	//			exeLength++;
 			else {
-//				cout << " ITES AWEFAWEFAWEF" << endl;
+				cout << "Still in the Square Bracket" << endl;
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
 					exeLength++;
-	//				indexE += 1;
 				}
-		//		if(numParamSq == 2) {
-		//			cout << "IS THIS WORKING??" << endl;
-		//			indexE--;
-		//			exeLength--;
-		//		}
-	//			indexE += 1;
-	//			exeLength += 1;
-				
 				if(temp == "]" && !quote) {
 					square--;
 				}
@@ -157,42 +131,18 @@ void InputData::takeInput() {
 			
 		}
 		else if(quote){
-		//	quote = true;
-		//	quoteSec = false;
+	//		cout << "In quote" << endl;
 			for(int i = 0; i < temp.size(); i++) {
 				indexE++;
 				exeLength++;
-			//	if(temp.at(i) == '#') {
-			//		quit = true;
-			//		break;
-			//	}
-		//		if(temp.at(i) == '\"') {
-		//			quote = !quote;
-		//		}
-			
 			}
-		//	if(temp.at(temp.size() - 1) = '\"') {
-		//		quoteSec = true;
-		//	} 
-			//if(quit) {
-			//	for(int i = 0; i < temp.size(); i++) {
-			//		if(temp.at(i) == '#') {
-			//			quitCheck = true;
-			//		}
-			//		if(!quitCheck) {
-			//			quitStr += temp.at(i);
-			//		}
-			//	}
-			//	temp = quitStr;
-			//}
 			indexE += 1;
 			exeLength += 1;
 		}
 		else if(paren > 0){
-		//	quote = true;
-		//	quoteSec = false;
-//			cout << "Paren length: " << paren << endl;
+			cout << "Num of Open Paren: " << paren << endl;
 			if(start) {
+				cout << "First Parenthesis Read in" << endl;
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
 					exeLength++;
@@ -202,29 +152,7 @@ void InputData::takeInput() {
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
 					exeLength++;
-				//	if(temp.at(i) == '#') {
-				//		quit = true;
-				//		break;
-				//	}
-			//		if(temp.at(i) == '\"') {
-			//			quote = !quote;
-			//		}
-				
 				}
-			//	if(temp.at(temp.size() - 1) = '\"') {
-			//		quoteSec = true;
-			//	} 
-				//if(quit) {
-				//	for(int i = 0; i < temp.size(); i++) {
-				//		if(temp.at(i) == '#') {
-				//			quitCheck = true;
-				//		}
-				//		if(!quitCheck) {
-				//			quitStr += temp.at(i);
-				//		}
-				//	}
-				//	temp = quitStr;
-				//}
 				indexE += 1;
 				exeLength += 1;
 			}
@@ -238,81 +166,55 @@ void InputData::takeInput() {
 					quit = true;
 					break;
 				}
-			//	if(temp.at(i) == '\"') {
-			//		quote = !quote;
-			//	}
-			
 			}
 			if(inTest && testStart) {
-//				cout << "TESTING AEFHAEOIFH" << endl;
+	//			Adjusts the executable for special case Test command
+				cout << "Test Command Start" << endl;
 				indexE -= 3;
 				exeLength -= 3;
 				testStart = false;
 			}
 			else if(inTest) {
+				cout << "Still in Test Command" << endl;
 				indexE++;
 				exeLength++;
-			}
-				
-				
-			// if(quit) {
-			//	for(int i = 0; i < temp.size(); i++) {
-			//		if(temp.at(i) == '#') {
-			//			quitCheck = true;
-			//		}
-			//		if(!quitCheck) {
-			//			quitStr += temp.at(i);
-			//		}
-			//	}
-			//	temp = quitStr;
-			//}
+	}
+			
+	//		Checks if the Connector is of &&, ||, ; type	
 			if((temp == "&&")  && !quote) {
-				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
-//				cout << "Char at indexS: " << str.at(indexS) << endl;
-	//			if(str.at(indexS) == '(') {
-	//				cout << "SOMETHING SHOULD BE HAPPENING HERE &&" << endl;
-	//				inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
-	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-	//			}
-	//			else {
-					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
-	//			}
-				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
-				//cout << indexE << endl;
+				cout << "Char at indexS: " << str.at(indexS) << endl;
+	//			Creates Executable Object
+				inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
 				if(str.substr(indexS, --exeLength) == "ls") {
+	//			Adjusts the creation of the Connector in the case of Executable is ls
 					inputs.push_back(new Connector(str.substr(--indexE, temp.size())));
 				}
 				else {
+	//			Creates the Connector in a normal case
 					inputs.push_back(new Connector(str.substr(indexE, temp.size())));
 				}
-				//indexS = indexE + temp.size() + 1;
-				//indexE = indexS
+
+	//			Reset Parameters
 				exeLength = 0;
-				indexS = indexE + 3;
+				indexS = indexE + /* 3 */ numArgs;
 				indexE = indexS;
 				inTest = false;
+				numArgs = 0;
 				numParamSq = 0;
 			}
 			else if(temp == "||" && !quote) {
-				//cout << "Exe + args: " << str.substr(indexS, exeLength) << endl;
-	//			if(str.at(indexS) == '(') {
-	//				cout << "SOMETHING SHOULD BE HAPPENING HERE ||" << endl;
-	//				inputs.push_back(new Parenthesis(str.substr(indexS, --exeLength)));
-	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-	//			}
-	//			else {
-					inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
-	//			}
-				//cout << "connector: " << str.substr(indexE, temp.size()) << endl;
-				//cout << indexE << endl;
+	//			Creates Executable Object
+				inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
 				if(str.substr(indexS, --exeLength) == "ls") {
+	//				Adjusts the creation of the Connector in the case of Executable is ls
 					inputs.push_back(new Connector(str.substr(--indexE, temp.size())));
 				}
 				else {
+	//				Creates the Connector in a normal case
 					inputs.push_back(new Connector(str.substr(indexE, temp.size())));
 				}
-				//indexS = indexE + temp.size() + 1;
-				//indexE = indexS
+
+	//			Reset Parameters
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
@@ -321,29 +223,76 @@ void InputData::takeInput() {
 				
 			}
 			else if(temp == ";"  && !quote ) {
-	//			if(str.at(indexS) == '(') {
-	//				cout << "SOMETHING SHOULD BE HAPPENING HERE ;" << endl;
-	//				inputs.push_back(new Parenthesis(str.substr(indexS, exeLength)));
-	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-	//			}
-	//			else {
-					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
-	//			}
+	//			Creates Executable Object
+				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
+	//			Creates Connector in the case of Semicolon
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() /* + 1 */)));
+
+	//			Reset Parameters
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
 				inTest = false;
 				numParamSq = 0;
 			}
+			else if(temp == "|" && !quote) {
+	//			Adjusts to fit the amount of Spaces
+				if(firstArgRun) {
+					exeLength++;
+					indexE++;
+				}
+		//		exeLength++;
+		//		indexE++;
+		//		exeLength--;
+
+				cout << "num spaces before: " << numArgs << endl;
+				numArgs--;
+				cout << "num spaces after: " << numArgs << endl;
+
+				cout << "indexE with hardcode: " << indexE + 3 << endl;
+				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+	//			Creates Executable Object
+					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
+	//			Creates Connector in the case of Pipe
+				inputs.push_back(new Connector(str.substr(indexE  + 1 , temp.size())));
+
+	//			Reset Parameters
+				exeLength = 0;
+				indexS = indexE + numArgs;
+				indexE = indexS;
+				inTest = false;
+				numParamSq = 0;
+				numArgs = 0;
+
+				firstArgRun = false;
+			}
+		//	else if(temp == "<" && !quote) {
+		//		exeLength++;
+		//		indexE++;
+		//	}
+			else if(temp == "<" && !quote) {
+		//		exeLength++;
+		//		indexE++;
+			}
+			else if(temp == "tee" && !quote) {
+				numArgs++;
+			}
+			else if(temp == "tr" && !quote) {
+				cout << "exeLength on tr: " << exeLength << endl;
+				cout << "indexE on tr: " << indexE << endl;
+				exeLength++;
+				indexE++;
+		//		numArgs--;
+			}
+			else if(temp == ">" && !quote) {
+		//		exeLength++;
+		//		indexE++;
+			}
 			else if(temp == "#"  && !quote ) {
-	//			if(str.at(indexS) == '(') {
-	//				inputs.push_back(new Parenthesis (str.substr(indexS, exeLength)));
-	//				cout << "parenthesis: " << inputs.at(inputs.size() - 1)->input << endl;
-	//			}
-	//			else {
-					inputs.push_back(new Executable (str.substr(indexS, exeLength)));
-	//			}
+	//			Creates Executable Object
+				inputs.push_back(new Executable (str.substr(indexS, exeLength)));
+
+	//			Reset Parameters
 				exeLength = 0;
 				indexS = indexE + 3;
 				indexE = indexS;
@@ -351,103 +300,55 @@ void InputData::takeInput() {
 				inTest = false;
 				numParamSq = 0;
 			}
-			//if(singular) {
-			//	inputs.push_back(str);
-			//}
-			//if(quote && quoteSec) {
-			//	quote = false;
-			//	quoteSec = false;
-			//	quoteStr += str.substr(indexS + 1, exeLength);
-			//	inputs.push_back(new Executable(quoteStr));
-			//	exeLength = 0;
-			//	indexS = indexE + 2;
-			//	indexE = indexS;
-			//}
-			//else if (quote) {
-			//	if (quote && !quoteSec) {
-			//		quoteStr = str.substr(indexS, exeLength);
-			//		cout << "first part: " << str.substr(indexS, exeLength);
-			//		indexS = indexE;
-			//	}
-			//	quoteSec = true;
-			//}
 		}
 	}
 	
+	// Reuse of Variables
 	bool closedP = false;
 	paren = 0;
-//	cout << indexE << endl;
-//	cout << str.length() << endl;
+	// Adjusting for added spaces
+	indexE += numSpaceAdds;
+	cout << "final index: " << indexE << endl;
+	cout << "str length: " << str.length() << endl;
 	
-	//for(int i = indexS; i <= indexE; i++) {
-	//	cout << str.at(i);
-	//	if(str.at(i) == '(') { 
-	//		paren++;
-	//	}
-	//	if(str.at(i) == ')') {
-	//		paren--;
-	//	}
-	//}
+	cout << endl;
 	
-//	cout << endl;
-	
-	//if(paren == 0) {
-	//	closedP = true;
-	//}
-	
-	if (quitCheck) {
-		//cout << "quitStr: "<< quitStr.size() << endl;
-		//inputs.push_back(new Executable(str.substr(indexS, quitStr.size() + 3)));
+	// Covers end case within the string
+	if (!quitCheck) {
+		inputs.push_back(new Executable(str.substr(indexS, indexE + 2)));
+	}
 
-	}
-	else {
-		//cout << "what is this: " << str.substr(indexS, indexE + 2) << endl;
-	//	if(closedP && parenE) {
-	//		cout << "Is Paren" << endl;
-	//		inputs.push_back(new Parenthesis(str.substr(indexS, indexE + 2)));
-	//	}
-	//	else{
-	//		cout << "Not Paren" << endl;
-			inputs.push_back(new Executable(str.substr(indexS, indexE + 2)));
-	//	}
-	}
 	//cout << "Exe + args: " << str.substr(indexS, indexE) << endl;
 	// -------------- TEST -----------------------
 	//cout << "hello" << endl;
 	//cout << indexE << endl;
 	//cout << str.size() - 1<< endl;	
 	
-//	cout << endl << "FINAL DISPLAY" << endl;
+	cout << endl << "FINAL DISPLAY" << endl;
 	
 	for(int i = 0; i < inputs.size(); i++) {
-//		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
-	//	while(inputs.at(i)->input.at(1) == '(' && inputs.at(i)->input.at(inputs.at(i)->input.length() - 2) == ')') {
-	//		inputs.at(i)->input = inputs.at(i)->input.substr(1, inputs.at(i)->input.length() - 2);
-	//	}
+		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
 		if(inputs.at(i)->input.at(0) == '(' /*&& inputs.at(i)->input.at(input.length() - 1) == ')'*/) {
-//			cout << "Paren Conversion" << endl;
+			cout << "Paren Conversion" << endl;
 			inputs.at(i) = new Parenthesis(inputs.at(i)->input);
 		}
 		else if(inputs.at(i)->input.at(0) == '[') {
-//			cout << "Square Conversion" << endl;
-//			cout << "input length: " << inputs.at(i)->input.length() - 1;
+			cout << "Square Conversion" << endl;
+			cout << "input length: " << inputs.at(i)->input.length() - 1;
 			inputs.at(i) = new Square(inputs.at(i)->input.substr(2, inputs.at(i)->input.length() - 4  ));
 		}
 		else if(inputs.at(i)->input.length() > 4) {
 			if(inputs.at(i)->input.substr(0, 4) == "test") {
-//				cout << "Test Conversion" << endl;
+				cout << "Test Conversion" << endl;
 				inputs.at(i) = new TestCommand(inputs.at(i)->input); 
 			}
 		}
-//		cout << "And we outta there" << endl;
-//		cout << "After: " << inputs.at(i)->input << endl;
+		cout << "And we outta there" << endl;
+		cout << "After: " << inputs.at(i)->input << endl;
 		
 	}
-//	cout << "size: " << inputs.size() << endl;
-	//cout << "hello" << endl;
-//	cout << "inputs size: " << inputs.size() << endl;
-	//cout << inputs.at(0) << endl << inputs.at(1) << endl;
-	//cout << "hello 2" << endl;
+	cout << "size: " << inputs.size() << endl;
+	cout << "inputs size: " << inputs.size() << endl;
 	
 }
 
