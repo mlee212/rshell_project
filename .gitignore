@@ -42,4 +42,7 @@ CMakeCache.txt
 CMakeFiles
 Makefile
 newOutputFile1
+output.tx
+test.txt
+test1.txt
 integration_tests/test

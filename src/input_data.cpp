@@ -409,12 +409,22 @@ void InputData::takeInput() {
 int InputData::run() {
 	bool next = true;
 	int stat;
+	bool inputr = false;
+	int outputr = 0;
+	int p[2];
+	int savestdin = dup(0);
+	int savestdout = dup(1);
+	if (pipe(p) < 0) {
+		exit(1);
+	}
 	pid_t pid[inputs.size()];
 	for (int i = 0; i < inputs.size(); i++)	{
 		//cout << i << endl;
 		if (i % 2 == 1){
 			if ((pid[i] = fork()) == 0){
 				cout << "This is child: " << getpid() << endl;
+				savestdin = dup(0);
+				savestdout = dup(1);
 				if (inputs.at(i - 1)->run() == -1){
 					exit(2);
 				}
@@ -453,6 +463,9 @@ int InputData::run() {
 								next = true;
 								cout << "Went next ||" << endl;
 							}
+						}
+						else if (inputs.at(i)->input == "|" || inputs.at(i)->input == "| ") {					
+						
 						}
 						else {
 							next = true;
@@ -498,6 +511,8 @@ int InputData::run() {
 			}
 		}
 	}
+	dup2(savestdin, 0);
+	dup2(savestdout, 1);
 	return 0;
 }
 

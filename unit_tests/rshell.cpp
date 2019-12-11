@@ -17,6 +17,12 @@ int main(int argc, char ** argv){
 	//test.takeInput();
 	//test.run();
 
+	//int save = dup(1);
+	//int file = open("test5.txt", O_WRONLY | O_CREAT | O_APPEND, 0644);
+	//dup2(file, 1);
+	//cout << "HELLLLLLLLO" << endl;
+	//dup2(save, 1);
+
 	for(; ;) {
 		string x;
 		cout << "$ ";
