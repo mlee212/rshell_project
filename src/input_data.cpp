@@ -64,8 +64,10 @@ void InputData::takeInput() {
 	// run string through a stringstream where each piece of text is separated by space.
 	
 	stringstream ss(str);
-	while(ss >> temp) {
-		numArgs++;
+	while(ss >> temp && !quitCheck) {
+		if(!quote) {
+			numArgs++;
+		}
 		// determines whether the executable is of test command	
 		if(!quote && !paren && !square && !inTest && temp == "test") {
 			indexE++;
@@ -182,30 +184,54 @@ void InputData::takeInput() {
 			
 	//		Checks if the Connector is of &&, ||, ; type	
 			if((temp == "&&")  && !quote) {
+				numArgs--;
 				cout << "Char at indexS: " << str.at(indexS) << endl;
+				cout << "indexE with hardcode: " << indexE + 3 << endl;
+				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+				cout << "numArgs: " << numArgs << endl;
+				
+				if(numArgs == 1){
+					indexE--;
+					exeLength--;
+				}
 	//			Creates Executable Object
 				inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
-				if(str.substr(indexS, --exeLength) == "ls") {
+			//	if(str.substr(indexS, --exeLength) == "ls") {
 	//			Adjusts the creation of the Connector in the case of Executable is ls
-					inputs.push_back(new Connector(str.substr(--indexE, temp.size())));
-				}
-				else {
+			//		indexE--;
+			//		inputs.push_back(new Connector(str.substr(--indexE, temp.size())));
+			//	}
+			//	else {
 	//			Creates the Connector in a normal case
 					inputs.push_back(new Connector(str.substr(indexE, temp.size())));
-				}
-
+			//	}
+				
 	//			Reset Parameters
+				if(numArgs == 1) {
+					indexE++;
+				}
 				exeLength = 0;
-				indexS = indexE + /* 3 */ numArgs;
+				indexS = indexE + /* 3 */ numArgs + 1;
 				indexE = indexS;
 				inTest = false;
 				numArgs = 0;
 				numParamSq = 0;
 			}
 			else if(temp == "||" && !quote) {
+				numArgs--;
+				cout << "Char at indexS: " << str.at(indexS) << endl;
+				cout << "indexE with hardcode: " << indexE + 3 << endl;
+				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+				cout << "numArgs: " << numArgs << endl;
+				
+				if(numArgs == 1){
+					indexE--;
+					exeLength--;
+				}
+
 	//			Creates Executable Object
 				inputs.push_back(new Executable(str.substr(indexS, --exeLength)));
-				if(str.substr(indexS, --exeLength) == "ls") {
+				if(str.substr(indexS, --exeLength) == "ls" || str.substr(indexS, --exeLength) == "exit") {
 	//				Adjusts the creation of the Connector in the case of Executable is ls
 					inputs.push_back(new Connector(str.substr(--indexE, temp.size())));
 				}
@@ -215,24 +241,42 @@ void InputData::takeInput() {
 				}
 
 	//			Reset Parameters
+				if(numArgs == 1) {
+					indexE++;
+				}
 				exeLength = 0;
-				indexS = indexE + 3;
+				indexS = indexE + /* 3 */ numArgs + 1;
 				indexE = indexS;
 				inTest = false;
+				numArgs = 0;
 				numParamSq = 0;
-				
 			}
 			else if(temp == ";"  && !quote ) {
+				numArgs--;
+				cout << "Char at indexS: " << str.at(indexS) << endl;
+				cout << "indexE with hardcode: " << indexE + 3 << endl;
+				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+				cout << "numArgs: " << numArgs << endl;
+				
+				if(numArgs == 1){
+					indexE--;
+					exeLength--;
+				}
+
 	//			Creates Executable Object
 				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
 	//			Creates Connector in the case of Semicolon
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() /* + 1 */)));
 
 	//			Reset Parameters
+				if(numArgs == 1) {
+					indexE++;
+				}
 				exeLength = 0;
-				indexS = indexE + 3;
+				indexS = indexE + /* 3 */ numArgs + 1;
 				indexE = indexS;
 				inTest = false;
+				numArgs = 0;
 				numParamSq = 0;
 			}
 			else if(temp == "|" && !quote) {
@@ -277,6 +321,9 @@ void InputData::takeInput() {
 			else if(temp == "tee" && !quote) {
 				numArgs++;
 			}
+		//	else if(temp == "ls" && !quote) {
+		//		numArgs--;
+		//	}
 			else if(temp == "tr" && !quote) {
 				cout << "exeLength on tr: " << exeLength << endl;
 				cout << "indexE on tr: " << indexE << endl;
@@ -289,9 +336,16 @@ void InputData::takeInput() {
 		//		indexE++;
 			}
 			else if(temp == "#"  && !quote ) {
+				numArgs--;
 	//			Creates Executable Object
-				inputs.push_back(new Executable (str.substr(indexS, exeLength)));
-
+				cout << "numArgsCom: " << numArgs << endl;
+				if(numArgs == 1) {
+					inputs.push_back(new Executable (str.substr(indexS, exeLength - 1)));
+				}
+				else {
+					inputs.push_back(new Executable (str.substr(indexS, exeLength)));
+				}
+				
 	//			Reset Parameters
 				exeLength = 0;
 				indexS = indexE + 3;

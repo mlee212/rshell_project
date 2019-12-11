@@ -95,7 +95,7 @@ TEST(Parser, EchoOrLsComNoSpace) {
 	ASSERT_EQ(test.inputs.size(), 3);
 	EXPECT_EQ(test.inputs.at(0)->input, "echo \"wsup bro\"");
 	EXPECT_EQ(test.inputs.at(1)->input, "||");
-	EXPECT_EQ(test.inputs.at(2)->input, "ls ");
+	EXPECT_EQ(test.inputs.at(2)->input, "ls");
 }
 
 TEST(Parser, EchoOrLsComSpace) {
