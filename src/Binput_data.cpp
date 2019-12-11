@@ -15,7 +15,7 @@ void InputData::takeInput() {
 	
 	
 	bool quote = false;
-	int numSpaceAdds = 0;
+	//int numSpaceAdds = 0;
 	// modifies the inputted string to isolate semicolons and comments
 
 	for(int i = 0; i < str.size(); i++) {
@@ -26,14 +26,14 @@ void InputData::takeInput() {
 		if (str.at(i) == ';' && !quote) {
 			str.insert(i," ");
 			i++;
-			numSpaceAdds++;
+			//numSpaceAdds++;
 		}
 		if (str.at(i) == '#' && i != 0 && !quote) {
 			str.insert(i, " ");
 			i++;
 			str.insert(i + 1, " ");
 			i++;
-			numSpaceAdds += 2;
+			//numSpaceAdds += 2;
 		}
 			
 	}
@@ -60,11 +60,13 @@ void InputData::takeInput() {
 	bool testStart = false;
 	int numArgs = 0;
 	bool firstArgRun = true;
+	bool correctParamPiping = false;
 
 	// run string through a stringstream where each piece of text is separated by space.
 	
 	stringstream ss(str);
 	while(ss >> temp && !quitCheck) {
+		cout << "beginning indexE: " << indexE << endl;
 		if(!quote) {
 			numArgs++;
 		}
@@ -180,7 +182,7 @@ void InputData::takeInput() {
 				cout << "Still in Test Command" << endl;
 				indexE++;
 				exeLength++;
-	}
+			}
 			
 	//		Checks if the Connector is of &&, ||, ; type	
 			if((temp == "&&")  && !quote) {
@@ -211,7 +213,12 @@ void InputData::takeInput() {
 					indexE++;
 				}
 				exeLength = 0;
-				indexS = indexE + /* 3 */ numArgs + 1;
+				if(numArgs == 1) {
+					indexS = indexE + /* 3 */ numArgs + 1;
+				}
+				else if(numArgs > 1) {
+					indexS = indexE + 3;
+				}
 				indexE = indexS;
 				inTest = false;
 				numArgs = 0;
@@ -245,10 +252,15 @@ void InputData::takeInput() {
 					indexE++;
 				}
 				exeLength = 0;
-				indexS = indexE + /* 3 */ numArgs + 1;
+		//		if(numArgs == 1) {
+					indexS = indexE + /* 3 */ numArgs + 1;
+		//		}
+		//		else if(numArgs > 1) {
+		//			indexS = indexE + 3;
+		//		}
 				indexE = indexS;
 				inTest = false;
-				numArgs = 0;
+				numArgs = 1;
 				numParamSq = 0;
 			}
 			else if(temp == ";"  && !quote ) {
@@ -258,14 +270,18 @@ void InputData::takeInput() {
 				cout << "indexE with numArgs: " << indexE + numArgs << endl;
 				cout << "numArgs: " << numArgs << endl;
 				
-				if(numArgs == 1){
+				//if(numArgs == 1){
+				//	indexE--;
+				//	exeLength--;
+				//}
+				if(!firstArgRun) {
+					indexS--;
 					indexE--;
-					exeLength--;
 				}
-
 	//			Creates Executable Object
 				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
 	//			Creates Connector in the case of Semicolon
+				
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() /* + 1 */)));
 
 	//			Reset Parameters
@@ -280,11 +296,19 @@ void InputData::takeInput() {
 				numParamSq = 0;
 			}
 			else if(temp == "|" && !quote) {
+				cout << "RIGHT Before: " << indexE << endl;
+				cout << "RIGHT Before length: " << exeLength << endl;
 	//			Adjusts to fit the amount of Spaces
+				if(!firstArgRun) {
+			//		numArgs++;
+			//		indexE++;
+				}
 				if(firstArgRun) {
 					exeLength++;
-					indexE++;
+			//		indexE++;
 				}
+				cout << "RIGHT After: " << indexE << endl;
+				cout << "Right After length: " << exeLength << endl;
 		//		exeLength++;
 		//		indexE++;
 		//		exeLength--;
@@ -292,49 +316,102 @@ void InputData::takeInput() {
 				cout << "num spaces before: " << numArgs << endl;
 				numArgs--;
 				cout << "num spaces after: " << numArgs << endl;
-
+				
+				if(numArgs < 4 && !firstArgRun) {
+					exeLength--;
+					correctParamPiping = true;
+				}
+			//	else if(numArgs < 3 && !firstArgRun) {
+			//		exeLength++;
+			//	}
+				
+				if(numArgs < 4 && !firstArgRun) {
+					indexE--;
+				}
+				
+				
+				
 				cout << "indexE with hardcode: " << indexE + 3 << endl;
 				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+				cout << "indexE: " << indexE << endl;
+				cout << "exeLength: " << exeLength << endl;
+				cout << "substr length: " << str.substr(indexS, exeLength).length() << endl;
+				cout << "substr: " << str.substr(indexS, exeLength) << endl;
+				cout << "Connector run: inputs.push_back(new Connector(str.substr(" << indexE + 1 << "," << temp.size() << ")))" << endl;
 	//			Creates Executable Object
 					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
 	//			Creates Connector in the case of Pipe
-				inputs.push_back(new Connector(str.substr(indexE  + 1 , temp.size())));
-
+			//	if(firstArgRun) {
+				
+					indexE++;
+					inputs.push_back(new Connector(str.substr(indexE + 1, temp.size())));
+			//	}
+			//	else {
+			//		inputs.push_back(new Connector(str.substr(indexE + 1, temp.size())));
+			//	}
+				if(numArgs == 3 && !firstArgRun) {
+					indexE--;
+				}
+				if(correctParamPiping) {
+					indexE--;
+					correctParamPiping = false;
+				}
+				
 	//			Reset Parameters
-				exeLength = 0;
-				indexS = indexE + numArgs;
-				indexE = indexS;
+				exeLength = 1;
+				if(numArgs == 4 && !firstArgRun) {
+					indexS = indexE + numArgs - 1;
+					indexE = indexS;
+					
+				}
+				else {
+					indexS = indexE + numArgs;
+					indexE = indexS;
+				}
 				inTest = false;
 				numParamSq = 0;
-				numArgs = 0;
+				numArgs = 1;
 
 				firstArgRun = false;
+				cout << "letter at indexS: " << str.at(indexS) << endl;
+				cout << "letter at indexS + 1: " << str.at(indexS + 1) << endl;
+				
 			}
 		//	else if(temp == "<" && !quote) {
 		//		exeLength++;
 		//		indexE++;
 		//	}
-			else if(temp == "<" && !quote) {
+			else if(temp == ">>" && !quote) {
+				for(int i = 0; i < temp.size(); i++) {
+					indexE++;
+					exeLength++;
+				}
+
+		//		numArgs += 2;
+		//		exeLength += 2;
+		//		indexE += 2;
+			}
+			//else if(temp == "<" && !quote) {
 		//		exeLength++;
 		//		indexE++;
-			}
-			else if(temp == "tee" && !quote) {
-				numArgs++;
-			}
+			//}
+		//	else if(temp == "tee" && !quote) {
+		//		numArgs++;
+		//	}
 		//	else if(temp == "ls" && !quote) {
 		//		numArgs--;
 		//	}
-			else if(temp == "tr" && !quote) {
-				cout << "exeLength on tr: " << exeLength << endl;
-				cout << "indexE on tr: " << indexE << endl;
-				exeLength++;
-				indexE++;
-		//		numArgs--;
-			}
-			else if(temp == ">" && !quote) {
+		//	else if(temp == "tr" && !quote) {
+		//		cout << "exeLength on tr: " << exeLength << endl;
+		//		cout << "indexE on tr: " << indexE << endl;
 		//		exeLength++;
 		//		indexE++;
-			}
+		//		numArgs--;
+		//	}
+			//else if(temp == ">" && !quote) {
+		//		exeLength++;
+		//		indexE++;
+			//}
 			else if(temp == "#"  && !quote ) {
 				numArgs--;
 	//			Creates Executable Object
@@ -361,7 +438,9 @@ void InputData::takeInput() {
 	bool closedP = false;
 	paren = 0;
 	// Adjusting for added spaces
-	indexE += numSpaceAdds;
+	numArgs--;
+	indexE += numArgs;
+	cout << "Last numArgs" << numArgs << endl;
 	cout << "final index: " << indexE << endl;
 	cout << "str length: " << str.length() << endl;
 	
