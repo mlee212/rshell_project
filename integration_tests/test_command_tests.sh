@@ -10,5 +10,5 @@ inputs=("test -e ../rshell" "test -f ../rshell" "test -d ../rshell" "test -e ../
 for i in "${inputs[@]}"
 do
 		echo "Executing ../rshell ${i}"
-		echo -e "${i}" | ../rshell 
+		echo -e "${i}\nexit" | ../rshell 
 done
