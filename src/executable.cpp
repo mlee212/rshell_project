@@ -88,6 +88,8 @@ int Executable::run(){
 		int file = open(arguments[space], O_RDONLY);
 		dup2(file, 0);
 		arguments[space] = '\0';
+		execvp(command, arguments);
+		return file;
 		//close(file);
 	}
 	else if (outputr == 1) {
@@ -96,6 +98,8 @@ int Executable::run(){
 		int file = open(arguments[space] ,  O_WRONLY | O_CREAT, 0644);
 		dup2(file, 1);
 		arguments[space] = '\0';
+		execvp(command, arguments);
+		return file;
 		//cout << "hello" << endl;
 		//printf("test");
 		//close(file);
@@ -104,6 +108,8 @@ int Executable::run(){
 		int file = open(arguments[space], O_WRONLY | O_APPEND | O_CREAT, 0644);
 		dup2(file, 1);
 		arguments[space] = '\0';
+		execvp(command, arguments);
+		return file;
 		//close(file);
 	}
 	return execvp(command, arguments);
