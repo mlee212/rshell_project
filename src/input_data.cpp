@@ -96,7 +96,7 @@ void InputData::takeInput() {
 		if(square > 0) {
 			cout << "Square Length: " << square << endl;
 			if(startsq) {
-				cout  << "First Square Bracket Read in" << endl;
+//				cout  << "First Square Bracket Read in" << endl;
 				tempIndSq = indexE;
 				while(str.at(tempIndSq) != ']') {
 					if(str.at(tempIndSq) == ' ') {
@@ -104,12 +104,12 @@ void InputData::takeInput() {
 					}
 					tempIndSq++;
 				}
-				cout << "tempIndSq: " << tempIndSq << endl;
-				cout << "numParamSq: " << numParamSq << endl;
+//				cout << "tempIndSq: " << tempIndSq << endl;
+//				cout << "numParamSq: " << numParamSq << endl;
 
 					if(numParamSq == 2) {
 	//				Covers case of 1 space
-						cout << "Are we there yet?" << endl;
+//						cout << "Are we there yet?" << endl;
 						indexE += 2;
 						exeLength += 2;
 					}
@@ -120,7 +120,7 @@ void InputData::takeInput() {
 					}
 			}
 			else {
-				cout << "Still in the Square Bracket" << endl;
+//				cout << "Still in the Square Bracket" << endl;
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
 					exeLength++;
@@ -142,9 +142,9 @@ void InputData::takeInput() {
 			exeLength += 1;
 		}
 		else if(paren > 0){
-			cout << "Num of Open Paren: " << paren << endl;
+//			cout << "Num of Open Paren: " << paren << endl;
 			if(start) {
-				cout << "First Parenthesis Read in" << endl;
+//				cout << "First Parenthesis Read in" << endl;
 				for(int i = 0; i < temp.size(); i++) {
 					indexE++;
 					exeLength++;
@@ -171,13 +171,13 @@ void InputData::takeInput() {
 			}
 			if(inTest && testStart) {
 	//			Adjusts the executable for special case Test command
-				cout << "Test Command Start" << endl;
+//				cout << "Test Command Start" << endl;
 				indexE -= 3;
 				exeLength -= 3;
 				testStart = false;
 			}
 			else if(inTest) {
-				cout << "Still in Test Command" << endl;
+//				cout << "Still in Test Command" << endl;
 				indexE++;
 				exeLength++;
 	}
@@ -185,10 +185,10 @@ void InputData::takeInput() {
 	//		Checks if the Connector is of &&, ||, ; type	
 			if((temp == "&&")  && !quote) {
 				numArgs--;
-				cout << "Char at indexS: " << str.at(indexS) << endl;
-				cout << "indexE with hardcode: " << indexE + 3 << endl;
-				cout << "indexE with numArgs: " << indexE + numArgs << endl;
-				cout << "numArgs: " << numArgs << endl;
+//				cout << "Char at indexS: " << str.at(indexS) << endl;
+//				cout << "indexE with hardcode: " << indexE + 3 << endl;
+//				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+//				cout << "numArgs: " << numArgs << endl;
 				
 				if(numArgs == 1){
 					indexE--;
@@ -219,10 +219,10 @@ void InputData::takeInput() {
 			}
 			else if(temp == "||" && !quote) {
 				numArgs--;
-				cout << "Char at indexS: " << str.at(indexS) << endl;
-				cout << "indexE with hardcode: " << indexE + 3 << endl;
-				cout << "indexE with numArgs: " << indexE + numArgs << endl;
-				cout << "numArgs: " << numArgs << endl;
+//				cout << "Char at indexS: " << str.at(indexS) << endl;
+//				cout << "indexE with hardcode: " << indexE + 3 << endl;
+//				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+//				cout << "numArgs: " << numArgs << endl;
 				
 				if(numArgs == 1){
 					indexE--;
@@ -253,10 +253,10 @@ void InputData::takeInput() {
 			}
 			else if(temp == ";"  && !quote ) {
 				numArgs--;
-				cout << "Char at indexS: " << str.at(indexS) << endl;
-				cout << "indexE with hardcode: " << indexE + 3 << endl;
-				cout << "indexE with numArgs: " << indexE + numArgs << endl;
-				cout << "numArgs: " << numArgs << endl;
+//				cout << "Char at indexS: " << str.at(indexS) << endl;
+//				cout << "indexE with hardcode: " << indexE + 3 << endl;
+//				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+//				cout << "numArgs: " << numArgs << endl;
 				
 				if(numArgs == 1){
 					indexE--;
@@ -289,12 +289,12 @@ void InputData::takeInput() {
 		//		indexE++;
 		//		exeLength--;
 
-				cout << "num spaces before: " << numArgs << endl;
+//				cout << "num spaces before: " << numArgs << endl;
 				numArgs--;
-				cout << "num spaces after: " << numArgs << endl;
+//				cout << "num spaces after: " << numArgs << endl;
 
-				cout << "indexE with hardcode: " << indexE + 3 << endl;
-				cout << "indexE with numArgs: " << indexE + numArgs << endl;
+//				cout << "indexE with hardcode: " << indexE + 3 << endl;
+//				cout << "indexE with numArgs: " << indexE + numArgs << endl;
 	//			Creates Executable Object
 					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
 	//			Creates Connector in the case of Pipe
@@ -325,8 +325,8 @@ void InputData::takeInput() {
 		//		numArgs--;
 		//	}
 			else if(temp == "tr" && !quote) {
-				cout << "exeLength on tr: " << exeLength << endl;
-				cout << "indexE on tr: " << indexE << endl;
+//				cout << "exeLength on tr: " << exeLength << endl;
+//				cout << "indexE on tr: " << indexE << endl;
 				exeLength++;
 				indexE++;
 		//		numArgs--;
@@ -338,7 +338,7 @@ void InputData::takeInput() {
 			else if(temp == "#"  && !quote ) {
 				numArgs--;
 	//			Creates Executable Object
-				cout << "numArgsCom: " << numArgs << endl;
+//				cout << "numArgsCom: " << numArgs << endl;
 				if(numArgs == 1) {
 					inputs.push_back(new Executable (str.substr(indexS, exeLength - 1)));
 				}
@@ -362,8 +362,8 @@ void InputData::takeInput() {
 	paren = 0;
 	// Adjusting for added spaces
 	indexE += numSpaceAdds;
-	cout << "final index: " << indexE << endl;
-	cout << "str length: " << str.length() << endl;
+//	cout << "final index: " << indexE << endl;
+//	cout << "str length: " << str.length() << endl;
 	
 	cout << endl;
 	
@@ -378,31 +378,31 @@ void InputData::takeInput() {
 	//cout << indexE << endl;
 	//cout << str.size() - 1<< endl;	
 	
-	cout << endl << "FINAL DISPLAY" << endl;
+//	cout << endl << "FINAL DISPLAY" << endl;
 	
 	for(int i = 0; i < inputs.size(); i++) {
-		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
+//		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
 		if(inputs.at(i)->input.at(0) == '(' /*&& inputs.at(i)->input.at(input.length() - 1) == ')'*/) {
-			cout << "Paren Conversion" << endl;
+//			cout << "Paren Conversion" << endl;
 			inputs.at(i) = new Parenthesis(inputs.at(i)->input);
 		}
 		else if(inputs.at(i)->input.at(0) == '[') {
-			cout << "Square Conversion" << endl;
-			cout << "input length: " << inputs.at(i)->input.length() - 1;
+//			cout << "Square Conversion" << endl;
+//			cout << "input length: " << inputs.at(i)->input.length() - 1;
 			inputs.at(i) = new Square(inputs.at(i)->input.substr(2, inputs.at(i)->input.length() - 4  ));
 		}
 		else if(inputs.at(i)->input.length() > 4) {
 			if(inputs.at(i)->input.substr(0, 4) == "test") {
-				cout << "Test Conversion" << endl;
+//				cout << "Test Conversion" << endl;
 				inputs.at(i) = new TestCommand(inputs.at(i)->input); 
 			}
 		}
-		cout << "And we outta there" << endl;
-		cout << "After: " << inputs.at(i)->input << endl;
+//		cout << "And we outta there" << endl;
+//		cout << "After: " << inputs.at(i)->input << endl;
 		
 	}
-	cout << "size: " << inputs.size() << endl;
-	cout << "inputs size: " << inputs.size() << endl;
+//	cout << "size: " << inputs.size() << endl;
+//	cout << "inputs size: " << inputs.size() << endl;
 	
 }
 
@@ -414,43 +414,49 @@ int InputData::run() {
 		//cout << i << endl;
 		if (i % 2 == 1){
 			if ((pid[i] = fork()) == 0){
-				//cout << "This is child: " << getpid() << endl;
+				cout << "This is child: " << getpid() << endl;
 				if (inputs.at(i - 1)->run() == -1){
 					exit(2);
+				}
+				else if (inputs.at(i - 1)->run() == 100) {
+					exit(1000);
 				}
 				exit(1);
 			}
 			else {
-				//cout << "This is parent: " << i << endl;
+				cout << "This is parent: " << i << endl;
 				pid_t test = waitpid(pid[i], &stat, 0);
 				if (i != inputs.size() - 1){
 					if (WIFEXITED(stat)){
-						//cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
-						if (inputs.at(i)->input == "&&" || inputs.at(i)->input == "&& "){
+						cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
+						if (inputs.at(i - 1)->input == "exit") {
+							exit(10000);
+						}
+						else if (inputs.at(i)->input == "&&" || inputs.at(i)->input == "&& "){
 							if (WEXITSTATUS(stat) == 2){
-//								cout << "Skip &&" << endl;
+								cout << "Skip &&" << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-//								cout << "Went next &&" << endl;
+								cout << "Went next &&" << endl;
 							}
 						}
 						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
 							if (WEXITSTATUS(stat) != 2){
-//								cout << "Skip || " << WEXITSTATUS(stat) << endl;
+								cout << "Skip || " << WEXITSTATUS(stat) << endl;
 								next = false;
 								i += 2;
 							}
 							else {
 								next = true;
-//								cout << "Went next ||" << endl;
+								cout << "Went next ||" << endl;
 							}
 						}
 						else {
 							next = true;
-//							cout << "Went next 3" << endl;
+							cout << "Went next 3" << endl;
 						}
 					}
 				}
@@ -458,11 +464,39 @@ int InputData::run() {
 		}
 	}
 	if (inputs.size() % 2 == 1 && next){
-//		cout << "next true" << endl;
-		inputs.at(inputs.size() - 1)->run();
+		cout << "next true" << endl;
+		pid_t x;
+		if ((x = fork()) == 0){
+			cout << "child rn" << endl;
+			if (inputs.at(inputs.size() - 1)->input == "exit") {
+				exit(10000);
+			}
+			inputs.at(inputs.size() - 1)->run();
+		}
+		else {
+			cout << "parent rn" << endl;
+			waitpid(x, & stat, 0);
+			if (inputs.at(inputs.size() - 1)->input == "exit") {
+				exit(10000);
+			}
+		}
 	}
 	else if (inputs.size() == 1){
-		inputs.at(0)->run();
+		pid_t x;
+		if ((x = fork()) == 0) {
+			cout << "child at end" << endl;
+			if (inputs.at(inputs.size() - 1)->input == "exit") {
+				exit(10000);
+			}
+			inputs.at(0)->run();
+		}
+		else {
+			waitpid(x, &stat, 0);
+			cout << "parent at end" << endl;
+			if (inputs.at(inputs.size() - 1) ->input == "exit") {
+				exit(10000);
+			}
+		}
 	}
 	return 0;
 }

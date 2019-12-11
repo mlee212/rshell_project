@@ -63,7 +63,7 @@ int Executable::run(){
 	//}
 	string exitTest = command;
 	if (exitTest == "exit"){
-		exit(1000);		
+		return 100;		
 	}
 	return execvp(command, arguments);
 }

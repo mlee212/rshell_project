@@ -17,13 +17,14 @@ int main(int argc, char ** argv){
 	//test.takeInput();
 	//test.run();
 
-	string x;
-	cout << "$ ";
-	getline(cin, x);
-	InputData test(x);
-	test.takeInput();
-	test.run();
-	
+	for(; ;) {
+		string x;
+		cout << "$ ";
+		getline(cin, x);
+		InputData test(x);
+		test.takeInput();
+		test.run();
+	}
 
 	return 0;
 }
