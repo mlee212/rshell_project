@@ -9,5 +9,5 @@ inputs=("[ -e ../rshell ]" "[ -f ../rshell ]" "[ -d ../rshell ]" "[ -e ../header
 for i in "${inputs[@]}"
 do
 		echo "Executing ../rshell ${i}"
-		../rshell ${i}
+		echo -e "${i}\nexit" | ../rshell
 done

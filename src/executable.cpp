@@ -7,6 +7,8 @@
 int Executable::run(){
 	int space = 0;
 	bool quote = false;
+	bool inputr = false;
+	int outputr = 0;
 	// if there is a space then that means there is an argument in this input);
 	for(int i = 0; i < input.size(); i++){
 		if (input.at(i) == '\"'){
@@ -15,7 +17,24 @@ int Executable::run(){
 		if (input.at(i) == ' ' && !quote){
 			space++;
 		}
+		if (input.at(i) == '>' && !quote) {
+			if (i != input.size() - 1){
+				if (input.at(i + 1) == '>') {
+					input.erase(i - 1, 3);
+					outputr = 2;
+				}
+				else {
+					input.erase(i - 1, 2);
+					outputr = 1;
+				}
+			}
+		}
+		if (input.at(i) == '<' &&  !quote) {
+			input.erase(i - 1, 2);
+			inputr = true;
+		}
 	}
+	cout << "." << input << "." << endl;
 	char * command;
 	char * arguments[space + 2];
 	int index = 0;
@@ -53,17 +72,51 @@ int Executable::run(){
 		arguments[0] = command;
 		arguments[1] = NULL;
 	}
-	
 	//for (int i = 0; i < space + 1; i++){
 	//	index = 0;
-		//while (arguments[i][index] != '\0'){
-		//	cout << arguments[i][index++];
-		//}
-		//cout << endl;
+	//	while (arguments[i][index] != '\0'){
+	//		cout << arguments[i][index++];
+	//	}
+		//cout << i << endl;
 	//}
 	string exitTest = command;
+	cout << "input: " << input << endl;
 	if (exitTest == "exit"){
-		exit(1000);		
+		return 100;		
+	}
+	if (inputr) {
+		int file = open(arguments[space], O_RDONLY);
+		dup2(file, 0);
+		arguments[space] = '\0';
+		execvp(command, arguments);
+		return file;
+		//close(file);
+	}
+	else if (outputr == 1) {
+		//cout << "arguments size: " << space + 2 << endl;
+		//cout << "filename: " << arguments[space + 1]  << endl;
+		int file = open(arguments[space] ,  O_WRONLY | O_CREAT, 0644);
+		dup2(file, 1);
+		arguments[space] = '\0';
+		execvp(command, arguments);
+		return file;
+		//cout << "hello" << endl;
+		//printf("test");
+		//close(file);
+	}
+	else if (outputr == 2) {
+		int file = open(arguments[space], O_WRONLY | O_APPEND | O_CREAT, 0644);
+		dup2(file, 1);
+		arguments[space] = '\0';
+		execvp(command, arguments);
+		return file;
+		//close(file);
 	}
 	return execvp(command, arguments);
 }
+
+
+
+
+
+
