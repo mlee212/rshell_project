@@ -18,6 +18,9 @@ ADD_EXECUTABLE(test
 	src/ampersand.cpp
 	src/semicolon.cpp
 	src/pipe.cpp
+	src/inputredirection.cpp
+	src/outputredirection.cpp
+	src/doubleoutput.cpp
 )
 
 #ADD_EXECUTABLE(main
@@ -41,6 +44,9 @@ ADD_EXECUTABLE(manT
 	src/ampersand.cpp
 	src/semicolon.cpp
 	src/pipe.cpp
+	src/inputredirection.cpp
+	src/outputredirection.cpp
+	src/doubleoutput.cpp
 #unit_test.cpp
 )
 
@@ -57,6 +63,9 @@ ADD_EXECUTABLE(rshell
 	src/ampersand.cpp
 	src/semicolon.cpp
 	src/pipe.cpp
+	src/inputredirection.cpp
+	src/outputredirection.cpp
+	src/doubleoutput.cpp
 )
 
 #ADD_EXECUTABLE(test2
