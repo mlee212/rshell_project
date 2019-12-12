@@ -660,7 +660,7 @@ int InputData::run() {
 		else if (inputs.at(index)->input == "<") {
 			// cout << "index before: " << index << endl;
 			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
-			Input * temp = new InputRedirection("<", inputs.at(0), inputs.at(2));
+			Input * temp = new InputRedirection(inputs.at(0)->input, inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
