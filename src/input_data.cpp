@@ -620,22 +620,22 @@ int InputData::run() {
 	auto it = inputs.begin();
 
 	while (it != inputs.end()){
-		if (inputs.at(i) == "&&") {
-			Input * temp = new Ampersand("&&", input.at(0), input.at(2));
+		if (inputs.at(i)->input == "&&") {
+			Input * temp = new Ampersand("&&", inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
 		}
-		else if (inputs.at(i) == "||") {
-			Input * temp = new Ampersand("&&", input.at(0), input.at(2));
+		else if (inputs.at(i)->input == "||") {
+			Input * temp = new Parallel("||", inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
 		}
-		else if (inputs.at(i) == ";") {
-			Input * temp = new Ampersand("&&", input.at(0), input.at(2));
+		else if (inputs.at(i)->input == ";") {
+			Input * temp = new Semicolon(";", inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
