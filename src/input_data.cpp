@@ -556,21 +556,14 @@ void InputData::takeInput(){
 				paren--;
 			}
 		}
-		if (temp == "&&" && !quote && !paren) {
+		if ((temp == "&&" || temp == "||" || /*temp == ">>"*/) && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 2)));
 			indexS += 3;
 			indexE = indexS;
 		}
-		else if (temp == "||" && !quote && !paren) {
-			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
-			indexS = indexE;
-			inputs.push_back(new Connector(str.substr(indexS, 2)));
-			indexS += 3;
-			indexE = indexS;
-		}
-		else if (temp == ";" && !quote && !paren) {
+		else if ((temp == ";" || temp == "|" || /*temp == "<" || temp == ">"*/) && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 1)));
@@ -581,13 +574,6 @@ void InputData::takeInput(){
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			quitCheck = true;
-		}
-		else if (temp == "|" && !quote && !paren) {
-			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
-			indexS = indexE;
-			inputs.push_back(new Connector(str.substr(indexS, 1)));
-			indexS += 2;
-			indexE = indexS;
 		}
 		else {
 			// cout << temp << endl;
@@ -610,9 +596,9 @@ void InputData::takeInput(){
 			}
 		}
 	}
-	 // for (int i = 0; i < inputs.size(); i++) {
-		 // cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
-	 // }
+	 for (int i = 0; i < inputs.size(); i++) {
+		 cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
+	 }
 
 }
 

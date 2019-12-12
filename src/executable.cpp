@@ -8,7 +8,10 @@ int Executable::run(){
 	int space = 0;
 	bool quote = false;
 	bool inputr = false;
+	// int inputrr = 0;
 	int outputr = 0;
+	// int outpurr = 0;
+	// int doutputrr = 0;
 	// if there is a space then that means there is an argument in this input);
 	for(int i = 0; i < input.size(); i++){
 		if (input.at(i) == '\"'){
@@ -22,18 +25,22 @@ int Executable::run(){
 				if (input.at(i + 1) == '>') {
 					input.erase(i - 1, 3);
 					outputr = 2;
+					// doutputrr++;
 				}
 				else {
 					input.erase(i - 1, 2);
 					outputr = 1;
+					// outputrr++;
 				}
 			}
 		}
 		if (input.at(i) == '<' &&  !quote) {
 			input.erase(i - 1, 2);
 			inputr = true;
+			// inputr++;
 		}
 	}
+
 	// cout << "." << input << "." << endl;
 	char * command;
 	char * arguments[space + 2];
@@ -72,22 +79,26 @@ int Executable::run(){
 		arguments[0] = command;
 		arguments[1] = NULL;
 	}
-	//for (int i = 0; i < space + 1; i++){
-	//	index = 0;
-	//	while (arguments[i][index] != '\0'){
-	//		cout << arguments[i][index++];
-	//	}
-		//cout << i << endl;
-	//}
+	for (int i = 0; i < space + 1; i++){
+		index = 0;
+		while (arguments[i][index] != '\0'){
+			cout << arguments[i][index++];
+		}
+		cout << i << endl;
+	}
 	string exitTest = command;
 	int savestdin = dup(0);
     int savestdout = dup(1);
 	// cout << "input: " << input << endl;
+	// if (inputrr > 1 || outputrr > 1 || doutputrr > 1) {
+		// while (inputrr)
+	// }
 	if (exitTest == "exit"){
 		exit(100);
 	}
+	int file = 0;
 	if (inputr) {
-		int file = open(arguments[space], O_RDONLY | O_EXCL);
+		file = open(arguments[space], O_RDONLY | O_EXCL);
 		if (file == -1) {
 			return -1;
 		}
@@ -100,7 +111,7 @@ int Executable::run(){
 	else if (outputr == 1) {
 		//cout << "arguments size: " << space + 2 << endl;
 		//cout << "filename: " << arguments[space + 1]  << endl;
-		int file = open(arguments[space] ,  O_WRONLY | O_CREAT | O_TRUNC, 0664);
+		file = open(arguments[space] ,  O_WRONLY | O_CREAT | O_TRUNC, 0664);
 		dup2(file, 1);
 		arguments[space] = '\0';
 		// execvp(command, arguments);
@@ -110,7 +121,7 @@ int Executable::run(){
 		//close(file);
 	}
 	else if (outputr == 2) {
-		int file = open(arguments[space], O_WRONLY | O_APPEND | O_CREAT, 0664);
+		file = open(arguments[space], O_WRONLY | O_APPEND | O_CREAT, 0664);
 		dup2(file, 1);
 		arguments[space] = '\0';
 		// execvp(command, arguments);
