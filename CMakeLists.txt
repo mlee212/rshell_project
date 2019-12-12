@@ -14,14 +14,17 @@ ADD_EXECUTABLE(test
 	src/parenthesis.cpp
 	src/test_command.cpp
 	src/square.cpp
+	src/parallel.cpp
+	src/ampersand.cpp
+	src/semicolon.cpp
 )
 
 #ADD_EXECUTABLE(main
-#	~/assignment-scootscoot/unit_tests/main.cpp
-#	~/assignment-scootscoot/src/executable.cpp
-#	~/assignment-scootscoot/src/input.cpp
-#	~/assignment-scootscoot/src/test_command.cpp
-#	~/assignment-scootscoot/src/square.cpp
+#	unit_tests/main.cpp
+#	src/executable.cpp
+#	src/input.cpp
+#	src/test_command.cpp
+#	src/square.cpp
 #)
 
 ADD_EXECUTABLE(manT
@@ -33,6 +36,9 @@ ADD_EXECUTABLE(manT
 	src/parenthesis.cpp
 	src/test_command.cpp
 	src/square.cpp
+	src/parallel.cpp
+	src/ampersand.cpp
+	src/semicolon.cpp
 #unit_test.cpp
 )
 
@@ -45,14 +51,14 @@ ADD_EXECUTABLE(rshell
 	src/parenthesis.cpp
 	src/test_command.cpp
 	src/square.cpp
-#	~/assignment-scootscoot/src/parallel.cpp
-#	~/assignment-scootscoot/src/ampersand.cpp
-#	~/assignment-scootscoot/src/semicolon.cpp
+	src/parallel.cpp
+	src/ampersand.cpp
+	src/semicolon.cpp
 )
 
 #ADD_EXECUTABLE(test2
-#	~/assignment-scootscoot/unit_tests/unit_test.cpp
-#	~/assignment-scootscoot/src/input_data.cpp
+	#unit_tests/unit_test.cpp
+	#src/input_data.cpp
 	#vector_container.cpp
 	#selection_sort.cpp
 	#list_container.cpp
