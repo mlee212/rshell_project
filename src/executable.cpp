@@ -87,7 +87,7 @@ int Executable::run(){
 		exit(100);
 	}
 	if (inputr) {
-		int file = open(arguments[space], O_RDONLY | O_CREAT | O_EXCL);
+		int file = open(arguments[space], O_RDONLY | O_EXCL);
 		if (file == -1) {
 			return -1;
 		}
