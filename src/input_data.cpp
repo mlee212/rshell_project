@@ -556,14 +556,14 @@ void InputData::takeInput(){
 				paren--;
 			}
 		}
-		if ((temp == "&&" || temp == "||" || /*temp == ">>"*/) && !quote && !paren) {
+		if ((temp == "&&" || temp == "||" /*|| temp == ">>"*/) && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 2)));
 			indexS += 3;
 			indexE = indexS;
 		}
-		else if ((temp == ";" || temp == "|" || /*temp == "<" || temp == ">"*/) && !quote && !paren) {
+		else if ((temp == ";" || temp == "|" /*|| temp == "<" || temp == ">"*/) && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 1)));
