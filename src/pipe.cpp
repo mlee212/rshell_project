@@ -8,7 +8,7 @@ int Pipe::run() {
         return -1;
     }
 
-
+    int savestdin = dup(0);
     int savestdout = dup(1);
     int x = p[1];
     int y = p[0];
@@ -22,8 +22,8 @@ int Pipe::run() {
     cout << "hello3 dup(0): " << endl;
     dup2(savestdout, 1);
     close(x);
-    
-    int savestdin = dup(0);
+
+
     cout << "hello4 dup(0): " << endl;
     dup2(y, 0);
     cout << "hello5 dup(0): " << endl;
