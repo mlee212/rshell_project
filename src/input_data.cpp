@@ -658,6 +658,17 @@ int InputData::run() {
 			index -=2;
 			// cout << "index after: " << index << endl;
 		}
+		else if (inputs.at(index)->input == "|"") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new Pipe("|", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -=2;
+			// cout << "index after: " << index << endl;
+		}
 		// cout << "index all before: " << index << endl;
 		index++;
 		// cout << "index all after: " << index << endl;
