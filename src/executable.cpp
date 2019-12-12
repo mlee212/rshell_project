@@ -34,7 +34,7 @@ int Executable::run(){
 			inputr = true;
 		}
 	}
-	cout << "." << input << "." << endl;
+	// cout << "." << input << "." << endl;
 	char * command;
 	char * arguments[space + 2];
 	int index = 0;
@@ -80,7 +80,7 @@ int Executable::run(){
 		//cout << i << endl;
 	//}
 	string exitTest = command;
-	cout << "input: " << input << endl;
+	// cout << "input: " << input << endl;
 	if (exitTest == "exit"){
 		exit(100);
 	}

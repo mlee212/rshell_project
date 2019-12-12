@@ -542,7 +542,7 @@ void InputData::takeInput(){
 	quote = false;
 	string temp;
 	stringstream ss(str);
-	cout << str << endl;
+	// cout << str << endl;
 	while (ss >> temp && !quitCheck) {
 		for (int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
@@ -589,7 +589,7 @@ void InputData::takeInput(){
 			indexE = indexS;
 		}
 		else {
-			cout << temp << endl;
+			// cout << temp << endl;
 			indexE += temp.size() + 1;
 		}
 	}
@@ -609,9 +609,9 @@ void InputData::takeInput(){
 			}
 		}
 	}
-	for (int i = 0; i < inputs.size(); i++) {
+	// for (int i = 0; i < inputs.size(); i++) {
 		// cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
-	}
+	// }
 
 }
 
