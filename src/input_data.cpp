@@ -8,6 +8,7 @@
 #include "../header/semicolon.hpp"
 #include "../header/square.hpp"
 #include "../header/test_command.hpp"
+#include "../header/pipe.hpp"
 
 
 
@@ -658,7 +659,7 @@ int InputData::run() {
 			index -=2;
 			// cout << "index after: " << index << endl;
 		}
-		else if (inputs.at(index)->input == "|"") {
+		else if (inputs.at(index)->input == "|") {
 			// cout << "index before: " << index << endl;
 			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Pipe("|", inputs.at(0), inputs.at(2));

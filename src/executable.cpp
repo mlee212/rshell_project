@@ -138,7 +138,7 @@ int Executable::run(){
 			}
 			else {
 				dup2(savestdin, 0);
-				dup2(savestdout, 1);
+				dup2(savestdout, 1A);
 			}
 		}
 	}

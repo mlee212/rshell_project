@@ -17,6 +17,7 @@ ADD_EXECUTABLE(test
 	src/parallel.cpp
 	src/ampersand.cpp
 	src/semicolon.cpp
+	src/pipe.cpp
 )
 
 #ADD_EXECUTABLE(main
@@ -39,6 +40,7 @@ ADD_EXECUTABLE(manT
 	src/parallel.cpp
 	src/ampersand.cpp
 	src/semicolon.cpp
+	src/pipe.cpp
 #unit_test.cpp
 )
 
@@ -54,6 +56,7 @@ ADD_EXECUTABLE(rshell
 	src/parallel.cpp
 	src/ampersand.cpp
 	src/semicolon.cpp
+	src/pipe.cpp
 )
 
 #ADD_EXECUTABLE(test2
