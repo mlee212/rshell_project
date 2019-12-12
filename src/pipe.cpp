@@ -14,13 +14,13 @@ int Pipe::run() {
 
     left->run();
 
+    dup2(savestdout, 1);
     dup2(p[0], 0);
     close(p[0]);
 
     right->run();
 
     dup2(savestdin, 0);
-    dup2(savestdout, 1);
 
     return 1;
 }
