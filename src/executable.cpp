@@ -114,16 +114,18 @@ int Executable::run(){
 	}
 	pid_t p;
 	int stat;
+	for (int i = 0; i < strlen(arguments); i++){
+		cout << "arguments[" << i << "]: " << arguments << endl;
+	}
 	if ((p = fork()) = 0) {
 		cout << "This is child process" << endl;
-		if (execvp(command, arguments) == -1) {
-			exit(2);
-		}
-		exit(1);
+		int leave = execvp(command, arguments);
+		cout << leave << endl;
+		exit(leave);
 	}
 	else {
 		cout << "This is parent process" << endl;
-		waitpid(p, &stat, 0);
+		pid_t test = waitpid(p, &stat, 0);
 		if (WIFEXITED(stat)){
 			if (WEXITSTATUS(stat) == 2){
 				return -1;
