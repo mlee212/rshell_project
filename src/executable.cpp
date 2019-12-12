@@ -125,10 +125,10 @@ int Executable::run(){
 		cout << "This is parent process" << endl;
 		waitpid(p, &stat, 0);
 		if (WIFEXITED(stat)){
-			if (WIFEXITSTATUS(stat) == 2){
+			if (WEXITSTATUS(stat) == 2){
 				return -1;
 			}
-			else if (WIFEXITSTATUS(stat) == 1){
+			else if (WEXITSTATUS(stat) == 1){
 				return 1;
 			}
 		}
