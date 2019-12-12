@@ -2,7 +2,8 @@
 
 int Pipe::run() {
     int p[2];
-
+    cout << "left: " << left->input << endl;
+    cout << "right: " << right->input << endl;
     if (pipe(p) == -1){
         return -1;
     }
