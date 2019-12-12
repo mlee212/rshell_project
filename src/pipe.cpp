@@ -9,9 +9,11 @@ int Pipe::run() {
 
     int savestdin = dup(0);
     int savestdout = dup(1);
+    int x = p[1];
+    int y = p[0];
 
     cout << "hello1" << endl;
-    dup2(p[1], 1);
+    dup2(x, 1);
     cout << "hello2" << endl;
     if (left->run() == -1){
         return -1;
@@ -20,7 +22,7 @@ int Pipe::run() {
     dup2(savestdout, 1);
     // close(p[1]);
     cout << "hello4" << endl;
-    dup2(p[0], 0);
+    dup2(y, 0);
     cout << "hello5" << endl;
     if (right->run() == -1){
         return -1;
