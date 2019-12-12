@@ -612,13 +612,16 @@ void InputData::takeInput(){
 	for (int i = 0; i < inputs.size(); i++) {
 		cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
 	}
-	// echo a && echo b && echo c
 
 }
 
 int InputData::run() {
 	int index = 0;
-	while (index != input.size()) {
+	while (index != inputs.size()) {
+		cout << "size: " << inputs.size() << endl;
+		if (inputs.size() == 1){
+			break;
+		}
 		if (inputs.at(index)->input == "&&") {
 			cout << "index before: " << index << endl;
 			cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
@@ -660,5 +663,6 @@ int InputData::run() {
 	for (int i = 0; i < inputs.size(); i++) {
 		cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
 	}
-	return 0;
+
+	return inputs.at(0)->run();
 }

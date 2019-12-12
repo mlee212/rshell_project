@@ -1,6 +1,6 @@
 #include "../header/executable.hpp"
 
-//Executable::Executable(string x){ 
+//Executable::Executable(string x){
 //	input = x;
 //}
 
@@ -82,14 +82,14 @@ int Executable::run(){
 	string exitTest = command;
 	cout << "input: " << input << endl;
 	if (exitTest == "exit"){
-		return 100;		
+		return 100;
 	}
 	if (inputr) {
 		int file = open(arguments[space], O_RDONLY);
 		dup2(file, 0);
 		arguments[space] = '\0';
-		execvp(command, arguments);
-		return file;
+		// execvp(command, arguments);
+		// return file;
 		//close(file);
 	}
 	else if (outputr == 1) {
@@ -98,8 +98,8 @@ int Executable::run(){
 		int file = open(arguments[space] ,  O_WRONLY | O_CREAT, 0644);
 		dup2(file, 1);
 		arguments[space] = '\0';
-		execvp(command, arguments);
-		return file;
+		// execvp(command, arguments);
+		// return file;
 		//cout << "hello" << endl;
 		//printf("test");
 		//close(file);
@@ -108,15 +108,30 @@ int Executable::run(){
 		int file = open(arguments[space], O_WRONLY | O_APPEND | O_CREAT, 0644);
 		dup2(file, 1);
 		arguments[space] = '\0';
-		execvp(command, arguments);
-		return file;
+		// execvp(command, arguments);
+		// return file;
 		//close(file);
 	}
-	return execvp(command, arguments);
+	pid_t p;
+	int stat;
+	if ((p = fork()) = 0) {
+		cout << "This is child process" << endl;
+		if (execvp(command, arguments) == -1) {
+			exit(2);
+		}
+		exit(1);
+	}
+	else {
+		cout << "This is parent process" << endl;
+		waitpid(p, &stat, 0);
+		if (WIFEXITED(stat)){
+			if (WIFEXITSTATUS(stat) == 2){
+				return -1;
+			}
+			else if (WIFEXITSTATUS(stat) == 1){
+				return 1;
+			}
+		}
+	}
+	return 1;
 }
-
-
-
-
-
-
