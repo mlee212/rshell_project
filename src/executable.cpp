@@ -148,6 +148,8 @@ int Executable::run(){
 		pid_t test = waitpid(p, &stat, 0);
 		if (WIFEXITED(stat)){
 			if (WEXITSTATUS(stat) == 1){
+				dup2(savestdin, 0);
+				dup2(savestdout, 1);
 				return -1;
 			}
 			else {
