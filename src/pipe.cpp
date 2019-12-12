@@ -14,20 +14,22 @@ int Pipe::run() {
 
     dup2(p[1], 1);
 
+    cout << "left: " << left->input << endl;
     left->run();
-
+    cout << "after left ran" << endl;
 	dup2(savestdout, 1);
     close(p[1]);
 	dup2(savestdout, 1);
-    
+
 	dup2(p[0], 0);
 
+    cout << "right: " << right->input << endl;
     right->run();
-
+    cout << "after right ran" << endl;
 	dup2(savestdin, 0);
     close(p[0]);
 	dup2(savestdin, 0);
-	
+
 	dup2(savestdout, 1);
     dup2(savestdin, 0);
 
