@@ -3,9 +3,9 @@
 #include "../header/connector.hpp"
 #include "../header/input.hpp"
 #include "../header/parenthesis.hpp"
-//#include "../header/ampersand.hpp"
-//#include "../header/parallel.hpp"
-//#include "../header/semicolon.hpp"
+#include "../header/ampersand.hpp"
+#include "../header/parallel.hpp"
+#include "../header/semicolon.hpp"
 #include "../header/square.hpp"
 #include "../header/test_command.hpp"
 
@@ -614,21 +614,21 @@ void InputData::takeInput(){
 	}
 	// echo a && echo b && echo c
 	for (int i = 1; i < inputs.size(); i += 2){
-		if (inputs.at(i) == "&&"){
+		if (inputs.at(i)->input == "&&"){
 			Input * temp = new Ampersand ("&&", inputs.at(0), inputs.at(2))
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
 		}
-		else if (inputs.at(i) == "||"){
+		else if (inputs.at(i)->input == "||"){
 			Input * temp = new Parallel ("||", inputs.at(0), inputs.at(2))
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
 		}
-		else if (inputs.at(i) == ";"){
+		else if (inputs.at(i)->input == ";"){
 			Input * temp = new Semicolon (";", inputs.at(0), inputs.at(2))
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
