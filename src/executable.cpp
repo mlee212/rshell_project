@@ -97,7 +97,7 @@ int Executable::run(){
 	else if (outputr == 1) {
 		//cout << "arguments size: " << space + 2 << endl;
 		//cout << "filename: " << arguments[space + 1]  << endl;
-		int file = open(arguments[space] ,  O_WRONLY | O_CREAT, 0664);
+		int file = open(arguments[space] ,  O_WRONLY | O_CREAT | O_TRUNC, 0664);
 		dup2(file, 1);
 		arguments[space] = '\0';
 		// execvp(command, arguments);
