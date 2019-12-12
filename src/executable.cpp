@@ -82,7 +82,7 @@ int Executable::run(){
 	string exitTest = command;
 	cout << "input: " << input << endl;
 	if (exitTest == "exit"){
-		return 100;
+		exit(100);
 	}
 	if (inputr) {
 		int file = open(arguments[space], O_RDONLY);
@@ -114,24 +114,25 @@ int Executable::run(){
 	}
 	pid_t p;
 	int stat;
-	for (int i = 0; i < strlen(arguments); i++){
-		cout << "arguments[" << i << "]: " << arguments << endl;
+	for (int i = 0; i < space + 1; i++) {
+		index = 0;
+		cout << "arguments[" << i << "]: ";
+		while (arguments[i][index] != '\0') {
+			cout << arguments[i][index++];
+		}
+		cout << endl;
 	}
-	if ((p = fork()) = 0) {
+	if ((p = fork()) == 0) {
 		cout << "This is child process" << endl;
-		int leave = execvp(command, arguments);
-		cout << leave << endl;
-		exit(leave);
+		execvp(command, arguments);
+		exit(1);
 	}
 	else {
 		cout << "This is parent process" << endl;
 		pid_t test = waitpid(p, &stat, 0);
 		if (WIFEXITED(stat)){
-			if (WEXITSTATUS(stat) == 2){
+			if (WEXITSTATUS(stat) != 1){
 				return -1;
-			}
-			else if (WEXITSTATUS(stat) == 1){
-				return 1;
 			}
 		}
 	}
