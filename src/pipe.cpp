@@ -10,21 +10,22 @@ int Pipe::run() {
     int savestdin = dup(0);
     int savestdout = dup(1);
 
+    cout << "hello1" << endl;
     dup2(p[1], 1);
-
+    cout << "hello2" << endl;
     if (left->run() == -1){
         return -1;
     }
-
+    cout << "hello3" << endl;
     dup2(savestdout, 1);
     // close(p[1]);
-
+    cout << "hello4" << endl;
     dup2(p[0], 0);
-
+    cout << "hello5" << endl;
     if (right->run() == -1){
         return -1;
     }
-
+    cout << "hello6" << endl;
     dup2(savestdin, 0);
     // close(p[0]);
 

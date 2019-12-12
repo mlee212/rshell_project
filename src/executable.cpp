@@ -79,13 +79,13 @@ int Executable::run(){
 		arguments[0] = command;
 		arguments[1] = NULL;
 	}
-	for (int i = 0; i < space + 1; i++){
-		index = 0;
-		while (arguments[i][index] != '\0'){
-			cout << arguments[i][index++];
-		}
-		cout << i << endl;
-	}
+	// for (int i = 0; i < space + 1; i++){
+	// 	index = 0;
+	// 	while (arguments[i][index] != '\0'){
+	// 		cout << arguments[i][index++];
+	// 	}
+	// 	cout << i << endl;
+	// }
 	string exitTest = command;
 	int savestdin = dup(0);
     int savestdout = dup(1);
