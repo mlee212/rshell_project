@@ -12,16 +12,16 @@ int Pipe::run() {
     int x = p[1];
     int y = p[0];
 
-    cout << "hello1 dup(0): " << dup(0) << " dup(1): " << dup(1) << endl;
+    cout << "hello1 dup(0): "
     dup2(x, 1);
-    cout << "hello2 dup(0): " << dup(0) << " dup(1): " << dup(1) << endl;
+    cout << "hello2 dup(0): "
     if (left->run() == -1){
         return -1;
     }
-    cout << "hello3 dup(0): " << dup(0) << " dup(1): " << dup(1) << endl;
+    cout << "hello3 dup(0): "
     dup2(savestdout, 1);
     close(x);
-    cout << "hello4 dup(0): " << dup(0) << " dup(1): " << dup(1) << endl;
+    cout << "hello4 dup(0): "
     dup2(y, 0);
     cout << "hello5 dup(0): " << dup(0) << " dup(1): " << dup(1) << endl;
     if (right->run() == -1){
