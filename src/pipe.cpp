@@ -17,7 +17,7 @@ int Pipe::run() {
     }
 
     dup2(savestdout, 1);
-    close(p[1]);
+    // close(p[1]);
 
     dup2(p[0], 0);
 
@@ -26,7 +26,7 @@ int Pipe::run() {
     }
 
     dup2(savestdin, 0);
-    close(p[0]);
+    // close(p[0]);
 
 
     return 1;
