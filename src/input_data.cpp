@@ -613,35 +613,41 @@ void InputData::takeInput(){
 		cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
 	}
 	// echo a && echo b && echo c
-	for (int i = 1; i < inputs.size(); i += 2){
-		if (inputs.at(i)->input == "&&"){
-			Input * temp = new Ampersand ("&&", inputs.at(0), inputs.at(2));
-			inputs.erase(inputs.begin());
-			inputs.erase(inputs.begin());
-			inputs.erase(inputs.begin());
-			inputs.insert(inputs.begin(), temp);
-		}
-		else if (inputs.at(i)->input == "||"){
-			Input * temp = new Parallel ("||", inputs.at(0), inputs.at(2));
-			inputs.erase(inputs.begin());
-			inputs.erase(inputs.begin());
-			inputs.erase(inputs.begin());
-			inputs.insert(inputs.begin(), temp);
-		}
-		else if (inputs.at(i)->input == ";"){
-			Input * temp = new Semicolon (";", inputs.at(0), inputs.at(2));
-			inputs.erase(inputs.begin());
-			inputs.erase(inputs.begin());
-			inputs.erase(inputs.begin());
-			inputs.insert(inputs.begin(), temp);
-		}
-	}
-	for (int i = 0; i < inputs.size(); i++) {
-		cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
-	}
+
 }
 
 int InputData::run() {
+	auto it = inputs.begin();
 
+	while (it != inputs.end()){
+		if (inputs.at(i) == "&&") {
+			Input * temp = new Ampersand("&&", input.at(0), input.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+		}
+		else if (inputs.at(i) == "||") {
+			Input * temp = new Ampersand("&&", input.at(0), input.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+		}
+		else if (inputs.at(i) == ";") {
+			Input * temp = new Ampersand("&&", input.at(0), input.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+		}
+		else {
+			it++;
+		}
+	}
+
+	for (int i = 0; i < inputs.size(); i++) {
+		cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
+	}
 	return 0;
 }
