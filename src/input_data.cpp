@@ -619,7 +619,7 @@ void InputData::takeInput(){
 int InputData::run() {
 	int index = 0;
 	while (index != input.size()) {
-		if (inputs.at(i)->input == "&&") {
+		if (inputs.at(index)->input == "&&") {
 			cout << "index before: " << index << endl;
 			cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Ampersand("&&", inputs.at(0), inputs.at(2));
@@ -630,7 +630,7 @@ int InputData::run() {
 			index -=2;
 			cout << "index after: " << index << endl;
 		}
-		else if (inputs.at(i)->input == "||") {
+		else if (inputs.at(index)->input == "||") {
 			cout << "index before: " << index << endl;
 			cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Parallel("||", inputs.at(0), inputs.at(2));
@@ -641,7 +641,7 @@ int InputData::run() {
 			index -=2;
 			cout << "index after: " << index << endl;
 		}
-		else if (inputs.at(i)->input == ";") {
+		else if (inputs.at(index)->input == ";") {
 			cout << "index before: " << index << endl;
 			cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Semicolon(";", inputs.at(0), inputs.at(2));
