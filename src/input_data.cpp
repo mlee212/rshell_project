@@ -634,7 +634,7 @@ int InputData::run() {
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
-			index -=2;
+			index -= 2;
 			// cout << "index after: " << index << endl;
 		}
 		else if (inputs.at(index)->input == "||") {
@@ -645,7 +645,7 @@ int InputData::run() {
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
-			index -=2;
+			index -= 2;
 			cout << "index after: " << index << endl;
 		}
 		else if (inputs.at(index)->input == ";") {
@@ -656,7 +656,7 @@ int InputData::run() {
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
-			index -=2;
+			index -= 2;
 			// cout << "index after: " << index << endl;
 		}
 		else if (inputs.at(index)->input == "|") {
@@ -667,7 +667,7 @@ int InputData::run() {
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
-			index -=2;
+			index -= 2;
 			// cout << "index after: " << index << endl;
 		}
 		// cout << "index all before: " << index << endl;
