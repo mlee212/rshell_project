@@ -12,12 +12,12 @@ int Pipe::run() {
     dup2(p[1], 1);
     close(p[1]);
 
-    left->execute();
+    left->run();
 
     dup2(p[0], 0);
     close(p[0]);
 
-    right->execute();
+    right->run();
 
     dup2(savestdin, 0);
     dup2(savestdout, 1);
