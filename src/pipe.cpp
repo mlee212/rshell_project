@@ -7,8 +7,8 @@ int Pipe::run() {
         return -1;
     }
 
-    int savestdin = 0
-    int savestdout = 1;
+    int savestdin = dup(0);
+    int savestdout = dup(1);
     int x = p[1];
     int y = p[0];
 
