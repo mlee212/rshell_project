@@ -9,8 +9,9 @@
 #include "../header/square.hpp"
 #include "../header/test_command.hpp"
 #include "../header/pipe.hpp"
-
-
+#include "../header/inputredirection.hpp"
+#include "../header/outputredirection.hpp"
+#include "../header/doubleoutput.hpp"
 
 /*void InputData::takeInput() {
 
@@ -556,14 +557,14 @@ void InputData::takeInput(){
 				paren--;
 			}
 		}
-		if ((temp == "&&" || temp == "||" /*|| temp == ">>"*/) && !quote && !paren) {
+		if ((temp == "&&" || temp == "||" || temp == ">>") && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 2)));
 			indexS += 3;
 			indexE = indexS;
 		}
-		else if ((temp == ";" || temp == "|" /*|| temp == "<" || temp == ">"*/) && !quote && !paren) {
+		else if ((temp == ";" || temp == "|" || temp == "<" || temp == ">") && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 1)));
@@ -649,6 +650,39 @@ int InputData::run() {
 			// cout << "index before: " << index << endl;
 			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Pipe("|", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == "<") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new InputRedirection("<", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == ">") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new OutputRedirection(">", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == ">>") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new DoubleOutput(">>", inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
