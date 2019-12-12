@@ -609,36 +609,36 @@ void InputData::takeInput(){
 			}
 		}
 	}
-	 for (int i = 0; i < inputs.size(); i++) {
-		 cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
-	 }
+	 // for (int i = 0; i < inputs.size(); i++) {
+		 // cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
+	 // }
 
 }
 
 int InputData::run() {
 	int index = 0;
 	while (index != inputs.size()) {
-		cout << "size: " << inputs.size() << endl;
+		// cout << "size: " << inputs.size() << endl;
 		if (inputs.size() == 1){
 			break;
 		}
 		if (index < 0) {
 			index = 0;
-		}	
+		}
 		if (inputs.at(index)->input == "&&") {
-			cout << "index before: " << index << endl;
-			cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Ampersand("&&", inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
 			index -=2;
-			 cout << "index after: " << index << endl;
+			// cout << "index after: " << index << endl;
 		}
 		else if (inputs.at(index)->input == "||") {
-			cout << "index before: " << index << endl;
-			cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Parallel("||", inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
@@ -648,24 +648,24 @@ int InputData::run() {
 			cout << "index after: " << index << endl;
 		}
 		else if (inputs.at(index)->input == ";") {
-			cout << "index before: " << index << endl;
-			cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
 			Input * temp = new Semicolon(";", inputs.at(0), inputs.at(2));
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.erase(inputs.begin());
 			inputs.insert(inputs.begin(), temp);
 			index -=2;
-			cout << "index after: " << index << endl;
+			// cout << "index after: " << index << endl;
 		}
-		cout << "index all before: " << index << endl;
+		// cout << "index all before: " << index << endl;
 		index++;
-		cout << "index all after: " << index << endl;
+		// cout << "index all after: " << index << endl;
 	}
 
-	 for (int i = 0; i < inputs.size(); i++) {
-		 cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
-	 }
+	 // for (int i = 0; i < inputs.size(); i++) {
+		 // cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
+	 // }
 
 	return inputs.at(0)->run();
 }

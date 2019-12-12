@@ -80,6 +80,8 @@ int Executable::run(){
 		//cout << i << endl;
 	//}
 	string exitTest = command;
+	int savestdin = dup(0);
+    int savestdout = dup(1);
 	// cout << "input: " << input << endl;
 	if (exitTest == "exit"){
 		exit(100);
@@ -133,6 +135,10 @@ int Executable::run(){
 		if (WIFEXITED(stat)){
 			if (WEXITSTATUS(stat) == 1){
 				return -1;
+			}
+			else {
+				dup2(savestdin, 0);
+				dup2(savestdout, 1);
 			}
 		}
 	}
