@@ -61,6 +61,7 @@ int Pipe::run() {
             return -1;
         }
     }
-
+    dup2(savestdin, 0);
+    dup2(savestdout, 1);
     return 1;
 }
