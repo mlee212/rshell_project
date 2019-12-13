@@ -51,7 +51,7 @@ int Pipe::run() {
         if (left->run() == -1) {
             return -1;
         }
-        exit(100);
+       // exit(100);
     }
     else {
         waitpid(pid, &stat, 0);
@@ -62,7 +62,7 @@ int Pipe::run() {
             return -1;
         }
     }
-    dup2(savestdin, 0);
-    dup2(savestdout, 1);
+    //dup2(savestdin, 0);
+    //dup2(savestdout, 1);
     return 1;
 }
