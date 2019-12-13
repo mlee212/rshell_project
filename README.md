@@ -12,10 +12,20 @@ Our program will be able to function as a basic shell that will be able to take 
 * Input: This is our base class, which will be the base class that holds a virtual run function of type int to indicate the status of executed functions. 
 * InputData: This is our composite class which inherits from Input. The InputData class will take in an input, parse it into a vector of Input pointers.
 * Executable: This class will inherit from the Input base class and will construct an Executable object that holds the string to be executed. The run function in this class will execute the command held within the string and return a negative number if the process failed.
-* Connector: This class will inherit from the Input base class and will construct a Connector object that holds the string of the connector that will be used to determine whether or not the next Executable object should be executed. The run function will determine its identity as a Connector.
-* Square: This class will inherit from the Input base class and will construct a Square object with a string. The run function of this class will be specialize to deal with cases of square bracket commands.
-* TestCommand: This class will inherit from the Input base class and will construct a TestCommand object with a string. The run function of this class will be specialized to deal with the case of test commands.
-* Parenthesis: This class will inherit from the Input base class and will construct a Parenthesis object with a string. This class' run function will further parse the string, "peeling" the parenthesis off, and will then parse the contents of the remainder of the string. This is possible due to the Parenthesis' specialized run function.
+* Connector: This class will inherit from the Input base class and will construct a Connector object that will act as a placeholder to be specified later.
+* Ampersand: This class will inherit from the Input base class and will construct an Ampersand object with a string of the respective connector, left string, and right string elements. This object's run function will be implemented to deal with the && case.
+
+* Parallel: This class will inherit from the Input base class and will construct a Parallel object with a string of the respective connector, left string, and right string elements. This object's run function will be implemented to deal with the || case.
+
+* Semicolon: This class will inherit from the Input base class and will construct a Semicolon object with a string of the respective connector, left string, and right string elements. This object's run function will be implemented to deal with the ; case.
+
+* Parenthesis: This class will inherit from the Input base class and will transform the Input object to a Parenthesis object within the vector.The run function of this class will be specialized to deal with cases of parenthesis commands.
+* Square: This class will inherit from the Input base class and will transform the Input object to a Square object within the vector. The run function of this class will be specialized to deal with cases of square bracket commands.
+* TestCommand: This class will inherit from the Input base class and will transform the Input object to a TestCommand object within the vector. The run function of this class will be specialized to deal with cases of testing commands.
+* InputRedirection: This class will inherit from the Input base class and will construct a InputRedirection object with a string of the respective connector, left, and right elements. The run function of this class will be specialized to deal with input redirection (<).
+* OutputRedirection: This class will inherit from the Input base class and will construct a OutputRedirection object with a string of the respective connector, left, and right elements. The run function of this class will be specialized to deal with output redirection (>).
+* DoubleOutput: This class will inherit from the Input base class and will construct a DoubleOutput object with a string of the respective connector, left, and right elements. The run function of this class will be specialized to deal with double output redirection (>>).
+* Pipe: This class will inherit from the Input base class and will construct a Pipe object with a string of the respective connector, left, and right elements. The run function of this class will be specialized to deal with pipes (|).
 
 # Prototypes
 * Parser: We used getline (cin, str) to get the inputs from the user. Once we have the inputs from the user, we separate each command into either an executable, argument, or connector and add it to the vector<Input *>.
@@ -50,15 +60,31 @@ Our program will be able to function as a basic shell that will be able to take 
 * Parenthesis Class
   * Created class
   * Fixed Parser to work with Parenthesis
-  * Made tests to test the parser
+  * Made tests to test the parser and parenthesis
 * Square
   * Created class
   * Fixed Parser to work with Square Brackets
-  * Made tests to test the parser
+  * Made tests to test the parser and square brackets
 * TestCommand
   * Created class
   * Fixed Parser to work with test formats (i.e. "test -d <fileName>", "test <fileName>")
-  * Made tests to test the parser
+  * Made tests to test the parser and test commands
+* InputRedirection
+  * Created class
+  * Fixed Parser to work with InputRedirection (i.e. "<")
+  * Made tests to test the parser and input redirection
+* OutputRedirection
+  * Created class
+  * Fixed Parser to work with OuputRedirection (i.e. ">")
+  * Made tests to test the parser and output redirection
+* DoubleOutput
+  * Created class
+  * Fixed Parser to work with DoubleOutput (i.e. ">>")
+  * Made tests to test the parser and double output
+* Pipe
+  * Created class
+  * Fixed Parser to work with Pipes (i.e. "|")
+  * Made tests to test the parser and pipes
 * Testing overall
 * Turn in
 
