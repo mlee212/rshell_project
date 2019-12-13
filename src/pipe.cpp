@@ -13,27 +13,29 @@ int Pipe::run() {
     int x = p[1];
     int y = p[0];
 
-    cout << "hello1 dup(0): " << endl;
+    cout << "hello1" << endl;
     dup2(x, 1);
-    cout << "hello2 dup(0): " << endl;
-    if (left->run() == -1){
+    cout << "hello2" << endl;
+    if (left->run() == -1) {
         return -1;
     }
-    cout << "hello3 dup(0): " << endl;
+    cout << "hello3" << endl;
     dup2(savestdout, 1);
+    cout << "hello4" << endl;
     close(x);
 
 
-    cout << "hello4 dup(0): " << endl;
+    cout << "hello5" << endl;
     dup2(y, 0);
-    cout << "hello5 dup(0): " << endl;
-    if (right->run() == -1){
+    cout << "hello6" << endl;
+    if (right->run() == -1) {
         return -1;
     }
-    cout << "hello6 dup(0): " << endl;
+    cout << "hello7: " << endl;
     dup2(savestdin, 0);
+    cout << "hello8: " << endl;
     close(y);
-
+    cout << "hello9: " << endl;
 
     return 1;
 }
