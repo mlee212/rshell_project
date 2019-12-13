@@ -597,9 +597,9 @@ void InputData::takeInput(){
 			}
 		}
 	}
-	 for (int i = 0; i < inputs.size(); i++) {
-		 cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
-	 }
+	 // for (int i = 0; i < inputs.size(); i++) {
+		//  cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
+	 // }
 
 }
 
