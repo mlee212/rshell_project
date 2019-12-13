@@ -47,4 +47,7 @@ output.tx
 output.txt
 test.txt
 test1.txt
+multiArgFile1.txt
+singleArgFile.txt
+integration_tests/output2.txt
 integration_tests/test

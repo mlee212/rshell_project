@@ -1,6 +1,6 @@
 #~/bin/sh
 
-input=("cat < inFile1" "cat < inFile2" "cat < inFile2 | tr A-Z a-z" "cat < inFile1 inFile2") 
+input=("echo a > output.txt" "cat single_command_tests.sh > output2.txt" "cat single_command_tests.sh >> output2.txt") 
 
 for i in "${input[@]}"
 do

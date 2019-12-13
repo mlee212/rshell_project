@@ -1,6 +1,6 @@
 #~/bin/sh
 
-input=("echo hi | tr a-z A-Z" "cat < existingInputFile | tr A-Z a-z" "cat < existingInputFile | tee newOutputFile1 | tr a-z A-Z" "echo hello | tr a-z A-Z | tr A-Z a-z | tr a-z A-Z | tr A-Z a-z" "cat < existingInputFile | tr A-Z a-z | tee newOutputFile1 | tr a-z A-Z > newOutputFile2") 
+input=("echo hi | tr a-z A-Z" "cat < single_command_tests.sh | tr a-z A-Z") 
 
 for i in "${input[@]}"
 do
