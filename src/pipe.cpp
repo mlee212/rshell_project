@@ -23,7 +23,7 @@ int Pipe::run() {
     dup2(savestdout, 1);
     cout << "hello4" << endl;
     close(x);
-
+    close(y);
 
     cout << "hello5" << endl;
     dup2(y, 0);
@@ -34,6 +34,7 @@ int Pipe::run() {
     cout << "hello7: " << endl;
     dup2(savestdin, 0);
     cout << "hello8: " << endl;
+    close(x);
     close(y);
     cout << "hello9: " << endl;
 
