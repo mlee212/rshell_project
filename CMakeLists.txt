@@ -31,24 +31,24 @@ ADD_EXECUTABLE(test
 #	src/square.cpp
 #)
 
-ADD_EXECUTABLE(manT
-	unit_tests/main2.cpp
-	src/input_data.cpp
-	src/input.cpp
-	src/executable.cpp
-	src/connector.cpp
-	src/parenthesis.cpp
-	src/test_command.cpp
-	src/square.cpp
-	src/parallel.cpp
-	src/ampersand.cpp
-	src/semicolon.cpp
-	src/pipe.cpp
-	src/inputredirection.cpp
-	src/outputredirection.cpp
-	src/doubleoutput.cpp
+#ADD_EXECUTABLE(manT
+#	unit_tests/main2.cpp
+#	src/input_data.cpp
+#	src/input.cpp
+#	src/executable.cpp
+#	src/connector.cpp
+#	src/parenthesis.cpp
+#	src/test_command.cpp
+#	src/square.cpp
+#	src/parallel.cpp
+#	src/ampersand.cpp
+#	src/semicolon.cpp
+#	src/pipe.cpp
+#	src/inputredirection.cpp
+#	src/outputredirection.cpp
+#	src/doubleoutput.cpp
 #unit_test.cpp
-)
+#)
 
 ADD_EXECUTABLE(rshell
 	unit_tests/rshell.cpp
