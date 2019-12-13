@@ -6,7 +6,7 @@ inputs=("(echo A && echo B)"  "(echo A || echo B)" "(echo A; echo B)" "(echo A &
 for i in "${inputs[@]}"
 do
 	echo "Executing ../rshell ${i}"
-	echo -e "${i}\nexit" | ./rshell
+	echo -e "${i}\nexit" | ../rshell
 done
 
 

@@ -3,17 +3,19 @@
 #include "../header/connector.hpp"
 #include "../header/input.hpp"
 #include "../header/parenthesis.hpp"
-//#include "../header/ampersand.hpp"
-//#include "../header/parallel.hpp"
-//#include "../header/semicolon.hpp"
+#include "../header/ampersand.hpp"
+#include "../header/parallel.hpp"
+#include "../header/semicolon.hpp"
 #include "../header/square.hpp"
 #include "../header/test_command.hpp"
-
-
+#include "../header/pipe.hpp"
+#include "../header/inputredirection.hpp"
+#include "../header/outputredirection.hpp"
+#include "../header/doubleoutput.hpp"
 
 /*void InputData::takeInput() {
-	
-	
+
+
 	bool quote = false;
 	//int numSpaceAdds = 0;
 	// modifies the inputted string to isolate semicolons and comments
@@ -35,10 +37,10 @@
 			i++;
 			//numSpaceAdds += 2;
 		}
-			
+
 	}
 	string quoteStr = str;
-	
+
 	int indexS = 0;
 	int indexE = 0;
 	int exeLength = 0;
@@ -63,14 +65,14 @@
 	bool correctParamPiping = false;
 
 	// run string through a stringstream where each piece of text is separated by space.
-	
+
 	stringstream ss(str);
 	while(ss >> temp && !quitCheck) {
 		cout << "beginning indexE: " << indexE << endl;
 		if(!quote) {
 			numArgs++;
 		}
-		// determines whether the executable is of test command	
+		// determines whether the executable is of test command
 		if(!quote && !paren && !square && !inTest && temp == "test") {
 			indexE++;
 			exeLength++;
@@ -132,7 +134,7 @@
 				}
 			}
 			startsq = false;
-			
+
 		}
 		else if(quote){
 	//		cout << "In quote" << endl;
@@ -161,7 +163,7 @@
 				exeLength += 1;
 			}
 			start = false;
-		} 
+		}
 		else {
 			for(int i = 0; i < temp.size(); i++) {
 				indexE++;
@@ -183,15 +185,15 @@
 				indexE++;
 				exeLength++;
 			}
-			
-	//		Checks if the Connector is of &&, ||, ; type	
+
+	//		Checks if the Connector is of &&, ||, ; type
 			if((temp == "&&")  && !quote) {
 				numArgs--;
 //				cout << "Char at indexS: " << str.at(indexS) << endl;
 //				cout << "indexE with hardcode: " << indexE + 3 << endl;
 //				cout << "indexE with numArgs: " << indexE + numArgs << endl;
 //				cout << "numArgs: " << numArgs << endl;
-				
+
 				if(numArgs == 1){
 					indexE--;
 					exeLength--;
@@ -207,7 +209,7 @@
 	//			Creates the Connector in a normal case
 					inputs.push_back(new Connector(str.substr(indexE, temp.size())));
 			//	}
-				
+
 	//			Reset Parameters
 				if(numArgs == 1) {
 					indexE++;
@@ -234,7 +236,7 @@
 //				cout << "indexE with hardcode: " << indexE + 3 << endl;
 //				cout << "indexE with numArgs: " << indexE + numArgs << endl;
 //				cout << "numArgs: " << numArgs << endl;
-				
+
 				if(numArgs == 1){
 					indexE--;
 					exeLength--;
@@ -277,7 +279,7 @@
 //				cout << "indexE with hardcode: " << indexE + 3 << endl;
 //				cout << "indexE with numArgs: " << indexE + numArgs << endl;
 //				cout << "numArgs: " << numArgs << endl;
-				
+
 				//if(numArgs == 1){
 				//	indexE--;
 				//	exeLength--;
@@ -290,7 +292,7 @@
 				inputs.push_back(new Executable(str.substr(indexS, exeLength)));
 	//			Creates Connector in the case of Semicolon
 <<<<<<< HEAD:src/Binput_data.cpp
-				
+
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size() * + 1 *)));
 =======
 				inputs.push_back(new Connector(str.substr(indexE + 1, temp.size()  + 1 )));
@@ -329,7 +331,7 @@
 				numArgs--;
 <<<<<<< HEAD:src/Binput_data.cpp
 				cout << "num spaces after: " << numArgs << endl;
-				
+
 				if(numArgs < 4 && !firstArgRun) {
 					exeLength--;
 					correctParamPiping = true;
@@ -337,13 +339,13 @@
 			//	else if(numArgs < 3 && !firstArgRun) {
 			//		exeLength++;
 			//	}
-				
+
 				if(numArgs < 4 && !firstArgRun) {
 					indexE--;
 				}
-				
-				
-				
+
+
+
 				cout << "indexE with hardcode: " << indexE + 3 << endl;
 				cout << "indexE with numArgs: " << indexE + numArgs << endl;
 				cout << "indexE: " << indexE << endl;
@@ -361,7 +363,7 @@
 					inputs.push_back(new Executable(str.substr(indexS, exeLength)));
 	//			Creates Connector in the case of Pipe
 			//	if(firstArgRun) {
-				
+
 					indexE++;
 					inputs.push_back(new Connector(str.substr(indexE + 1, temp.size())));
 			//	}
@@ -375,13 +377,13 @@
 					indexE--;
 					correctParamPiping = false;
 				}
-				
+
 	//			Reset Parameters
 				exeLength = 1;
 				if(numArgs == 4 && !firstArgRun) {
 					indexS = indexE + numArgs - 1;
 					indexE = indexS;
-					
+
 				}
 				else {
 					indexS = indexE + numArgs;
@@ -394,7 +396,7 @@
 				firstArgRun = false;
 				cout << "letter at indexS: " << str.at(indexS) << endl;
 				cout << "letter at indexS + 1: " << str.at(indexS + 1) << endl;
-				
+
 			}
 		//	else if(temp == "<" && !quote) {
 		//		exeLength++;
@@ -449,7 +451,7 @@
 				else {
 					inputs.push_back(new Executable (str.substr(indexS, exeLength)));
 				}
-				
+
 	//			Reset Parameters
 				exeLength = 0;
 				indexS = indexE + 3;
@@ -460,7 +462,7 @@
 			}
 		}
 	}
-	
+
 	// Reuse of Variables
 	bool closedP = false;
 	paren = 0;
@@ -476,9 +478,9 @@
 //	cout << "final index: " << indexE << endl;
 //	cout << "str length: " << str.length() << endl;
 >>>>>>> e1618a36c1f28d36be6d8fa1fb4c97846b6b2da1:src/input_data.cpp
-	
+
 	cout << endl;
-	
+
 	// Covers end case within the string
 	if (!quitCheck) {
 		inputs.push_back(new Executable(str.substr(indexS, indexE + 2)));
@@ -488,10 +490,10 @@
 	// -------------- TEST -----------------------
 	//cout << "hello" << endl;
 	//cout << indexE << endl;
-	//cout << str.size() - 1<< endl;	
-	
+	//cout << str.size() - 1<< endl;
+
 //	cout << endl << "FINAL DISPLAY" << endl;
-	
+
 	for(int i = 0; i < inputs.size(); i++) {
 //		cout << endl << "vector: ." << inputs.at(i)->input << "." << endl;
 		if(inputs.at(i)->input.at(0) == '(' && inputs.at(i)->input.at(input.length() - 1) == ')') {
@@ -506,16 +508,16 @@
 		else if(inputs.at(i)->input.length() > 4) {
 			if(inputs.at(i)->input.substr(0, 4) == "test") {
 //				cout << "Test Conversion" << endl;
-				inputs.at(i) = new TestCommand(inputs.at(i)->input); 
+				inputs.at(i) = new TestCommand(inputs.at(i)->input);
 			}
 		}
 //		cout << "And we outta there" << endl;
 //		cout << "After: " << inputs.at(i)->input << endl;
-		
+
 	}
 //	cout << "size: " << inputs.size() << endl;
 //	cout << "inputs size: " << inputs.size() << endl;
-	
+
 }
 */
 
@@ -542,7 +544,7 @@ void InputData::takeInput(){
 	quote = false;
 	string temp;
 	stringstream ss(str);
-	cout << str << endl;
+	// cout << str << endl;
 	while (ss >> temp && !quitCheck) {
 		for (int i = 0; i < temp.size(); i++) {
 			if (temp.at(i) == '\"') {
@@ -555,41 +557,27 @@ void InputData::takeInput(){
 				paren--;
 			}
 		}
-		if (temp == "&&" && !quote && !paren) {
+		if ((temp == "&&" || temp == "||" || temp == ">>") && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 2)));
 			indexS += 3;
 			indexE = indexS;
 		}
-		else if (temp == "||" && !quote && !paren) {
-			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
-			indexS = indexE;
-			inputs.push_back(new Connector(str.substr(indexS, 2)));
-			indexS += 3;
-			indexE = indexS;		
-		}
-		else if (temp == ";" && !quote && !paren) {
+		else if ((temp == ";" || temp == "|" || temp == "<" || temp == ">") && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			inputs.push_back(new Connector(str.substr(indexS, 1)));
 			indexS += 2;
-			indexE = indexS;		
+			indexE = indexS;
 		}
 		else if (temp == "#" && !quote && !paren) {
 			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
 			indexS = indexE;
 			quitCheck = true;
 		}
-		else if (temp == "|" && !quote && !paren) {
-			inputs.push_back(new Executable(str.substr(indexS, indexE - indexS - 1)));
-			indexS = indexE;
-			inputs.push_back(new Connector(str.substr(indexS, 1)));
-			indexS += 2;
-			indexE = indexS;
-		}
 		else {
-			cout << temp << endl;
+			// cout << temp << endl;
 			indexE += temp.size() + 1;
 		}
 	}
@@ -609,120 +597,107 @@ void InputData::takeInput(){
 			}
 		}
 	}
-	for (int i = 0; i < inputs.size(); i++) {
-		cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
-	}
+	 // for (int i = 0; i < inputs.size(); i++) {
+		//  cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
+	 // }
+
 }
 
 int InputData::run() {
-	bool next = true;
-	int stat;
-	bool inputr = false;
-	int outputr = 0;
-	int p[2];
-	int savestdin = dup(0);
-	int savestdout = dup(1);
-	if (pipe(p) < 0) {
-		exit(1);
+	int index = 0;
+	while (index != inputs.size()) {
+		// cout << "size: " << inputs.size() << endl;
+		if (inputs.size() == 1){
+			break;
+		}
+		if (index < 0) {
+			index = 0;
+		}
+		if (inputs.at(index)->input == "&&") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new Ampersand("&&", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == "||") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new Parallel("||", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == ";") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new Semicolon(";", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == "|") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new Pipe("|", inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == "<") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new InputRedirection(inputs.at(0)->input, inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == ">") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new OutputRedirection(inputs.at(0)->input, inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		else if (inputs.at(index)->input == ">>") {
+			// cout << "index before: " << index << endl;
+			// cout << "input x: "<< inputs.at(0)->input << " input y: " << inputs.at(2)->input << endl;
+			Input * temp = new DoubleOutput(inputs.at(0)->input, inputs.at(0), inputs.at(2));
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.erase(inputs.begin());
+			inputs.insert(inputs.begin(), temp);
+			index -= 2;
+			// cout << "index after: " << index << endl;
+		}
+		// cout << "index all before: " << index << endl;
+		index++;
+		// cout << "index all after: " << index << endl;
 	}
-	pid_t pid[inputs.size()];
-	for (int i = 0; i < inputs.size(); i++)	{
-		//cout << i << endl;
-		if (i % 2 == 1){
-			if ((pid[i] = fork()) == 0){
-//				cout << "This is child: " << getpid() << endl;
-				savestdin = dup(0);
-				savestdout = dup(1);
-				if (inputs.at(i - 1)->run() == -1){
-					exit(2);
-				}
-				else if (inputs.at(i - 1)->run() == 100) {
-					exit(1000);
-				}
-				if (inputs.at(i)->input == "|" || inputs.at(i)->input == "| "){
-				}
-				exit(1);
-			}
-			else {
-//				cout << "This is parent: " << i << endl;
-				pid_t test = waitpid(pid[i], &stat, 0);
-				if (i != inputs.size() - 1){
-					if (WIFEXITED(stat)){
-//						cout << "Child: " << test << " / terminated: " << WEXITSTATUS(stat) << endl;
-						if (inputs.at(i - 1)->input == "exit") {
-							exit(10000);
-						}
-						else if (inputs.at(i)->input == "&&" || inputs.at(i)->input == "&& "){
-							if (WEXITSTATUS(stat) == 2){
-//								cout << "Skip &&" << endl;
-								next = false;
-								i += 2;
-							}
-							else {
-								next = true;
-//								cout << "Went next &&" << endl;
-							}
-						}
-						else if (inputs.at(i)->input == "||" || inputs.at(i)->input == "|| "){
-							if (WEXITSTATUS(stat) != 2){
-//								cout << "Skip || " << WEXITSTATUS(stat) << endl;
-								next = false;
-								i += 2;
-							}
-							else {
-								next = true;
-//								cout << "Went next ||" << endl;
-							}
-						}
-						else if (inputs.at(i)->input == "|" || inputs.at(i)->input == "| ") {					
-						
-						}
-						else {
-							next = true;
-//							cout << "Went next 3" << endl;
-						}
-					}
-				}
-			}
-		}
-	}
-	if (inputs.size() % 2 == 1 && next){
-//		cout << "next true" << endl;
-		pid_t x;
-		if ((x = fork()) == 0){
-//			cout << "child rn" << endl;
-			if (inputs.at(inputs.size() - 1)->input == "exit") {
-				exit(10000);
-			}
-			inputs.at(inputs.size() - 1)->run();
-		}
-		else {
-//			cout << "parent rn" << endl;
-			waitpid(x, & stat, 0);
-			if (inputs.at(inputs.size() - 1)->input == "exit") {
-				exit(10000);
-			}
-		}
-	}
-	else if (inputs.size() == 1){
-		pid_t x;
-		if ((x = fork()) == 0) {
-//			cout << "child at end" << endl;
-			if (inputs.at(inputs.size() - 1)->input == "exit") {
-				exit(10000);
-			}
-			inputs.at(0)->run();
-		}
-		else {
-			waitpid(x, &stat, 0);
-//			cout << "parent at end" << endl;
-			if (inputs.at(inputs.size() - 1) ->input == "exit") {
-				exit(10000);
-			}
-		}
-	}
-	dup2(savestdin, 0);
-	dup2(savestdout, 1);
-	return 0;
-}
 
+	 // for (int i = 0; i < inputs.size(); i++) {
+		 // cout << "input[" << i << "] = ." << inputs.at(i)->input << "." << endl;
+	 // }
+
+	return inputs.at(0)->run();
+}
