@@ -43,6 +43,7 @@ int Pipe::run() {
         return -1;
     }
     pid_t pid;
+    int stat;
     if ((pid = fork()) == 0){
         dup2(p[1], 1);
         close(p[1]);
@@ -52,6 +53,7 @@ int Pipe::run() {
         dup2(savestdout, 1);
     }
     else {
+        waitpid(pid, &stat, 0);
         dup2(p[0], 0);
         close(p[0]);
         if (right->run() == -1) {
